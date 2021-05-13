@@ -30,6 +30,9 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cmdCam3 = new System.Windows.Forms.Button();
+            this.cmdCam2 = new System.Windows.Forms.Button();
+            this.cmdCam1 = new System.Windows.Forms.Button();
             this.inspectPort = new System.Windows.Forms.TextBox();
             this.inspectIp = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -55,6 +58,9 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox1.Controls.Add(this.cmdCam3);
+            this.groupBox1.Controls.Add(this.cmdCam2);
+            this.groupBox1.Controls.Add(this.cmdCam1);
             this.groupBox1.Controls.Add(this.inspectPort);
             this.groupBox1.Controls.Add(this.inspectIp);
             this.groupBox1.Controls.Add(this.label4);
@@ -67,6 +73,36 @@
             this.groupBox1.Size = new System.Drawing.Size(261, 450);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // cmdCam3
+            // 
+            this.cmdCam3.Location = new System.Drawing.Point(61, 339);
+            this.cmdCam3.Name = "cmdCam3";
+            this.cmdCam3.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam3.TabIndex = 8;
+            this.cmdCam3.Text = "cmdCam3";
+            this.cmdCam3.UseVisualStyleBackColor = true;
+            this.cmdCam3.Click += new System.EventHandler(this.cmdCam3_Click);
+            // 
+            // cmdCam2
+            // 
+            this.cmdCam2.Location = new System.Drawing.Point(61, 298);
+            this.cmdCam2.Name = "cmdCam2";
+            this.cmdCam2.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam2.TabIndex = 7;
+            this.cmdCam2.Text = "cmdCam2";
+            this.cmdCam2.UseVisualStyleBackColor = true;
+            this.cmdCam2.Click += new System.EventHandler(this.cmdCam2_Click);
+            // 
+            // cmdCam1
+            // 
+            this.cmdCam1.Location = new System.Drawing.Point(61, 257);
+            this.cmdCam1.Name = "cmdCam1";
+            this.cmdCam1.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam1.TabIndex = 6;
+            this.cmdCam1.Text = "cmdCam1";
+            this.cmdCam1.UseVisualStyleBackColor = true;
+            this.cmdCam1.Click += new System.EventHandler(this.cmdCam1_Click);
             // 
             // inspectPort
             // 
@@ -280,6 +316,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button cmdCam1;
+        private System.Windows.Forms.Button cmdCam2;
+        private System.Windows.Forms.Button cmdCam3;
 
         private System.Windows.Forms.TextBox inspectPort;
         private System.Windows.Forms.TextBox plcIp2;

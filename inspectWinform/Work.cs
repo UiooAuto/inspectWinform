@@ -108,7 +108,17 @@ namespace inspectWinform
             /*InspectUtils.sendCmdToTarget(localSocket, "san;");
             string recStr = InspectUtils.receiveDataFromTarget(localSocket, resBytes);
             return recStr;*/
-            string str = camId.ToString() + ';';
+            string str = "";
+            if (camId == 1)
+            {
+                str = "c1;";
+            }else if (camId == 2)
+            {
+                str = "c2;";
+            }else if (camId == 3)
+            {
+                str = "c3;";
+            }
             InspectUtils.sendCmdToTarget(localSocket, str);
             var receiveData = InspectUtils.receiveDataFromTarget(localSocket, resBytes);
             return receiveData;

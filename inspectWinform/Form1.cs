@@ -16,6 +16,8 @@ namespace inspectWinform
     {
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
+        
+        public byte[] resByteArr = new byte[1024];
 
         Socket inspectSocket;
         Socket plcSocket1;
@@ -87,29 +89,51 @@ namespace inspectWinform
         /// </summary>
         public void connectAllcon()
         {
+            bool flag = true;
             if (inspectSocket == null & !isEmpty(inspectIp.Text) & !isEmpty(inspectPort.Text))
             {
                 inspectConnectInfo.ip = inspectIp.Text;
                 inspectConnectInfo.port = int.Parse(inspectPort.Text);
                 inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
+                if (inspectSocket == null)
+                {
+                    flag = false;
+                }
             }
             if (plcSocket1 == null & !isEmpty(plcIp1.Text) & !isEmpty(plcPort1.Text))
             {
                 plcConnectArr[0].ip = plcIp1.Text;
                 plcConnectArr[0].port = int.Parse(plcPort1.Text);
                 plcSocket1 = InspectUtils.connectToTarget(plcConnectArr[0].ip, plcConnectArr[0].port);
+                if (inspectSocket == null)
+                {
+                    flag = false;
+                }
             }
             if (plcSocket2 == null & !isEmpty(plcIp2.Text) & !isEmpty(plcPort2.Text))
             {
                 plcConnectArr[1].ip = plcIp2.Text;
                 plcConnectArr[1].port = int.Parse(plcPort2.Text);
                 plcSocket2 = InspectUtils.connectToTarget(plcConnectArr[1].ip, plcConnectArr[1].port);
+                if (inspectSocket == null)
+                {
+                    flag = false;
+                }
             }
             if (plcSocket3 == null & !isEmpty(plcIp3.Text) & !isEmpty(plcPort3.Text))
             {
                 plcConnectArr[2].ip = plcIp3.Text;
                 plcConnectArr[2].port = int.Parse(plcPort3.Text);
                 plcSocket3 = InspectUtils.connectToTarget(plcConnectArr[2].ip, plcConnectArr[2].port);
+                if (inspectSocket == null)
+                {
+                    flag = false;
+                }
+            }
+
+            if (flag)
+            {
+                connectAll.Text = "已连接";
             }
         }
         #endregion
@@ -135,6 +159,27 @@ namespace inspectWinform
         {
             connectAllcon();
             startWork();
+        }
+
+        private void cmdCam1_Click(object sender, EventArgs e)
+        {
+            string str = "c1;";
+            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+        }
+
+        private void cmdCam2_Click(object sender, EventArgs e)
+        {
+            string str = "c2;";
+            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+        }
+
+        private void cmdCam3_Click(object sender, EventArgs e)
+        {
+            string str = "c3;";
+            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
         }
     }
 }
