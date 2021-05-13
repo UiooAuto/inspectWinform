@@ -255,12 +255,17 @@ namespace inspectWinform
 
         #endregion
 
-        #region MyRegion
+        #region 退出按钮
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            closeAllSocket();
-            System.Environment.Exit(0);
+            DialogResult
+                TS = MessageBox.Show("确认退出？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question); //弹出提示是否退出
+            if (TS == DialogResult.Yes)
+            {
+                closeAllSocket();
+                System.Environment.Exit(0);
+            }
         }
 
         #endregion
