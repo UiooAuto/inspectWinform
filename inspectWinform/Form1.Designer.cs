@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.inspectPort = new System.Windows.Forms.TextBox();
             this.inspectIp = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.inspectPort = new System.Windows.Forms.TextBox();
             this.plcIp1 = new System.Windows.Forms.TextBox();
             this.plcPort1 = new System.Windows.Forms.TextBox();
             this.plcPort2 = new System.Windows.Forms.TextBox();
@@ -67,6 +67,15 @@
             this.groupBox1.Size = new System.Drawing.Size(261, 450);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // inspectPort
+            // 
+            this.inspectPort.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.inspectPort.Location = new System.Drawing.Point(92, 198);
+            this.inspectPort.Name = "inspectPort";
+            this.inspectPort.Size = new System.Drawing.Size(134, 29);
+            this.inspectPort.TabIndex = 5;
+            this.inspectPort.Text = "5024";
             // 
             // inspectIp
             // 
@@ -177,15 +186,6 @@
             this.label10.Text = "PORT:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // inspectPort
-            // 
-            this.inspectPort.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectPort.Location = new System.Drawing.Point(92, 198);
-            this.inspectPort.Name = "inspectPort";
-            this.inspectPort.Size = new System.Drawing.Size(134, 29);
-            this.inspectPort.TabIndex = 5;
-            this.inspectPort.Text = "5024";
-            // 
             // plcIp1
             // 
             this.plcIp1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
@@ -249,6 +249,7 @@
             this.connectAll.TabIndex = 14;
             this.connectAll.Text = "连接";
             this.connectAll.UseVisualStyleBackColor = true;
+            this.connectAll.Click += new System.EventHandler(this.connectAll_Click);
             // 
             // Form1
             // 
