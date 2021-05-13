@@ -227,24 +227,28 @@ namespace inspectWinform
         {
             if (inspectSocket != null)
             {
+                InspectUtils.shutDownConnect(inspectSocket);
                 inspectSocket.Close();
                 inspectSocket = null;
             }
 
             if (plcSocket1 != null)
             {
+                InspectUtils.shutDownConnect(plcSocket1);
                 plcSocket1.Close();
                 plcSocket1 = null;
             }
 
             if (plcSocket2 != null)
             {
+                InspectUtils.shutDownConnect(plcSocket2);
                 plcSocket2.Close();
                 plcSocket2 = null;
             }
 
             if (plcSocket3 != null)
             {
+                InspectUtils.shutDownConnect(plcSocket3);
                 plcSocket3.Close();
                 plcSocket3 = null;
             }
