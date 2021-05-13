@@ -80,7 +80,7 @@
             this.cmdCam3.Name = "cmdCam3";
             this.cmdCam3.Size = new System.Drawing.Size(125, 35);
             this.cmdCam3.TabIndex = 8;
-            this.cmdCam3.Text = "cmdCam3";
+            this.cmdCam3.Text = "相机3触发测试";
             this.cmdCam3.UseVisualStyleBackColor = true;
             this.cmdCam3.Click += new System.EventHandler(this.cmdCam3_Click);
             // 
@@ -90,7 +90,7 @@
             this.cmdCam2.Name = "cmdCam2";
             this.cmdCam2.Size = new System.Drawing.Size(125, 35);
             this.cmdCam2.TabIndex = 7;
-            this.cmdCam2.Text = "cmdCam2";
+            this.cmdCam2.Text = "相机2触发测试";
             this.cmdCam2.UseVisualStyleBackColor = true;
             this.cmdCam2.Click += new System.EventHandler(this.cmdCam2_Click);
             // 
@@ -100,7 +100,7 @@
             this.cmdCam1.Name = "cmdCam1";
             this.cmdCam1.Size = new System.Drawing.Size(125, 35);
             this.cmdCam1.TabIndex = 6;
-            this.cmdCam1.Text = "cmdCam1";
+            this.cmdCam1.Text = "相机1触发测试";
             this.cmdCam1.UseVisualStyleBackColor = true;
             this.cmdCam1.Click += new System.EventHandler(this.cmdCam1_Click);
             // 

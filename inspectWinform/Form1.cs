@@ -16,7 +16,7 @@ namespace inspectWinform
     {
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
-        
+
         public byte[] resByteArr = new byte[1024];
 
         Socket inspectSocket;
@@ -34,15 +34,19 @@ namespace inspectWinform
         string cam2ResAds = "D8032 01 ";
         string cam3CmdAds = "D10030 01";
         string cam3ResAds = "D10032 01 ";
+
         public Form1()
         {
             InitializeComponent();
+            this.ControlBox = false;
             inspectConnectInfo = new ConnectInfo();
             plcConnectArr[0] = new ConnectInfo();
             plcConnectArr[1] = new ConnectInfo();
             plcConnectArr[2] = new ConnectInfo();
         }
+
         #region 启动程序主要功能
+
         /// <summary>
         /// 启动程序主要功能
         /// </summary>
@@ -59,6 +63,7 @@ namespace inspectWinform
                 thread1.Name = "cam1";
                 thread1.Start();
             }
+
             if (plcSocket2 != null)
             {
                 work2.plcSocket = plcSocket2;
@@ -70,6 +75,7 @@ namespace inspectWinform
                 thread2.Name = "cam2";
                 thread2.Start();
             }
+
             if (plcSocket1 != null)
             {
                 work3.plcSocket = plcSocket3;
@@ -82,8 +88,11 @@ namespace inspectWinform
                 thread3.Start();
             }
         }
+
         #endregion
+
         #region 连接所有连接
+
         /// <summary>
         /// 建立所有连接
         /// </summary>
@@ -100,6 +109,7 @@ namespace inspectWinform
                     flag = false;
                 }
             }
+
             if (plcSocket1 == null & !isEmpty(plcIp1.Text) & !isEmpty(plcPort1.Text))
             {
                 plcConnectArr[0].ip = plcIp1.Text;
@@ -110,6 +120,7 @@ namespace inspectWinform
                     flag = false;
                 }
             }
+
             if (plcSocket2 == null & !isEmpty(plcIp2.Text) & !isEmpty(plcPort2.Text))
             {
                 plcConnectArr[1].ip = plcIp2.Text;
@@ -120,6 +131,7 @@ namespace inspectWinform
                     flag = false;
                 }
             }
+
             if (plcSocket3 == null & !isEmpty(plcIp3.Text) & !isEmpty(plcPort3.Text))
             {
                 plcConnectArr[2].ip = plcIp3.Text;
@@ -136,8 +148,11 @@ namespace inspectWinform
                 connectAll.Text = "已连接";
             }
         }
+
         #endregion
+
         #region 字符串非空
+
         /// <summary>
         /// 判断字符串非空
         /// </summary>
@@ -154,12 +169,34 @@ namespace inspectWinform
                 return true;
             }
         }
+
         #endregion
+
+        #region 点击连接按钮
+
         private void connectAll_Click(object sender, EventArgs e)
         {
-            connectAllcon();
-            startWork();
+            if ((inspectSocket != null && inspectSocket.Connected)
+                || plcSocket1 != null && plcSocket1.Connected
+                || plcSocket2 != null && plcSocket2.Connected
+                || plcSocket3 != null && plcSocket3.Connected)
+            {
+                MessageBox.Show("正在关闭连接");
+                closeAllSocket();
+                connectAll.Text = "连接";
+            }
+            else
+            {
+                MessageBox.Show("正在连接");
+                connectAllcon();
+                startWork(); 
+            }
+            
         }
+
+        #endregion
+
+        #region 相机触发测试
 
         private void cmdCam1_Click(object sender, EventArgs e)
         {
@@ -181,5 +218,38 @@ namespace inspectWinform
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
         }
+
+        #endregion
+
+        #region 关闭所有连接
+
+        public void closeAllSocket()
+        {
+            if (inspectSocket != null)
+            {
+                inspectSocket.Close();
+                inspectSocket = null;
+            }
+
+            if (plcSocket1 != null)
+            {
+                plcSocket1.Close();
+                plcSocket1 = null;
+            }
+
+            if (plcSocket2 != null)
+            {
+                plcSocket2.Close();
+                plcSocket2 = null;
+            }
+
+            if (plcSocket3 != null)
+            {
+                plcSocket3.Close();
+                plcSocket3 = null;
+            }
+        }
+
+        #endregion
     }
 }
