@@ -189,9 +189,8 @@ namespace inspectWinform
             {
                 MessageBox.Show("正在连接");
                 connectAllcon();
-                startWork(); 
+                startWork();
             }
-            
         }
 
         #endregion
@@ -252,6 +251,16 @@ namespace inspectWinform
                 plcSocket3.Close();
                 plcSocket3 = null;
             }
+        }
+
+        #endregion
+
+        #region MyRegion
+
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            closeAllSocket();
+            System.Environment.Exit(0);
         }
 
         #endregion

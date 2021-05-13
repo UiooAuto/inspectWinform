@@ -52,12 +52,14 @@
             this.plcPort3 = new System.Windows.Forms.TextBox();
             this.plcIp3 = new System.Windows.Forms.TextBox();
             this.connectAll = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox1.Controls.Add(this.ExitButton);
             this.groupBox1.Controls.Add(this.cmdCam3);
             this.groupBox1.Controls.Add(this.cmdCam2);
             this.groupBox1.Controls.Add(this.cmdCam1);
@@ -76,9 +78,10 @@
             // 
             // cmdCam3
             // 
-            this.cmdCam3.Location = new System.Drawing.Point(61, 339);
+            this.cmdCam3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.cmdCam3.Location = new System.Drawing.Point(27, 299);
             this.cmdCam3.Name = "cmdCam3";
-            this.cmdCam3.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam3.Size = new System.Drawing.Size(214, 35);
             this.cmdCam3.TabIndex = 8;
             this.cmdCam3.Text = "相机3触发测试";
             this.cmdCam3.UseVisualStyleBackColor = true;
@@ -86,9 +89,10 @@
             // 
             // cmdCam2
             // 
-            this.cmdCam2.Location = new System.Drawing.Point(61, 298);
+            this.cmdCam2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.cmdCam2.Location = new System.Drawing.Point(27, 258);
             this.cmdCam2.Name = "cmdCam2";
-            this.cmdCam2.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam2.Size = new System.Drawing.Size(214, 35);
             this.cmdCam2.TabIndex = 7;
             this.cmdCam2.Text = "相机2触发测试";
             this.cmdCam2.UseVisualStyleBackColor = true;
@@ -96,9 +100,10 @@
             // 
             // cmdCam1
             // 
-            this.cmdCam1.Location = new System.Drawing.Point(61, 257);
+            this.cmdCam1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.cmdCam1.Location = new System.Drawing.Point(27, 217);
             this.cmdCam1.Name = "cmdCam1";
-            this.cmdCam1.Size = new System.Drawing.Size(125, 35);
+            this.cmdCam1.Size = new System.Drawing.Size(214, 35);
             this.cmdCam1.TabIndex = 6;
             this.cmdCam1.Text = "相机1触发测试";
             this.cmdCam1.UseVisualStyleBackColor = true;
@@ -107,7 +112,7 @@
             // inspectPort
             // 
             this.inspectPort.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectPort.Location = new System.Drawing.Point(92, 198);
+            this.inspectPort.Location = new System.Drawing.Point(107, 158);
             this.inspectPort.Name = "inspectPort";
             this.inspectPort.Size = new System.Drawing.Size(134, 29);
             this.inspectPort.TabIndex = 5;
@@ -116,7 +121,7 @@
             // inspectIp
             // 
             this.inspectIp.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectIp.Location = new System.Drawing.Point(92, 118);
+            this.inspectIp.Location = new System.Drawing.Point(107, 93);
             this.inspectIp.Name = "inspectIp";
             this.inspectIp.Size = new System.Drawing.Size(134, 29);
             this.inspectIp.TabIndex = 4;
@@ -125,7 +130,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label4.Location = new System.Drawing.Point(12, 194);
+            this.label4.Location = new System.Drawing.Point(27, 154);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 32);
             this.label4.TabIndex = 3;
@@ -135,7 +140,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label3.Location = new System.Drawing.Point(12, 114);
+            this.label3.Location = new System.Drawing.Point(27, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 32);
             this.label3.TabIndex = 2;
@@ -287,6 +292,19 @@
             this.connectAll.UseVisualStyleBackColor = true;
             this.connectAll.Click += new System.EventHandler(this.connectAll_Click);
             // 
+            // ExitButton
+            // 
+            this.ExitButton.BackColor = System.Drawing.Color.Red;
+            this.ExitButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.ExitButton.ForeColor = System.Drawing.Color.White;
+            this.ExitButton.Location = new System.Drawing.Point(27, 392);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(214, 37);
+            this.ExitButton.TabIndex = 9;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -316,6 +334,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button ExitButton;
 
         private System.Windows.Forms.Button cmdCam1;
         private System.Windows.Forms.Button cmdCam2;
