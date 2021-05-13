@@ -64,19 +64,19 @@ namespace inspectWinform
             plcConnectArr[2] = new ConnectInfo();
 
             //给PLC连接地址赋值
-            if (isEmpty(trigger1.Text) && isEmpty(result1.Text))
+            if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
                 cam1CmdAds = "D" + trigger1.Text + " 01";
                 cam1ResAds = "D" + result1.Text + " 01";
             }
 
-            if (isEmpty(trigger2.Text) && isEmpty(result2.Text))
+            if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
             {
                 cam2CmdAds = "D" + trigger2.Text + " 01";
                 cam2ResAds = "D" + result2.Text + " 01";
             }
 
-            if (isEmpty(trigger3.Text) && isEmpty(result3.Text))
+            if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
             {
                 cam3CmdAds = "D" + trigger3.Text + " 01";
                 cam3ResAds = "D" + result3.Text + " 01";
@@ -222,6 +222,24 @@ namespace inspectWinform
 
         private void connectAll_Click(object sender, EventArgs e)
         {
+            //给PLC连接地址赋值
+            if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
+            {
+                cam1CmdAds = "D" + trigger1.Text + " 01";
+                cam1ResAds = "D" + result1.Text + " 01";
+            }
+
+            if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
+            {
+                cam2CmdAds = "D" + trigger2.Text + " 01";
+                cam2ResAds = "D" + result2.Text + " 01";
+            }
+
+            if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
+            {
+                cam3CmdAds = "D" + trigger3.Text + " 01";
+                cam3ResAds = "D" + result3.Text + " 01";
+            }
             //当在有链接的时候点击，需要关闭所有连接
             if ((inspectSocket != null && inspectSocket.Connected)
                 || plcSocket1 != null && plcSocket1.Connected
@@ -313,22 +331,36 @@ namespace inspectWinform
                 inspectIp.ReadOnly = true;
                 inspectPort.ReadOnly = true;
                 plcIp1.ReadOnly = true;
-                plcPort1.ReadOnly = true;
                 plcIp2.ReadOnly = true;
-                plcPort2.ReadOnly = true;
                 plcIp3.ReadOnly = true;
+                plcPort1.ReadOnly = true;
+                plcPort2.ReadOnly = true;
                 plcPort3.ReadOnly = true;
+                
+                trigger1.ReadOnly = true;
+                trigger2.ReadOnly = true;
+                trigger3.ReadOnly = true;
+                result1.ReadOnly = true;
+                result2.ReadOnly = true;
+                result3.ReadOnly = true;
             }
             else
             {
                 inspectIp.ReadOnly = false;
                 inspectPort.ReadOnly = false;
                 plcIp1.ReadOnly = false;
-                plcPort1.ReadOnly = false;
                 plcIp2.ReadOnly = false;
-                plcPort2.ReadOnly = false;
                 plcIp3.ReadOnly = false;
+                plcPort1.ReadOnly = false;
+                plcPort2.ReadOnly = false;
                 plcPort3.ReadOnly = false;
+                
+                trigger1.ReadOnly = false;
+                trigger2.ReadOnly = false;
+                trigger3.ReadOnly = false;
+                result1.ReadOnly = false;
+                result2.ReadOnly = false;
+                result3.ReadOnly = false;
             }
         }
 
