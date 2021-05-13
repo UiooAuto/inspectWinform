@@ -14,26 +14,33 @@ namespace inspectWinform
 {
     public partial class Form1 : Form
     {
+        //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
 
+        //用于存放读取结果的数组
         public byte[] resByteArr = new byte[1024];
 
+        //用于通信的Socket
         Socket inspectSocket;
         Socket plcSocket1;
         Socket plcSocket2;
         Socket plcSocket3;
 
+        //用于多线程执行的对象
         static Work work1 = new Work();
         static Work work2 = new Work();
         static Work work3 = new Work();
 
+        //准备plc所用的各种地址
         string cam1CmdAds;
         string cam1ResAds;
         string cam2CmdAds;
         string cam2ResAds;
         string cam3CmdAds;
         string cam3ResAds;
+
+        bool connectStatus = false;
 
         public Form1()
         {
@@ -43,14 +50,20 @@ namespace inspectWinform
 
         #region 初始化
 
+        /// <summary>
+        /// 窗口初始化
+        /// </summary>
         public void init()
         {
+            //取消关闭安妮
             this.ControlBox = false;
+            //新建Socket连接
             inspectConnectInfo = new ConnectInfo();
             plcConnectArr[0] = new ConnectInfo();
             plcConnectArr[1] = new ConnectInfo();
             plcConnectArr[2] = new ConnectInfo();
 
+            //给PLC连接地址赋值
             if (isEmpty(trigger1.Text) && isEmpty(result1.Text))
             {
                 cam1CmdAds = "D" + trigger1.Text + " 01";
@@ -68,7 +81,6 @@ namespace inspectWinform
                 cam3CmdAds = "D" + trigger3.Text + " 01";
                 cam3ResAds = "D" + result3.Text + " 01";
             }
-
             //connectAllcon();
         }
 
@@ -81,6 +93,7 @@ namespace inspectWinform
         /// </summary>
         public void startWork()
         {
+            //仅当对应plc有连接的时候，才开启线程
             if (plcSocket1 != null)
             {
                 work1.plcSocket = plcSocket1;
@@ -127,7 +140,9 @@ namespace inspectWinform
         /// </summary>
         public void connectAllcon()
         {
+            //用于标识是否有连接建立成功
             bool flag = false;
+            //只有在有连接参数的时候才连接
             if (inspectSocket == null & !isEmpty(inspectIp.Text) & !isEmpty(inspectPort.Text))
             {
                 inspectConnectInfo.ip = inspectIp.Text;
@@ -171,10 +186,12 @@ namespace inspectWinform
                     flag = true;
                 }
             }
+
             if (flag)
             {
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
+                connectStatus = true;
             }
         }
 
@@ -205,22 +222,22 @@ namespace inspectWinform
 
         private void connectAll_Click(object sender, EventArgs e)
         {
+            //当在有链接的时候点击，需要关闭所有连接
             if ((inspectSocket != null && inspectSocket.Connected)
                 || plcSocket1 != null && plcSocket1.Connected
                 || plcSocket2 != null && plcSocket2.Connected
                 || plcSocket3 != null && plcSocket3.Connected)
             {
-                MessageBox.Show("正在关闭连接");
                 closeAllSocket();
                 connectAll.Text = "连接";
                 connectAll.BackColor = Color.Silver;
             }
             else
             {
-                MessageBox.Show("正在连接");
                 connectAllcon();
                 startWork();
             }
+            enTextBoxs();
         }
 
         #endregion
@@ -280,6 +297,38 @@ namespace inspectWinform
                 InspectUtils.shutDownConnect(plcSocket3);
                 plcSocket3.Close();
                 plcSocket3 = null;
+            }
+
+            connectStatus = false;
+        }
+
+        #endregion
+
+        #region 根据连接状态禁用或启用输入框
+
+        public void enTextBoxs()
+        {
+            if (connectStatus)
+            {
+                inspectIp.ReadOnly = true;
+                inspectPort.ReadOnly = true;
+                plcIp1.ReadOnly = true;
+                plcPort1.ReadOnly = true;
+                plcIp2.ReadOnly = true;
+                plcPort2.ReadOnly = true;
+                plcIp3.ReadOnly = true;
+                plcPort3.ReadOnly = true;
+            }
+            else
+            {
+                inspectIp.ReadOnly = false;
+                inspectPort.ReadOnly = false;
+                plcIp1.ReadOnly = false;
+                plcPort1.ReadOnly = false;
+                plcIp2.ReadOnly = false;
+                plcPort2.ReadOnly = false;
+                plcIp3.ReadOnly = false;
+                plcPort3.ReadOnly = false;
             }
         }
 
