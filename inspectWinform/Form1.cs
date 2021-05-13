@@ -28,22 +28,51 @@ namespace inspectWinform
         static Work work2 = new Work();
         static Work work3 = new Work();
 
-        string cam1CmdAds = "D6030 01";
-        string cam1ResAds = "D6032 01 ";
-        string cam2CmdAds = "D8030 01";
-        string cam2ResAds = "D8032 01 ";
-        string cam3CmdAds = "D10030 01";
-        string cam3ResAds = "D10032 01 ";
+        string cam1CmdAds;
+        string cam1ResAds;
+        string cam2CmdAds;
+        string cam2ResAds;
+        string cam3CmdAds;
+        string cam3ResAds;
 
         public Form1()
         {
             InitializeComponent();
+            init();
+        }
+
+        #region 初始化
+
+        public void init()
+        {
             this.ControlBox = false;
             inspectConnectInfo = new ConnectInfo();
             plcConnectArr[0] = new ConnectInfo();
             plcConnectArr[1] = new ConnectInfo();
             plcConnectArr[2] = new ConnectInfo();
+
+            if (isEmpty(trigger1.Text) && isEmpty(result1.Text))
+            {
+                cam1CmdAds = "D" + trigger1.Text + " 01";
+                cam1ResAds = "D" + result1.Text + " 01";
+            }
+
+            if (isEmpty(trigger2.Text) && isEmpty(result2.Text))
+            {
+                cam2CmdAds = "D" + trigger2.Text + " 01";
+                cam2ResAds = "D" + result2.Text + " 01";
+            }
+
+            if (isEmpty(trigger3.Text) && isEmpty(result3.Text))
+            {
+                cam3CmdAds = "D" + trigger3.Text + " 01";
+                cam3ResAds = "D" + result3.Text + " 01";
+            }
+
+            //connectAllcon();
         }
+
+        #endregion
 
         #region 启动程序主要功能
 
@@ -98,15 +127,15 @@ namespace inspectWinform
         /// </summary>
         public void connectAllcon()
         {
-            bool flag = true;
+            bool flag = false;
             if (inspectSocket == null & !isEmpty(inspectIp.Text) & !isEmpty(inspectPort.Text))
             {
                 inspectConnectInfo.ip = inspectIp.Text;
                 inspectConnectInfo.port = int.Parse(inspectPort.Text);
                 inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
-                if (inspectSocket == null)
+                if (inspectSocket != null)
                 {
-                    flag = false;
+                    flag = true;
                 }
             }
 
@@ -115,9 +144,9 @@ namespace inspectWinform
                 plcConnectArr[0].ip = plcIp1.Text;
                 plcConnectArr[0].port = int.Parse(plcPort1.Text);
                 plcSocket1 = InspectUtils.connectToTarget(plcConnectArr[0].ip, plcConnectArr[0].port);
-                if (inspectSocket == null)
+                if (plcSocket1 != null)
                 {
-                    flag = false;
+                    flag = true;
                 }
             }
 
@@ -126,9 +155,9 @@ namespace inspectWinform
                 plcConnectArr[1].ip = plcIp2.Text;
                 plcConnectArr[1].port = int.Parse(plcPort2.Text);
                 plcSocket2 = InspectUtils.connectToTarget(plcConnectArr[1].ip, plcConnectArr[1].port);
-                if (inspectSocket == null)
+                if (plcSocket2 != null)
                 {
-                    flag = false;
+                    flag = true;
                 }
             }
 
@@ -137,15 +166,15 @@ namespace inspectWinform
                 plcConnectArr[2].ip = plcIp3.Text;
                 plcConnectArr[2].port = int.Parse(plcPort3.Text);
                 plcSocket3 = InspectUtils.connectToTarget(plcConnectArr[2].ip, plcConnectArr[2].port);
-                if (inspectSocket == null)
+                if (plcSocket3 != null)
                 {
-                    flag = false;
+                    flag = true;
                 }
             }
-
             if (flag)
             {
-                connectAll.Text = "已连接";
+                connectAll.Text = "关闭连接";
+                connectAll.BackColor = Color.LimeGreen;
             }
         }
 
@@ -184,6 +213,7 @@ namespace inspectWinform
                 MessageBox.Show("正在关闭连接");
                 closeAllSocket();
                 connectAll.Text = "连接";
+                connectAll.BackColor = Color.Silver;
             }
             else
             {

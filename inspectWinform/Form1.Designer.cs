@@ -308,13 +308,14 @@
             // 
             // connectAll
             // 
+            this.connectAll.BackColor = System.Drawing.Color.Silver;
             this.connectAll.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
             this.connectAll.Location = new System.Drawing.Point(307, 391);
             this.connectAll.Name = "connectAll";
             this.connectAll.Size = new System.Drawing.Size(424, 38);
             this.connectAll.TabIndex = 14;
             this.connectAll.Text = "连接";
-            this.connectAll.UseVisualStyleBackColor = true;
+            this.connectAll.UseVisualStyleBackColor = false;
             this.connectAll.Click += new System.EventHandler(this.connectAll_Click);
             // 
             // label11
