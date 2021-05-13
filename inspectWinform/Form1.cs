@@ -86,6 +86,50 @@ namespace inspectWinform
 
         #endregion
 
+        #region 点击连接按钮
+
+        private void connectAll_Click(object sender, EventArgs e)
+        {
+            //给PLC连接地址赋值
+            if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
+            {
+                cam1CmdAds = "D" + trigger1.Text + " 01";
+                cam1ResAds = "D" + result1.Text + " 01";
+            }
+
+            if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
+            {
+                cam2CmdAds = "D" + trigger2.Text + " 01";
+                cam2ResAds = "D" + result2.Text + " 01";
+            }
+
+            if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
+            {
+                cam3CmdAds = "D" + trigger3.Text + " 01";
+                cam3ResAds = "D" + result3.Text + " 01";
+            }
+
+            //当在有链接的时候点击，需要关闭所有连接
+            if ((inspectSocket != null && inspectSocket.Connected)
+                || plcSocket1 != null && plcSocket1.Connected
+                || plcSocket2 != null && plcSocket2.Connected
+                || plcSocket3 != null && plcSocket3.Connected)
+            {
+                closeAllSocket();
+                connectAll.Text = "连接";
+                connectAll.BackColor = Color.Silver;
+            }
+            else
+            {
+                connectAllcon();
+                startWork();
+            }
+
+            enTextBoxs();
+        }
+
+        #endregion
+
         #region 启动程序主要功能
 
         /// <summary>
@@ -193,6 +237,10 @@ namespace inspectWinform
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
             }
+            else
+            {
+                MessageBox.Show("连接失败");
+            }
         }
 
         #endregion
@@ -217,49 +265,7 @@ namespace inspectWinform
         }
 
         #endregion
-
-        #region 点击连接按钮
-
-        private void connectAll_Click(object sender, EventArgs e)
-        {
-            //给PLC连接地址赋值
-            if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
-            {
-                cam1CmdAds = "D" + trigger1.Text + " 01";
-                cam1ResAds = "D" + result1.Text + " 01";
-            }
-
-            if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
-            {
-                cam2CmdAds = "D" + trigger2.Text + " 01";
-                cam2ResAds = "D" + result2.Text + " 01";
-            }
-
-            if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
-            {
-                cam3CmdAds = "D" + trigger3.Text + " 01";
-                cam3ResAds = "D" + result3.Text + " 01";
-            }
-            //当在有链接的时候点击，需要关闭所有连接
-            if ((inspectSocket != null && inspectSocket.Connected)
-                || plcSocket1 != null && plcSocket1.Connected
-                || plcSocket2 != null && plcSocket2.Connected
-                || plcSocket3 != null && plcSocket3.Connected)
-            {
-                closeAllSocket();
-                connectAll.Text = "连接";
-                connectAll.BackColor = Color.Silver;
-            }
-            else
-            {
-                connectAllcon();
-                startWork();
-            }
-            enTextBoxs();
-        }
-
-        #endregion
-
+        
         #region 相机触发测试
 
         private void cmdCam1_Click(object sender, EventArgs e)
@@ -336,7 +342,7 @@ namespace inspectWinform
                 plcPort1.ReadOnly = true;
                 plcPort2.ReadOnly = true;
                 plcPort3.ReadOnly = true;
-                
+
                 trigger1.ReadOnly = true;
                 trigger2.ReadOnly = true;
                 trigger3.ReadOnly = true;
@@ -354,7 +360,7 @@ namespace inspectWinform
                 plcPort1.ReadOnly = false;
                 plcPort2.ReadOnly = false;
                 plcPort3.ReadOnly = false;
-                
+
                 trigger1.ReadOnly = false;
                 trigger2.ReadOnly = false;
                 trigger3.ReadOnly = false;
