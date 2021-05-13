@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.cmdCam3 = new System.Windows.Forms.Button();
             this.cmdCam2 = new System.Windows.Forms.Button();
             this.cmdCam1 = new System.Windows.Forms.Button();
@@ -52,7 +53,18 @@
             this.plcPort3 = new System.Windows.Forms.TextBox();
             this.plcIp3 = new System.Windows.Forms.TextBox();
             this.connectAll = new System.Windows.Forms.Button();
-            this.ExitButton = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.trigger1 = new System.Windows.Forms.TextBox();
+            this.trigger2 = new System.Windows.Forms.TextBox();
+            this.trigger3 = new System.Windows.Forms.TextBox();
+            this.result1 = new System.Windows.Forms.TextBox();
+            this.result2 = new System.Windows.Forms.TextBox();
+            this.result3 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,6 +87,19 @@
             this.groupBox1.Size = new System.Drawing.Size(261, 450);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // ExitButton
+            // 
+            this.ExitButton.BackColor = System.Drawing.Color.Red;
+            this.ExitButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.ExitButton.ForeColor = System.Drawing.Color.White;
+            this.ExitButton.Location = new System.Drawing.Point(27, 392);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(214, 37);
+            this.ExitButton.TabIndex = 9;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = false;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // cmdCam3
             // 
@@ -170,7 +195,7 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label5.Location = new System.Drawing.Point(275, 89);
+            this.label5.Location = new System.Drawing.Point(292, 75);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 32);
             this.label5.TabIndex = 4;
@@ -180,7 +205,7 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label6.Location = new System.Drawing.Point(275, 194);
+            this.label6.Location = new System.Drawing.Point(292, 180);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(74, 32);
             this.label6.TabIndex = 5;
@@ -190,7 +215,7 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label7.Location = new System.Drawing.Point(275, 292);
+            this.label7.Location = new System.Drawing.Point(292, 278);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(74, 32);
             this.label7.TabIndex = 6;
@@ -200,7 +225,7 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label8.Location = new System.Drawing.Point(499, 89);
+            this.label8.Location = new System.Drawing.Point(530, 74);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 32);
             this.label8.TabIndex = 4;
@@ -210,7 +235,7 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label9.Location = new System.Drawing.Point(499, 194);
+            this.label9.Location = new System.Drawing.Point(530, 179);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 32);
             this.label9.TabIndex = 7;
@@ -220,7 +245,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label10.Location = new System.Drawing.Point(499, 292);
+            this.label10.Location = new System.Drawing.Point(530, 277);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 32);
             this.label10.TabIndex = 8;
@@ -230,7 +255,7 @@
             // plcIp1
             // 
             this.plcIp1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp1.Location = new System.Drawing.Point(341, 93);
+            this.plcIp1.Location = new System.Drawing.Point(372, 78);
             this.plcIp1.Name = "plcIp1";
             this.plcIp1.Size = new System.Drawing.Size(152, 29);
             this.plcIp1.TabIndex = 6;
@@ -239,7 +264,7 @@
             // plcPort1
             // 
             this.plcPort1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort1.Location = new System.Drawing.Point(579, 93);
+            this.plcPort1.Location = new System.Drawing.Point(610, 78);
             this.plcPort1.Name = "plcPort1";
             this.plcPort1.Size = new System.Drawing.Size(152, 29);
             this.plcPort1.TabIndex = 9;
@@ -248,7 +273,7 @@
             // plcPort2
             // 
             this.plcPort2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort2.Location = new System.Drawing.Point(579, 198);
+            this.plcPort2.Location = new System.Drawing.Point(610, 183);
             this.plcPort2.Name = "plcPort2";
             this.plcPort2.Size = new System.Drawing.Size(152, 29);
             this.plcPort2.TabIndex = 11;
@@ -257,7 +282,7 @@
             // plcIp2
             // 
             this.plcIp2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp2.Location = new System.Drawing.Point(341, 198);
+            this.plcIp2.Location = new System.Drawing.Point(372, 183);
             this.plcIp2.Name = "plcIp2";
             this.plcIp2.Size = new System.Drawing.Size(152, 29);
             this.plcIp2.TabIndex = 10;
@@ -266,7 +291,7 @@
             // plcPort3
             // 
             this.plcPort3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort3.Location = new System.Drawing.Point(579, 296);
+            this.plcPort3.Location = new System.Drawing.Point(610, 281);
             this.plcPort3.Name = "plcPort3";
             this.plcPort3.Size = new System.Drawing.Size(152, 29);
             this.plcPort3.TabIndex = 13;
@@ -275,7 +300,7 @@
             // plcIp3
             // 
             this.plcIp3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp3.Location = new System.Drawing.Point(341, 296);
+            this.plcIp3.Location = new System.Drawing.Point(372, 281);
             this.plcIp3.Name = "plcIp3";
             this.plcIp3.Size = new System.Drawing.Size(152, 29);
             this.plcIp3.TabIndex = 12;
@@ -284,7 +309,7 @@
             // connectAll
             // 
             this.connectAll.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.connectAll.Location = new System.Drawing.Point(307, 360);
+            this.connectAll.Location = new System.Drawing.Point(307, 391);
             this.connectAll.Name = "connectAll";
             this.connectAll.Size = new System.Drawing.Size(424, 38);
             this.connectAll.TabIndex = 14;
@@ -292,18 +317,119 @@
             this.connectAll.UseVisualStyleBackColor = true;
             this.connectAll.Click += new System.EventHandler(this.connectAll_Click);
             // 
-            // ExitButton
+            // label11
             // 
-            this.ExitButton.BackColor = System.Drawing.Color.Red;
-            this.ExitButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.ExitButton.ForeColor = System.Drawing.Color.White;
-            this.ExitButton.Location = new System.Drawing.Point(27, 392);
-            this.ExitButton.Name = "ExitButton";
-            this.ExitButton.Size = new System.Drawing.Size(214, 37);
-            this.ExitButton.TabIndex = 9;
-            this.ExitButton.Text = "Exit";
-            this.ExitButton.UseVisualStyleBackColor = false;
-            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            this.label11.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label11.Location = new System.Drawing.Point(306, 127);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 32);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "触发地址：";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label12.Location = new System.Drawing.Point(306, 229);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 32);
+            this.label12.TabIndex = 16;
+            this.label12.Text = "触发地址：";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label13.Location = new System.Drawing.Point(306, 328);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(105, 32);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "触发地址：";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label14.Location = new System.Drawing.Point(530, 127);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(105, 32);
+            this.label14.TabIndex = 18;
+            this.label14.Text = "结果地址：";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label15.Location = new System.Drawing.Point(530, 229);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(105, 32);
+            this.label15.TabIndex = 19;
+            this.label15.Text = "结果地址：";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label16
+            // 
+            this.label16.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.label16.Location = new System.Drawing.Point(530, 328);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(105, 32);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "结果地址：";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // trigger1
+            // 
+            this.trigger1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.trigger1.Location = new System.Drawing.Point(405, 127);
+            this.trigger1.Name = "trigger1";
+            this.trigger1.Size = new System.Drawing.Size(119, 29);
+            this.trigger1.TabIndex = 21;
+            this.trigger1.Text = "6030";
+            // 
+            // trigger2
+            // 
+            this.trigger2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.trigger2.Location = new System.Drawing.Point(405, 233);
+            this.trigger2.Name = "trigger2";
+            this.trigger2.Size = new System.Drawing.Size(119, 29);
+            this.trigger2.TabIndex = 22;
+            this.trigger2.Text = "8030";
+            // 
+            // trigger3
+            // 
+            this.trigger3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.trigger3.Location = new System.Drawing.Point(405, 332);
+            this.trigger3.Name = "trigger3";
+            this.trigger3.Size = new System.Drawing.Size(119, 29);
+            this.trigger3.TabIndex = 23;
+            this.trigger3.Text = "10030";
+            // 
+            // result1
+            // 
+            this.result1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.result1.Location = new System.Drawing.Point(641, 127);
+            this.result1.Name = "result1";
+            this.result1.Size = new System.Drawing.Size(119, 29);
+            this.result1.TabIndex = 24;
+            this.result1.Text = "6032";
+            // 
+            // result2
+            // 
+            this.result2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.result2.Location = new System.Drawing.Point(641, 232);
+            this.result2.Name = "result2";
+            this.result2.Size = new System.Drawing.Size(119, 29);
+            this.result2.TabIndex = 25;
+            this.result2.Text = "8032";
+            // 
+            // result3
+            // 
+            this.result3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.result3.Location = new System.Drawing.Point(641, 328);
+            this.result3.Name = "result3";
+            this.result3.Size = new System.Drawing.Size(119, 29);
+            this.result3.TabIndex = 26;
+            this.result3.Text = "10032";
             // 
             // Form1
             // 
@@ -311,6 +437,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.result3);
+            this.Controls.Add(this.result2);
+            this.Controls.Add(this.result1);
+            this.Controls.Add(this.trigger3);
+            this.Controls.Add(this.trigger2);
+            this.Controls.Add(this.trigger1);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.connectAll);
             this.Controls.Add(this.plcPort3);
             this.Controls.Add(this.plcIp3);
@@ -334,6 +472,21 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.TextBox trigger2;
+        private System.Windows.Forms.TextBox trigger3;
+        private System.Windows.Forms.TextBox result1;
+        private System.Windows.Forms.TextBox result2;
+        private System.Windows.Forms.TextBox result3;
+
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox trigger1;
+
+        private System.Windows.Forms.Label label11;
 
         private System.Windows.Forms.Button ExitButton;
 
