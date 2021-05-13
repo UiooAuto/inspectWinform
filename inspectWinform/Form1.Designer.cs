@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.save = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.cmdCam3 = new System.Windows.Forms.Button();
             this.cmdCam2 = new System.Windows.Forms.Button();
@@ -71,6 +72,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox1.Controls.Add(this.save);
             this.groupBox1.Controls.Add(this.ExitButton);
             this.groupBox1.Controls.Add(this.cmdCam3);
             this.groupBox1.Controls.Add(this.cmdCam2);
@@ -87,6 +89,17 @@
             this.groupBox1.Size = new System.Drawing.Size(261, 450);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
+            // 
+            // save
+            // 
+            this.save.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.save.Location = new System.Drawing.Point(27, 353);
+            this.save.Name = "save";
+            this.save.Size = new System.Drawing.Size(214, 33);
+            this.save.TabIndex = 10;
+            this.save.Text = "保存连接参数";
+            this.save.UseVisualStyleBackColor = true;
+            this.save.Click += new System.EventHandler(this.save_Click);
             // 
             // ExitButton
             // 
@@ -312,7 +325,7 @@
             this.connectAll.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
             this.connectAll.Location = new System.Drawing.Point(307, 391);
             this.connectAll.Name = "connectAll";
-            this.connectAll.Size = new System.Drawing.Size(424, 38);
+            this.connectAll.Size = new System.Drawing.Size(453, 38);
             this.connectAll.TabIndex = 14;
             this.connectAll.Text = "连接";
             this.connectAll.UseVisualStyleBackColor = false;
@@ -473,6 +486,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button save;
 
         private System.Windows.Forms.TextBox trigger2;
         private System.Windows.Forms.TextBox trigger3;

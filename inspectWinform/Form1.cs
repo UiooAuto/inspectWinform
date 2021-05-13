@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace inspectWinform
 {
     public partial class Form1 : Form
     {
+        private AllConnectData allConnectData;
+        string path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) + "\\saveData.JSON";//xml文件地址
+        
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
@@ -63,6 +68,9 @@ namespace inspectWinform
             plcConnectArr[1] = new ConnectInfo();
             plcConnectArr[2] = new ConnectInfo();
 
+            //读取前一次的连接数据
+            readSaveData();
+            
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
@@ -81,7 +89,7 @@ namespace inspectWinform
                 cam3CmdAds = "D" + trigger3.Text + " 01";
                 cam3ResAds = "D" + result3.Text + " 01";
             }
-            //connectAllcon();
+            connectAllcon();
         }
 
         #endregion
@@ -265,7 +273,7 @@ namespace inspectWinform
         }
 
         #endregion
-        
+
         #region 相机触发测试
 
         private void cmdCam1_Click(object sender, EventArgs e)
@@ -386,5 +394,59 @@ namespace inspectWinform
         }
 
         #endregion
+
+        #region 保存连接数据
+
+        public void saveDatas()
+        {
+            allConnectData.inspectIp = inspectIp.Text;
+            allConnectData.inspectPort = inspectPort.Text;
+            allConnectData.plcIp1 = plcIp1.Text;
+            allConnectData.plcIp2 = plcIp2.Text;
+            allConnectData.plcIp3 = plcIp3.Text;
+            allConnectData.plcPort1 = plcPort1.Text;
+            allConnectData.plcPort2 = plcPort2.Text;
+            allConnectData.plcPort3 = plcPort3.Text;
+
+            allConnectData.cam1CmdAds = trigger1.Text;
+            allConnectData.cam2CmdAds = trigger2.Text;
+            allConnectData.cam3CmdAds = trigger3.Text;
+            allConnectData.cam1ResAds = result1.Text;
+            allConnectData.cam2ResAds = result2.Text;
+            allConnectData.cam3ResAds = result3.Text;
+            
+            File.WriteAllText(path,JsonConvert.SerializeObject(allConnectData));
+        }
+
+        public void readSaveData()
+        {
+            if (File.Exists(path))
+            {
+                string readAllText = File.ReadAllText(path, Encoding.UTF8);
+                if (!isEmpty(readAllText))
+                {
+                    try
+                    {
+                        allConnectData = JsonConvert.DeserializeObject<AllConnectData>(readAllText);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("读取存档失败");
+                    }
+                }
+            }
+            else
+            {
+                FileStream fileStream = File.Create(path);
+                fileStream.Close();
+            }
+        }
+
+        #endregion
+
+        private void save_Click(object sender, EventArgs e)
+        {
+            saveDatas();
+        }
     }
 }
