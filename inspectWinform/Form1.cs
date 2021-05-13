@@ -16,7 +16,7 @@ namespace inspectWinform
 {
     public partial class Form1 : Form
     {
-        private AllConnectData allConnectData;
+        private AllConnectData allConnectData = new AllConnectData();
         string path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) + "\\saveData.JSON";//xml文件地址
         
         //inspect和plc的连接信息
@@ -71,6 +71,22 @@ namespace inspectWinform
             //读取前一次的连接数据
             readSaveData();
             
+             inspectIp.Text = allConnectData.inspectIp;
+             inspectPort.Text = allConnectData.inspectPort;
+             plcIp1.Text = allConnectData.plcIp1;
+             plcIp2.Text = allConnectData.plcIp2;
+             plcIp3.Text = allConnectData.plcIp3;
+             plcPort1.Text = allConnectData.plcPort1;
+             plcPort2.Text = allConnectData.plcPort2;
+             plcPort3.Text = allConnectData.plcPort3;
+
+             trigger1.Text = allConnectData.cam1CmdAds;
+             trigger2.Text = allConnectData.cam2CmdAds;
+             trigger3.Text = allConnectData.cam3CmdAds;
+             result1.Text = allConnectData.cam1ResAds;
+             result2.Text = allConnectData.cam2ResAds;
+             result3.Text = allConnectData.cam3ResAds;
+            
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
@@ -89,7 +105,6 @@ namespace inspectWinform
                 cam3CmdAds = "D" + trigger3.Text + " 01";
                 cam3ResAds = "D" + result3.Text + " 01";
             }
-            connectAllcon();
         }
 
         #endregion
