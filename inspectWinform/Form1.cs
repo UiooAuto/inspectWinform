@@ -12,7 +12,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
-using Timer = System.Windows.Forms.Timer;
 
 namespace inspectWinform
 {
@@ -85,6 +84,9 @@ namespace inspectWinform
                 Process.Start(inspectPath);
             }
 
+            AutoConnectForm autoConnectForm = new AutoConnectForm();
+            autoConnectForm.ShowDialog();
+
             //取消关闭安妮
             this.ControlBox = false;
             //新建Socket连接
@@ -112,23 +114,9 @@ namespace inspectWinform
             result2.Text = allConnectData.cam2ResAds;
             result3.Text = allConnectData.cam3ResAds;
 
-            //给PLC连接地址赋值
-            if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
+            if (autoConnectForm.autoConn)
             {
-                cam1CmdAds = "D" + trigger1.Text + " 01";
-                cam1ResAds = "D" + result1.Text + " 01";
-            }
-
-            if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
-            {
-                cam2CmdAds = "D" + trigger2.Text + " 01";
-                cam2ResAds = "D" + result2.Text + " 01";
-            }
-
-            if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
-            {
-                cam3CmdAds = "D" + trigger3.Text + " 01";
-                cam3ResAds = "D" + result3.Text + " 01";
+                startConnect();
             }
         }
 
@@ -573,20 +561,6 @@ namespace inspectWinform
         private void savePath_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "/select," + filePath);
-        }
-
-        #endregion
-
-        #region 自动连接弹窗
-
-        public void autoConnect()
-        {
-            DialogResult
-                con = MessageBox.Show("10秒后自动自动连接", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); //弹出提示是否退出
-            if (con == DialogResult.No)
-            {
-                autoConn = false;
-            }
         }
 
         #endregion
