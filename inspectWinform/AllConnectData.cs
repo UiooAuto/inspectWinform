@@ -19,5 +19,9 @@
         public string cam3ResAds;
 
         public string autoConnTime;
+
+        public bool con1En;
+        public bool con2En;
+        public bool con3En;
     }
 }

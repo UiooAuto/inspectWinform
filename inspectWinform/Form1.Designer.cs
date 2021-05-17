@@ -70,7 +70,16 @@
             this.label17 = new System.Windows.Forms.Label();
             this.autoConTimeSet = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.conn1En = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.conn2En = new System.Windows.Forms.CheckBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.conn3En = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -214,7 +223,7 @@
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label2.Location = new System.Drawing.Point(454, 27);
+            this.label2.Location = new System.Drawing.Point(433, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(165, 32);
             this.label2.TabIndex = 1;
@@ -224,9 +233,9 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label5.Location = new System.Drawing.Point(292, 75);
+            this.label5.Location = new System.Drawing.Point(6, 17);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 32);
+            this.label5.Size = new System.Drawing.Size(68, 32);
             this.label5.TabIndex = 4;
             this.label5.Text = "IP:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -234,9 +243,9 @@
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label6.Location = new System.Drawing.Point(292, 180);
+            this.label6.Location = new System.Drawing.Point(6, 17);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(74, 32);
+            this.label6.Size = new System.Drawing.Size(68, 32);
             this.label6.TabIndex = 5;
             this.label6.Text = "IP:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -244,9 +253,9 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label7.Location = new System.Drawing.Point(292, 278);
+            this.label7.Location = new System.Drawing.Point(6, 17);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 32);
+            this.label7.Size = new System.Drawing.Size(68, 32);
             this.label7.TabIndex = 6;
             this.label7.Text = "IP:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -254,7 +263,7 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label8.Location = new System.Drawing.Point(530, 74);
+            this.label8.Location = new System.Drawing.Point(238, 16);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 32);
             this.label8.TabIndex = 4;
@@ -264,7 +273,7 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label9.Location = new System.Drawing.Point(530, 179);
+            this.label9.Location = new System.Drawing.Point(238, 16);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 32);
             this.label9.TabIndex = 7;
@@ -274,7 +283,7 @@
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label10.Location = new System.Drawing.Point(530, 277);
+            this.label10.Location = new System.Drawing.Point(238, 16);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 32);
             this.label10.TabIndex = 8;
@@ -284,7 +293,7 @@
             // plcIp1
             // 
             this.plcIp1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp1.Location = new System.Drawing.Point(372, 78);
+            this.plcIp1.Location = new System.Drawing.Point(80, 20);
             this.plcIp1.Name = "plcIp1";
             this.plcIp1.Size = new System.Drawing.Size(152, 29);
             this.plcIp1.TabIndex = 6;
@@ -293,7 +302,7 @@
             // plcPort1
             // 
             this.plcPort1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort1.Location = new System.Drawing.Point(610, 78);
+            this.plcPort1.Location = new System.Drawing.Point(318, 20);
             this.plcPort1.Name = "plcPort1";
             this.plcPort1.Size = new System.Drawing.Size(152, 29);
             this.plcPort1.TabIndex = 9;
@@ -302,7 +311,7 @@
             // plcPort2
             // 
             this.plcPort2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort2.Location = new System.Drawing.Point(610, 183);
+            this.plcPort2.Location = new System.Drawing.Point(318, 20);
             this.plcPort2.Name = "plcPort2";
             this.plcPort2.Size = new System.Drawing.Size(152, 29);
             this.plcPort2.TabIndex = 11;
@@ -311,7 +320,7 @@
             // plcIp2
             // 
             this.plcIp2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp2.Location = new System.Drawing.Point(372, 183);
+            this.plcIp2.Location = new System.Drawing.Point(80, 20);
             this.plcIp2.Name = "plcIp2";
             this.plcIp2.Size = new System.Drawing.Size(152, 29);
             this.plcIp2.TabIndex = 10;
@@ -320,7 +329,7 @@
             // plcPort3
             // 
             this.plcPort3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcPort3.Location = new System.Drawing.Point(610, 281);
+            this.plcPort3.Location = new System.Drawing.Point(318, 20);
             this.plcPort3.Name = "plcPort3";
             this.plcPort3.Size = new System.Drawing.Size(152, 29);
             this.plcPort3.TabIndex = 13;
@@ -329,7 +338,7 @@
             // plcIp3
             // 
             this.plcIp3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.plcIp3.Location = new System.Drawing.Point(372, 281);
+            this.plcIp3.Location = new System.Drawing.Point(80, 20);
             this.plcIp3.Name = "plcIp3";
             this.plcIp3.Size = new System.Drawing.Size(152, 29);
             this.plcIp3.TabIndex = 12;
@@ -339,7 +348,7 @@
             // 
             this.connectAll.BackColor = System.Drawing.Color.Silver;
             this.connectAll.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.connectAll.Location = new System.Drawing.Point(307, 391);
+            this.connectAll.Location = new System.Drawing.Point(286, 403);
             this.connectAll.Name = "connectAll";
             this.connectAll.Size = new System.Drawing.Size(453, 38);
             this.connectAll.TabIndex = 0;
@@ -350,7 +359,7 @@
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label11.Location = new System.Drawing.Point(306, 127);
+            this.label11.Location = new System.Drawing.Point(14, 69);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(105, 32);
             this.label11.TabIndex = 15;
@@ -360,7 +369,7 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label12.Location = new System.Drawing.Point(306, 229);
+            this.label12.Location = new System.Drawing.Point(14, 66);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(105, 32);
             this.label12.TabIndex = 16;
@@ -370,7 +379,7 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label13.Location = new System.Drawing.Point(306, 328);
+            this.label13.Location = new System.Drawing.Point(14, 67);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(105, 32);
             this.label13.TabIndex = 17;
@@ -380,7 +389,7 @@
             // label14
             // 
             this.label14.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label14.Location = new System.Drawing.Point(530, 127);
+            this.label14.Location = new System.Drawing.Point(238, 69);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(105, 32);
             this.label14.TabIndex = 18;
@@ -390,7 +399,7 @@
             // label15
             // 
             this.label15.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label15.Location = new System.Drawing.Point(530, 229);
+            this.label15.Location = new System.Drawing.Point(238, 66);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(105, 32);
             this.label15.TabIndex = 19;
@@ -400,7 +409,7 @@
             // label16
             // 
             this.label16.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label16.Location = new System.Drawing.Point(530, 328);
+            this.label16.Location = new System.Drawing.Point(238, 67);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(105, 32);
             this.label16.TabIndex = 20;
@@ -410,34 +419,34 @@
             // trigger1
             // 
             this.trigger1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.trigger1.Location = new System.Drawing.Point(405, 127);
+            this.trigger1.Location = new System.Drawing.Point(125, 69);
             this.trigger1.Name = "trigger1";
-            this.trigger1.Size = new System.Drawing.Size(119, 29);
+            this.trigger1.Size = new System.Drawing.Size(107, 29);
             this.trigger1.TabIndex = 21;
             this.trigger1.Text = "6030";
             // 
             // trigger2
             // 
             this.trigger2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.trigger2.Location = new System.Drawing.Point(405, 233);
+            this.trigger2.Location = new System.Drawing.Point(125, 70);
             this.trigger2.Name = "trigger2";
-            this.trigger2.Size = new System.Drawing.Size(119, 29);
+            this.trigger2.Size = new System.Drawing.Size(107, 29);
             this.trigger2.TabIndex = 23;
             this.trigger2.Text = "8030";
             // 
             // trigger3
             // 
             this.trigger3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.trigger3.Location = new System.Drawing.Point(405, 332);
+            this.trigger3.Location = new System.Drawing.Point(125, 71);
             this.trigger3.Name = "trigger3";
-            this.trigger3.Size = new System.Drawing.Size(119, 29);
+            this.trigger3.Size = new System.Drawing.Size(107, 29);
             this.trigger3.TabIndex = 25;
             this.trigger3.Text = "10030";
             // 
             // result1
             // 
             this.result1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.result1.Location = new System.Drawing.Point(641, 127);
+            this.result1.Location = new System.Drawing.Point(349, 69);
             this.result1.Name = "result1";
             this.result1.Size = new System.Drawing.Size(119, 29);
             this.result1.TabIndex = 22;
@@ -446,7 +455,7 @@
             // result2
             // 
             this.result2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.result2.Location = new System.Drawing.Point(641, 232);
+            this.result2.Location = new System.Drawing.Point(349, 69);
             this.result2.Name = "result2";
             this.result2.Size = new System.Drawing.Size(119, 29);
             this.result2.TabIndex = 24;
@@ -455,7 +464,7 @@
             // result3
             // 
             this.result3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.result3.Location = new System.Drawing.Point(641, 328);
+            this.result3.Location = new System.Drawing.Point(349, 67);
             this.result3.Name = "result3";
             this.result3.Size = new System.Drawing.Size(119, 29);
             this.result3.TabIndex = 26;
@@ -463,7 +472,7 @@
             // 
             // label17
             // 
-            this.label17.Location = new System.Drawing.Point(637, 37);
+            this.label17.Location = new System.Drawing.Point(635, 18);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(80, 23);
             this.label17.TabIndex = 27;
@@ -472,7 +481,7 @@
             // 
             // autoConTimeSet
             // 
-            this.autoConTimeSet.Location = new System.Drawing.Point(714, 38);
+            this.autoConTimeSet.Location = new System.Drawing.Point(712, 19);
             this.autoConTimeSet.Name = "autoConTimeSet";
             this.autoConTimeSet.Size = new System.Drawing.Size(23, 21);
             this.autoConTimeSet.TabIndex = 28;
@@ -480,47 +489,116 @@
             // 
             // label18
             // 
-            this.label18.Location = new System.Drawing.Point(737, 37);
+            this.label18.Location = new System.Drawing.Point(735, 18);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(23, 23);
             this.label18.TabIndex = 29;
             this.label18.Text = "秒";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.conn1En);
+            this.groupBox2.Controls.Add(this.plcIp1);
+            this.groupBox2.Controls.Add(this.trigger1);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.result1);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.label8);
+            this.groupBox2.Controls.Add(this.plcPort1);
+            this.groupBox2.Location = new System.Drawing.Point(264, 44);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(563, 114);
+            this.groupBox2.TabIndex = 30;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "工位 1 参数";
+            // 
+            // conn1En
+            // 
+            this.conn1En.Checked = true;
+            this.conn1En.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.conn1En.Location = new System.Drawing.Point(476, 20);
+            this.conn1En.Name = "conn1En";
+            this.conn1En.Size = new System.Drawing.Size(78, 24);
+            this.conn1En.TabIndex = 23;
+            this.conn1En.Text = "勾选启用";
+            this.conn1En.UseVisualStyleBackColor = true;
+            this.conn1En.CheckedChanged += new System.EventHandler(this.conn1En_CheckedChanged);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.conn2En);
+            this.groupBox3.Controls.Add(this.plcIp2);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.plcPort2);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label15);
+            this.groupBox3.Controls.Add(this.trigger2);
+            this.groupBox3.Controls.Add(this.result2);
+            this.groupBox3.Location = new System.Drawing.Point(264, 164);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(563, 114);
+            this.groupBox3.TabIndex = 31;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "工位 2 参数";
+            // 
+            // conn2En
+            // 
+            this.conn2En.Checked = true;
+            this.conn2En.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.conn2En.Location = new System.Drawing.Point(476, 21);
+            this.conn2En.Name = "conn2En";
+            this.conn2En.Size = new System.Drawing.Size(78, 24);
+            this.conn2En.TabIndex = 24;
+            this.conn2En.Text = "勾选启用";
+            this.conn2En.UseVisualStyleBackColor = true;
+            this.conn2En.CheckedChanged += new System.EventHandler(this.conn2En_CheckedChanged);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.conn3En);
+            this.groupBox4.Controls.Add(this.plcIp3);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.label10);
+            this.groupBox4.Controls.Add(this.plcPort3);
+            this.groupBox4.Controls.Add(this.label13);
+            this.groupBox4.Controls.Add(this.label16);
+            this.groupBox4.Controls.Add(this.result3);
+            this.groupBox4.Controls.Add(this.trigger3);
+            this.groupBox4.Location = new System.Drawing.Point(264, 284);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(563, 114);
+            this.groupBox4.TabIndex = 31;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "工位 3 参数";
+            // 
+            // conn3En
+            // 
+            this.conn3En.Checked = true;
+            this.conn3En.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.conn3En.Location = new System.Drawing.Point(476, 20);
+            this.conn3En.Name = "conn3En";
+            this.conn3En.Size = new System.Drawing.Size(78, 24);
+            this.conn3En.TabIndex = 25;
+            this.conn3En.Text = "勾选启用";
+            this.conn3En.UseVisualStyleBackColor = true;
+            this.conn3En.CheckedChanged += new System.EventHandler(this.conn3En_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(830, 449);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.autoConTimeSet);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.result3);
-            this.Controls.Add(this.result2);
-            this.Controls.Add(this.result1);
-            this.Controls.Add(this.trigger3);
-            this.Controls.Add(this.trigger2);
-            this.Controls.Add(this.trigger1);
-            this.Controls.Add(this.label16);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.connectAll);
-            this.Controls.Add(this.plcPort3);
-            this.Controls.Add(this.plcIp3);
-            this.Controls.Add(this.plcPort2);
-            this.Controls.Add(this.plcIp2);
-            this.Controls.Add(this.plcPort1);
-            this.Controls.Add(this.plcIp1);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox1);
             this.Location = new System.Drawing.Point(15, 15);
@@ -528,9 +606,25 @@
             this.Text = "Inspect连接工具";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.CheckBox conn1En;
+        private System.Windows.Forms.CheckBox conn2En;
+        private System.Windows.Forms.CheckBox conn3En;
+
+        private System.Windows.Forms.CheckBox checkBox1;
+
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
 
         private System.Windows.Forms.Label label18;
 
@@ -569,8 +663,6 @@
         private System.Windows.Forms.TextBox plcPort3;
 
         private System.Windows.Forms.Button connectAll;
-
-        private System.Windows.Forms.TextBox textBox2;
 
         private System.Windows.Forms.TextBox plcIp1;
 

@@ -78,6 +78,7 @@ namespace inspectWinform
                     inspectRun = true;
                 }
             }
+
             if (!inspectRun)
             {
                 Process.Start(inspectPath);
@@ -94,6 +95,7 @@ namespace inspectWinform
             //读取前一次的连接数据
             readSaveData();
 
+            //界面中已保存值恢复
             inspectIp.Text = allConnectData.inspectIp;
             inspectPort.Text = allConnectData.inspectPort;
             plcIp1.Text = allConnectData.plcIp1;
@@ -111,6 +113,9 @@ namespace inspectWinform
             result3.Text = allConnectData.cam3ResAds;
 
             autoConTimeSet.Text = allConnectData.autoConnTime;
+            conn1En.Checked = allConnectData.con1En;
+            conn2En.Checked = allConnectData.con2En;
+            conn3En.Checked = allConnectData.con3En;
 
             //创建窗口对象
             AutoConnectForm autoConnectForm = new AutoConnectForm();
@@ -284,7 +289,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) && !isEmpty(trigger1.Text) &&
+            if (conn1En.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
+                !isEmpty(trigger1.Text) &&
                 !isEmpty(result1.Text))
             {
                 plcConnectArr[0].ip = plcIp1.Text;
@@ -296,7 +302,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) && !isEmpty(trigger2.Text) &&
+            if (conn2En.Checked && plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) &&
+                !isEmpty(trigger2.Text) &&
                 !isEmpty(result2.Text))
             {
                 plcConnectArr[1].ip = plcIp2.Text;
@@ -308,7 +315,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) && !isEmpty(trigger3.Text) &&
+            if (conn3En.Checked && plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) &&
+                !isEmpty(trigger3.Text) &&
                 !isEmpty(result3.Text))
             {
                 plcConnectArr[2].ip = plcIp3.Text;
@@ -520,6 +528,10 @@ namespace inspectWinform
 
             allConnectData.autoConnTime = autoConTimeSet.Text;
 
+            allConnectData.con1En = conn1En.Checked;
+            allConnectData.con2En = conn2En.Checked;
+            allConnectData.con3En = conn3En.Checked;
+
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }
 
@@ -574,6 +586,64 @@ namespace inspectWinform
         private void savePath_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "/select," + filePath);
+        }
+
+        #endregion
+
+        #region 用过复选框选择需要的连接
+
+        private void conn1En_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!conn1En.Checked)
+            {
+                plcIp1.Enabled = false;
+                plcPort1.Enabled = false;
+                trigger1.Enabled = false;
+                result1.Enabled = false;
+            }
+            else
+            {
+                plcIp1.Enabled = true;
+                plcPort1.Enabled = true;
+                trigger1.Enabled = true;
+                result1.Enabled = true;
+            }
+        }
+
+        private void conn2En_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!conn2En.Checked)
+            {
+                plcIp2.Enabled = false;
+                plcPort2.Enabled = false;
+                trigger2.Enabled = false;
+                result2.Enabled = false;
+            }
+            else
+            {
+                plcIp2.Enabled = true;
+                plcPort2.Enabled = true;
+                trigger2.Enabled = true;
+                result2.Enabled = true;
+            }
+        }
+
+        private void conn3En_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!conn3En.Checked)
+            {
+                plcIp3.Enabled = false;
+                plcPort3.Enabled = false;
+                trigger3.Enabled = false;
+                result3.Enabled = false;
+            }
+            else
+            {
+                plcIp3.Enabled = true;
+                plcPort3.Enabled = true;
+                trigger3.Enabled = true;
+                result3.Enabled = true;
+            }
         }
 
         #endregion
