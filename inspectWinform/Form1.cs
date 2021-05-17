@@ -12,6 +12,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using Timer = System.Windows.Forms.Timer;
 
 namespace inspectWinform
 {
@@ -24,6 +25,7 @@ namespace inspectWinform
 
         private string inspectPath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
                                      "\\startInspect.bat";
+
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
@@ -52,6 +54,8 @@ namespace inspectWinform
 
         bool connectStatus = false;
 
+        bool autoConn = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -65,6 +69,7 @@ namespace inspectWinform
         /// </summary>
         public void init()
         {
+            //查询inspect是否已启动，未启动则自动启动
             bool inspectRun = false;
             Process[] processes = Process.GetProcesses();
             foreach (Process process in processes)
@@ -79,6 +84,7 @@ namespace inspectWinform
             {
                 Process.Start(inspectPath);
             }
+
             //取消关闭安妮
             this.ControlBox = false;
             //新建Socket连接
@@ -131,6 +137,15 @@ namespace inspectWinform
         #region 点击连接按钮
 
         private void connectAll_Click(object sender, EventArgs e)
+        {
+            startConnect();
+        }
+
+        #endregion
+
+        #region 连接功能
+
+        public void startConnect()
         {
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
@@ -261,6 +276,7 @@ namespace inspectWinform
                 inspectConnectInfo.ip = inspectIp.Text;
                 inspectConnectInfo.port = int.Parse(inspectPort.Text);
                 inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
+                inspectSocket.SendTimeout = 500;
                 if (inspectSocket != null)
                 {
                     flag = true;
@@ -543,14 +559,36 @@ namespace inspectWinform
 
         #endregion
 
+        #region 保存参数
+
         private void save_Click(object sender, EventArgs e)
         {
             saveDatas();
         }
 
+        #endregion
+
+        #region 打开参数文件位置
+
         private void savePath_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "/select,"+filePath);
+            System.Diagnostics.Process.Start("explorer.exe", "/select," + filePath);
         }
+
+        #endregion
+
+        #region 自动连接弹窗
+
+        public void autoConnect()
+        {
+            DialogResult
+                con = MessageBox.Show("10秒后自动自动连接", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning); //弹出提示是否退出
+            if (con == DialogResult.No)
+            {
+                autoConn = false;
+            }
+        }
+
+        #endregion
     }
 }
