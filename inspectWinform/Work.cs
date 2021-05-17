@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
+using System.Windows.Forms;
 
 namespace inspectWinform
 {
@@ -50,11 +51,11 @@ namespace inspectWinform
                     }
                     if (result == "1")
                     {
-                        setPlcCmd(plcSocket, camResAds, "0001\r\n");
+                        setPlcCmd(plcSocket, camResAds, " 0001\r\n");
                     }
                     else if (result == "2")
                     {
-                        setPlcCmd(plcSocket, camResAds, "0002\r\n");
+                        setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                     }
                     result = "";
                     Thread.Sleep(100);
@@ -64,7 +65,6 @@ namespace inspectWinform
 
         private string setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
-            Console.WriteLine(writeCmd + plcAddress + setResult + "\r\n");
             string rtn = InspectUtils.sendCmdToTarget(socket, writeCmd + plcAddress + setResult + "\r\n");
             return rtn;
         }

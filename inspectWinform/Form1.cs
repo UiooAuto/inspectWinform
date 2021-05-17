@@ -17,8 +17,10 @@ namespace inspectWinform
     public partial class Form1 : Form
     {
         private AllConnectData allConnectData = new AllConnectData();
-        string path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) + "\\saveData.JSON";//xml文件地址
-        
+
+        string path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
+                      "\\saveData.JSON"; //xml文件地址
+
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
@@ -70,23 +72,23 @@ namespace inspectWinform
 
             //读取前一次的连接数据
             readSaveData();
-            
-             inspectIp.Text = allConnectData.inspectIp;
-             inspectPort.Text = allConnectData.inspectPort;
-             plcIp1.Text = allConnectData.plcIp1;
-             plcIp2.Text = allConnectData.plcIp2;
-             plcIp3.Text = allConnectData.plcIp3;
-             plcPort1.Text = allConnectData.plcPort1;
-             plcPort2.Text = allConnectData.plcPort2;
-             plcPort3.Text = allConnectData.plcPort3;
 
-             trigger1.Text = allConnectData.cam1CmdAds;
-             trigger2.Text = allConnectData.cam2CmdAds;
-             trigger3.Text = allConnectData.cam3CmdAds;
-             result1.Text = allConnectData.cam1ResAds;
-             result2.Text = allConnectData.cam2ResAds;
-             result3.Text = allConnectData.cam3ResAds;
-            
+            inspectIp.Text = allConnectData.inspectIp;
+            inspectPort.Text = allConnectData.inspectPort;
+            plcIp1.Text = allConnectData.plcIp1;
+            plcIp2.Text = allConnectData.plcIp2;
+            plcIp3.Text = allConnectData.plcIp3;
+            plcPort1.Text = allConnectData.plcPort1;
+            plcPort2.Text = allConnectData.plcPort2;
+            plcPort3.Text = allConnectData.plcPort3;
+
+            trigger1.Text = allConnectData.cam1CmdAds;
+            trigger2.Text = allConnectData.cam2CmdAds;
+            trigger3.Text = allConnectData.cam3CmdAds;
+            result1.Text = allConnectData.cam1ResAds;
+            result2.Text = allConnectData.cam2ResAds;
+            result3.Text = allConnectData.cam3ResAds;
+
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
@@ -295,21 +297,45 @@ namespace inspectWinform
         {
             string str = "c1;";
             InspectUtils.sendCmdToTarget(inspectSocket, str);
-            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            if (receiveData == "1")
+            {
+                setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
+            }
+            else if (receiveData == "2")
+            {
+                setPlcCmd(plcSocket1, cam1ResAds, " 0002\r\n");
+            }
         }
 
         private void cmdCam2_Click(object sender, EventArgs e)
         {
             string str = "c2;";
             InspectUtils.sendCmdToTarget(inspectSocket, str);
-            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            if (receiveData == "1")
+            {
+                setPlcCmd(plcSocket2, cam2ResAds, " 0001\r\n");
+            }
+            else if (receiveData == "2")
+            {
+                setPlcCmd(plcSocket2, cam2ResAds, " 0002\r\n");
+            }
         }
 
         private void cmdCam3_Click(object sender, EventArgs e)
         {
             string str = "c3;";
             InspectUtils.sendCmdToTarget(inspectSocket, str);
-            //var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            if (receiveData == "1")
+            {
+                setPlcCmd(plcSocket3, cam3ResAds, " 0001\r\n");
+            }
+            else if (receiveData == "2")
+            {
+                setPlcCmd(plcSocket3, cam3ResAds, " 0002\r\n");
+            }
         }
 
         #endregion
@@ -429,8 +455,8 @@ namespace inspectWinform
             allConnectData.cam1ResAds = result1.Text;
             allConnectData.cam2ResAds = result2.Text;
             allConnectData.cam3ResAds = result3.Text;
-            
-            File.WriteAllText(path,JsonConvert.SerializeObject(allConnectData));
+
+            File.WriteAllText(path, JsonConvert.SerializeObject(allConnectData));
         }
 
         public void readSaveData()
@@ -455,6 +481,17 @@ namespace inspectWinform
                 FileStream fileStream = File.Create(path);
                 fileStream.Close();
             }
+        }
+
+        #endregion
+
+        #region 给plc发送信息
+
+        private string setPlcCmd(Socket socket, string plcAddress, string setResult)
+        {
+            string rtn = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult + "\r\n");
+            MessageBox.Show("01WWR" + plcAddress + setResult + "\r\n");
+            return rtn;
         }
 
         #endregion
