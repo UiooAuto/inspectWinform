@@ -115,9 +115,6 @@ namespace inspectWinform
 
         private void connectAll_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(trigger1.Text + "+" +
-                            trigger2.Text + "+" +
-                            trigger3.Text + "+");
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {

@@ -75,7 +75,6 @@ namespace inspectWinform
 
         private int getPlcCmd(Socket socket, string plcAddress)
         {
-            MessageBox.Show(plcAddress+"+"+plc1CmdAds+"+"+plc2CmdAds+"+"+plc3CmdAds);
             int enCamId = 0;
             InspectUtils.sendCmdToTarget(socket, readCmd + plcAddress + "\r\n");
             var cmd = InspectUtils.receiveDataFromTarget(socket, new byte[1024]);
