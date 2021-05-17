@@ -200,7 +200,7 @@ namespace inspectWinform
                 work2.localSocket = inspectSocket;
                 work2.camCmdAds = cam2CmdAds;
                 work2.camResAds = cam2ResAds;
-                
+
                 work2.plc1CmdAds = cam1CmdAds;
                 work2.plc2CmdAds = cam2CmdAds;
                 work2.plc3CmdAds = cam3CmdAds;
@@ -216,7 +216,7 @@ namespace inspectWinform
                 work3.localSocket = inspectSocket;
                 work3.camCmdAds = cam3CmdAds;
                 work3.camResAds = cam3ResAds;
-                
+
                 work3.plc1CmdAds = cam1CmdAds;
                 work3.plc2CmdAds = cam2CmdAds;
                 work3.plc3CmdAds = cam3CmdAds;
@@ -239,7 +239,7 @@ namespace inspectWinform
             //用于标识是否有连接建立成功
             bool flag = false;
             //只有在有连接参数的时候才连接
-            if (inspectSocket == null & !isEmpty(inspectIp.Text) & !isEmpty(inspectPort.Text))
+            if (inspectSocket == null && !isEmpty(inspectIp.Text) && !isEmpty(inspectPort.Text))
             {
                 inspectConnectInfo.ip = inspectIp.Text;
                 inspectConnectInfo.port = int.Parse(inspectPort.Text);
@@ -250,7 +250,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket1 == null & !isEmpty(plcIp1.Text) & !isEmpty(plcPort1.Text))
+            if (plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) && !isEmpty(trigger1.Text) &&
+                !isEmpty(result1.Text))
             {
                 plcConnectArr[0].ip = plcIp1.Text;
                 plcConnectArr[0].port = int.Parse(plcPort1.Text);
@@ -261,7 +262,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket2 == null & !isEmpty(plcIp2.Text) & !isEmpty(plcPort2.Text))
+            if (plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) && !isEmpty(trigger2.Text) &&
+                !isEmpty(result2.Text))
             {
                 plcConnectArr[1].ip = plcIp2.Text;
                 plcConnectArr[1].port = int.Parse(plcPort2.Text);
@@ -272,7 +274,8 @@ namespace inspectWinform
                 }
             }
 
-            if (plcSocket3 == null & !isEmpty(plcIp3.Text) & !isEmpty(plcPort3.Text))
+            if (plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) && !isEmpty(trigger3.Text) &&
+                !isEmpty(result3.Text))
             {
                 plcConnectArr[2].ip = plcIp3.Text;
                 plcConnectArr[2].port = int.Parse(plcPort3.Text);
