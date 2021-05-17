@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -18,11 +19,11 @@ namespace inspectWinform
     {
         private AllConnectData allConnectData = new AllConnectData();
 
-        string Path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")); //xml文件地址
-
         string filePath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
                           "\\saveData.JSON"; //xml文件地址
 
+        private string inspectPath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
+                                     "\\startInspect.bat";
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
         ConnectInfo[] plcConnectArr = new ConnectInfo[3];
@@ -64,6 +65,20 @@ namespace inspectWinform
         /// </summary>
         public void init()
         {
+            bool inspectRun = false;
+            Process[] processes = Process.GetProcesses();
+            foreach (Process process in processes)
+            {
+                if (process.ProcessName.Equals("iworks"))
+                {
+                    inspectRun = true;
+                }
+            }
+
+            if (!inspectRun)
+            {
+                Process.Start(inspectPath);
+            }
             //取消关闭安妮
             this.ControlBox = false;
             //新建Socket连接
