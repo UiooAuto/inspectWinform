@@ -18,5 +18,6 @@
         public string cam3CmdAds;
         public string cam3ResAds;
 
+        public string autoConnTime;
     }
 }

@@ -67,6 +67,9 @@
             this.result1 = new System.Windows.Forms.TextBox();
             this.result2 = new System.Windows.Forms.TextBox();
             this.result3 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.autoConTimeSet = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -458,12 +461,41 @@
             this.result3.TabIndex = 26;
             this.result3.Text = "10032";
             // 
+            // label17
+            // 
+            this.label17.Location = new System.Drawing.Point(637, 37);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(80, 23);
+            this.label17.TabIndex = 27;
+            this.label17.Text = "自动连接等待";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // autoConTimeSet
+            // 
+            this.autoConTimeSet.Location = new System.Drawing.Point(714, 38);
+            this.autoConTimeSet.Name = "autoConTimeSet";
+            this.autoConTimeSet.Size = new System.Drawing.Size(23, 21);
+            this.autoConTimeSet.TabIndex = 28;
+            this.autoConTimeSet.Text = "10";
+            // 
+            // label18
+            // 
+            this.label18.Location = new System.Drawing.Point(737, 37);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(23, 23);
+            this.label18.TabIndex = 29;
+            this.label18.Text = "秒";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.autoConTimeSet);
+            this.Controls.Add(this.label17);
             this.Controls.Add(this.result3);
             this.Controls.Add(this.result2);
             this.Controls.Add(this.result1);
@@ -499,6 +531,10 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Label label18;
+
+        private System.Windows.Forms.Label label17;
 
         private System.Windows.Forms.Button savePath;
 
@@ -547,7 +583,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox autoConTimeSet;
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

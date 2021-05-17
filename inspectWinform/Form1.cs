@@ -78,16 +78,12 @@ namespace inspectWinform
                     inspectRun = true;
                 }
             }
-
             if (!inspectRun)
             {
                 Process.Start(inspectPath);
             }
 
-            AutoConnectForm autoConnectForm = new AutoConnectForm();
-            autoConnectForm.ShowDialog();
-
-            //取消关闭安妮
+            //取消关闭按钮
             this.ControlBox = false;
             //新建Socket连接
             inspectConnectInfo = new ConnectInfo();
@@ -113,6 +109,23 @@ namespace inspectWinform
             result1.Text = allConnectData.cam1ResAds;
             result2.Text = allConnectData.cam2ResAds;
             result3.Text = allConnectData.cam3ResAds;
+
+            autoConTimeSet.Text = allConnectData.autoConnTime;
+
+            //创建窗口对象
+            AutoConnectForm autoConnectForm = new AutoConnectForm();
+            //如果文件中没有保存等待时间，则默认为10
+            if (isEmpty(allConnectData.autoConnTime))
+            {
+                autoConnectForm.autoConnTime = "10";
+            }
+            else
+            {
+                autoConnectForm.autoConnTime = allConnectData.autoConnTime;
+            }
+
+            //运行窗口，阻塞主体程序运行
+            autoConnectForm.ShowDialog();
 
             if (autoConnectForm.autoConn)
             {
@@ -330,14 +343,12 @@ namespace inspectWinform
         /// <returns></returns>
         private bool isEmpty(string str)
         {
-            if (str.Length != 0 & str != null)
+            if (!string.IsNullOrEmpty(str))
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+
+            return true;
         }
 
         #endregion
@@ -507,6 +518,8 @@ namespace inspectWinform
             allConnectData.cam2ResAds = result2.Text;
             allConnectData.cam3ResAds = result3.Text;
 
+            allConnectData.autoConnTime = autoConTimeSet.Text;
+
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }
 
@@ -547,7 +560,7 @@ namespace inspectWinform
 
         #endregion
 
-        #region 保存参数
+        #region 保存参数按钮
 
         private void save_Click(object sender, EventArgs e)
         {
