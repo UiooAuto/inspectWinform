@@ -21,6 +21,10 @@ namespace inspectWinform
         public bool san = true;
         private string lastCmd = "";
 
+        public string plc1CmdAds;
+        public string plc2CmdAds;
+        public string plc3CmdAds;
+
         public string testStr = Thread.CurrentThread.Name;
 
         public void go()
@@ -71,10 +75,10 @@ namespace inspectWinform
 
         private int getPlcCmd(Socket socket, string plcAddress)
         {
+            MessageBox.Show(plcAddress+"+"+plc1CmdAds+"+"+plc2CmdAds+"+"+plc3CmdAds);
             int enCamId = 0;
             InspectUtils.sendCmdToTarget(socket, readCmd + plcAddress + "\r\n");
             var cmd = InspectUtils.receiveDataFromTarget(socket, new byte[1024]);
-            testStr = cmd;
             var indexOf = cmd.IndexOf('\r');
             if (indexOf != -1)
             {
@@ -83,17 +87,17 @@ namespace inspectWinform
             if (cmd == "11OK0001" && cmd != lastCmd)
             {
                 Console.WriteLine(Thread.CurrentThread.Name + "触发");
-                if (plcAddress == "D6030 01")
+                if (plcAddress == plc1CmdAds)
                 {
                     enCamId = 1;
                 }
 
-                if (plcAddress == "D8030 01")
+                if (plcAddress == plc2CmdAds)
                 {
                     enCamId = 2;
                 }
 
-                if (plcAddress == "D10030 01")
+                if (plcAddress == plc3CmdAds)
                 {
                     enCamId = 3;
                 }

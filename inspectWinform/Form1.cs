@@ -115,11 +115,19 @@ namespace inspectWinform
 
         private void connectAll_Click(object sender, EventArgs e)
         {
+            MessageBox.Show(trigger1.Text + "+" +
+                            trigger2.Text + "+" +
+                            trigger3.Text + "+");
             //给PLC连接地址赋值
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
                 cam1CmdAds = "D" + trigger1.Text + " 01";
                 cam1ResAds = "D" + result1.Text + " 01";
+            }
+            else
+            {
+                cam1CmdAds = null;
+                cam1ResAds = null;
             }
 
             if (!isEmpty(trigger2.Text) && !isEmpty(result2.Text))
@@ -127,11 +135,21 @@ namespace inspectWinform
                 cam2CmdAds = "D" + trigger2.Text + " 01";
                 cam2ResAds = "D" + result2.Text + " 01";
             }
+            else
+            {
+                cam2CmdAds = null;
+                cam2ResAds = null;
+            }
 
             if (!isEmpty(trigger3.Text) && !isEmpty(result3.Text))
             {
                 cam3CmdAds = "D" + trigger3.Text + " 01";
                 cam3ResAds = "D" + result3.Text + " 01";
+            }
+            else
+            {
+                cam3CmdAds = null;
+                cam3ResAds = null;
             }
 
             //当在有链接的时候点击，需要关闭所有连接
@@ -169,6 +187,10 @@ namespace inspectWinform
                 work1.localSocket = inspectSocket;
                 work1.camCmdAds = cam1CmdAds;
                 work1.camResAds = cam1ResAds;
+
+                work1.plc1CmdAds = cam1CmdAds;
+                work1.plc2CmdAds = cam2CmdAds;
+                work1.plc3CmdAds = cam3CmdAds;
                 work1.san = true;
                 Thread thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
@@ -181,6 +203,10 @@ namespace inspectWinform
                 work2.localSocket = inspectSocket;
                 work2.camCmdAds = cam2CmdAds;
                 work2.camResAds = cam2ResAds;
+                
+                work2.plc1CmdAds = cam1CmdAds;
+                work2.plc2CmdAds = cam2CmdAds;
+                work2.plc3CmdAds = cam3CmdAds;
                 work2.san = true;
                 Thread thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
@@ -193,6 +219,10 @@ namespace inspectWinform
                 work3.localSocket = inspectSocket;
                 work3.camCmdAds = cam3CmdAds;
                 work3.camResAds = cam3ResAds;
+                
+                work3.plc1CmdAds = cam1CmdAds;
+                work3.plc2CmdAds = cam2CmdAds;
+                work3.plc3CmdAds = cam3CmdAds;
                 work3.san = true;
                 Thread thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
