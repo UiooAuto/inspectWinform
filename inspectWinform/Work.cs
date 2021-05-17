@@ -25,7 +25,8 @@ namespace inspectWinform
         public string plc2CmdAds;
         public string plc3CmdAds;
 
-        public string testStr = Thread.CurrentThread.Name;
+
+        #region 线程主方法
 
         public void go()
         {
@@ -53,25 +54,37 @@ namespace inspectWinform
                     {
                         result = readInspect(plcCmd);
                     }
+
                     if (result == "1")
                     {
                         setPlcCmd(plcSocket, camResAds, " 0001\r\n");
+                        setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
                     else if (result == "2")
                     {
                         setPlcCmd(plcSocket, camResAds, " 0002\r\n");
+                        setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
+
                     result = "";
                     Thread.Sleep(100);
                 }
             }
         }
 
+        #endregion
+
+        #region 设置PLC命令
+
         private string setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
             string rtn = InspectUtils.sendCmdToTarget(socket, writeCmd + plcAddress + setResult + "\r\n");
             return rtn;
         }
+
+        #endregion
+
+        #region 获取PLC命令
 
         private int getPlcCmd(Socket socket, string plcAddress)
         {
@@ -83,6 +96,7 @@ namespace inspectWinform
             {
                 cmd = cmd.Substring(0, indexOf);
             }
+
             if (cmd == "11OK0001" && cmd != lastCmd)
             {
                 Console.WriteLine(Thread.CurrentThread.Name + "触发");
@@ -106,6 +120,10 @@ namespace inspectWinform
             return enCamId;
         }
 
+        #endregion
+
+        #region 获取Inspect结果
+
         private string readInspect(int camId)
         {
             /*InspectUtils.sendCmdToTarget(localSocket, "san;");
@@ -115,16 +133,21 @@ namespace inspectWinform
             if (camId == 1)
             {
                 str = "c1;";
-            }else if (camId == 2)
+            }
+            else if (camId == 2)
             {
                 str = "c2;";
-            }else if (camId == 3)
+            }
+            else if (camId == 3)
             {
                 str = "c3;";
             }
+
             InspectUtils.sendCmdToTarget(localSocket, str);
             var receiveData = InspectUtils.receiveDataFromTarget(localSocket, resBytes);
             return receiveData;
         }
+
+        #endregion
     }
 }
