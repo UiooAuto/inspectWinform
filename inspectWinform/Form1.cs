@@ -18,8 +18,10 @@ namespace inspectWinform
     {
         private AllConnectData allConnectData = new AllConnectData();
 
-        string path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
-                      "\\saveData.JSON"; //xml文件地址
+        string Path = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")); //xml文件地址
+
+        string filePath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
+                          "\\saveData.JSON"; //xml文件地址
 
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
@@ -486,14 +488,14 @@ namespace inspectWinform
             allConnectData.cam2ResAds = result2.Text;
             allConnectData.cam3ResAds = result3.Text;
 
-            File.WriteAllText(path, JsonConvert.SerializeObject(allConnectData));
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }
 
         public void readSaveData()
         {
-            if (File.Exists(path))
+            if (File.Exists(filePath))
             {
-                string readAllText = File.ReadAllText(path, Encoding.UTF8);
+                string readAllText = File.ReadAllText(filePath, Encoding.UTF8);
                 if (!isEmpty(readAllText))
                 {
                     try
@@ -508,7 +510,7 @@ namespace inspectWinform
             }
             else
             {
-                FileStream fileStream = File.Create(path);
+                FileStream fileStream = File.Create(filePath);
                 fileStream.Close();
             }
         }
@@ -529,6 +531,11 @@ namespace inspectWinform
         private void save_Click(object sender, EventArgs e)
         {
             saveDatas();
+        }
+
+        private void savePath_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", "/select,"+filePath);
         }
     }
 }

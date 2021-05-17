@@ -30,6 +30,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.savePath = new System.Windows.Forms.Button();
             this.save = new System.Windows.Forms.Button();
             this.ExitButton = new System.Windows.Forms.Button();
             this.cmdCam3 = new System.Windows.Forms.Button();
@@ -72,6 +73,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.groupBox1.Controls.Add(this.savePath);
             this.groupBox1.Controls.Add(this.save);
             this.groupBox1.Controls.Add(this.ExitButton);
             this.groupBox1.Controls.Add(this.cmdCam3);
@@ -90,10 +92,21 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             // 
+            // savePath
+            // 
+            this.savePath.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
+            this.savePath.Location = new System.Drawing.Point(27, 353);
+            this.savePath.Name = "savePath";
+            this.savePath.Size = new System.Drawing.Size(214, 33);
+            this.savePath.TabIndex = 11;
+            this.savePath.Text = "打开连接参数地址";
+            this.savePath.UseVisualStyleBackColor = true;
+            this.savePath.Click += new System.EventHandler(this.savePath_Click);
+            // 
             // save
             // 
             this.save.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.save.Location = new System.Drawing.Point(27, 353);
+            this.save.Location = new System.Drawing.Point(27, 314);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(214, 33);
             this.save.TabIndex = 10;
@@ -117,7 +130,7 @@
             // cmdCam3
             // 
             this.cmdCam3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam3.Location = new System.Drawing.Point(27, 299);
+            this.cmdCam3.Location = new System.Drawing.Point(27, 258);
             this.cmdCam3.Name = "cmdCam3";
             this.cmdCam3.Size = new System.Drawing.Size(214, 35);
             this.cmdCam3.TabIndex = 8;
@@ -128,7 +141,7 @@
             // cmdCam2
             // 
             this.cmdCam2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam2.Location = new System.Drawing.Point(27, 258);
+            this.cmdCam2.Location = new System.Drawing.Point(27, 217);
             this.cmdCam2.Name = "cmdCam2";
             this.cmdCam2.Size = new System.Drawing.Size(214, 35);
             this.cmdCam2.TabIndex = 7;
@@ -139,7 +152,7 @@
             // cmdCam1
             // 
             this.cmdCam1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam1.Location = new System.Drawing.Point(27, 217);
+            this.cmdCam1.Location = new System.Drawing.Point(27, 176);
             this.cmdCam1.Name = "cmdCam1";
             this.cmdCam1.Size = new System.Drawing.Size(214, 35);
             this.cmdCam1.TabIndex = 6;
@@ -150,7 +163,7 @@
             // inspectPort
             // 
             this.inspectPort.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectPort.Location = new System.Drawing.Point(107, 158);
+            this.inspectPort.Location = new System.Drawing.Point(107, 127);
             this.inspectPort.Name = "inspectPort";
             this.inspectPort.Size = new System.Drawing.Size(134, 29);
             this.inspectPort.TabIndex = 5;
@@ -159,7 +172,7 @@
             // inspectIp
             // 
             this.inspectIp.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectIp.Location = new System.Drawing.Point(107, 93);
+            this.inspectIp.Location = new System.Drawing.Point(107, 79);
             this.inspectIp.Name = "inspectIp";
             this.inspectIp.Size = new System.Drawing.Size(134, 29);
             this.inspectIp.TabIndex = 4;
@@ -168,7 +181,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label4.Location = new System.Drawing.Point(27, 154);
+            this.label4.Location = new System.Drawing.Point(27, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 32);
             this.label4.TabIndex = 3;
@@ -178,7 +191,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label3.Location = new System.Drawing.Point(27, 89);
+            this.label3.Location = new System.Drawing.Point(27, 75);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 32);
             this.label3.TabIndex = 2;
@@ -326,7 +339,7 @@
             this.connectAll.Location = new System.Drawing.Point(307, 391);
             this.connectAll.Name = "connectAll";
             this.connectAll.Size = new System.Drawing.Size(453, 38);
-            this.connectAll.TabIndex = 14;
+            this.connectAll.TabIndex = 0;
             this.connectAll.Text = "连接";
             this.connectAll.UseVisualStyleBackColor = false;
             this.connectAll.Click += new System.EventHandler(this.connectAll_Click);
@@ -406,7 +419,7 @@
             this.trigger2.Location = new System.Drawing.Point(405, 233);
             this.trigger2.Name = "trigger2";
             this.trigger2.Size = new System.Drawing.Size(119, 29);
-            this.trigger2.TabIndex = 22;
+            this.trigger2.TabIndex = 23;
             this.trigger2.Text = "8030";
             // 
             // trigger3
@@ -415,7 +428,7 @@
             this.trigger3.Location = new System.Drawing.Point(405, 332);
             this.trigger3.Name = "trigger3";
             this.trigger3.Size = new System.Drawing.Size(119, 29);
-            this.trigger3.TabIndex = 23;
+            this.trigger3.TabIndex = 25;
             this.trigger3.Text = "10030";
             // 
             // result1
@@ -424,7 +437,7 @@
             this.result1.Location = new System.Drawing.Point(641, 127);
             this.result1.Name = "result1";
             this.result1.Size = new System.Drawing.Size(119, 29);
-            this.result1.TabIndex = 24;
+            this.result1.TabIndex = 22;
             this.result1.Text = "6032";
             // 
             // result2
@@ -433,7 +446,7 @@
             this.result2.Location = new System.Drawing.Point(641, 232);
             this.result2.Name = "result2";
             this.result2.Size = new System.Drawing.Size(119, 29);
-            this.result2.TabIndex = 25;
+            this.result2.TabIndex = 24;
             this.result2.Text = "8032";
             // 
             // result3
@@ -486,6 +499,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button savePath;
 
         private System.Windows.Forms.Button save;
 
