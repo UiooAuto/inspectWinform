@@ -17,13 +17,14 @@ namespace inspectWinform
 {
     public partial class Form1 : Form
     {
+        //用于保存连接数据的对象
         private AllConnectData allConnectData = new AllConnectData();
 
         string filePath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
                           "\\saveData.JSON"; //xml文件地址
 
         private string inspectPath = Application.StartupPath.Substring(0, Application.StartupPath.LastIndexOf("\\")) +
-                                     "\\startInspect.bat";
+                                     "\\startInspect.bat"; //批处理文件启动inspect路径
 
         //inspect和plc的连接信息
         ConnectInfo inspectConnectInfo;
@@ -51,26 +52,35 @@ namespace inspectWinform
         string cam3CmdAds;
         string cam3ResAds;
 
+        //用于判断连接状态
         bool connectStatus = false;
-
-        bool autoConn = true;
 
         public Form1()
         {
             InitializeComponent();
-            init();
+            init(); //初始化流程
         }
 
         #region 初始化
 
         /// <summary>
         /// 窗口初始化
+        /// 检测Inspect是否已启动
+        /// 取消系统自带关闭按钮
+        /// 新建socket
+        /// 读取保存好的文件中的数据
+        /// 把连接参数恢复到窗口中
+        /// 创建自动连接窗口，等待倒计时窗口结束后获取是否需要自动连接
+        /// 如需自动连接，则自动连接
         /// </summary>
         public void init()
         {
             //查询inspect是否已启动，未启动则自动启动
             bool inspectRun = false;
+
+            //拉取进程列表
             Process[] processes = Process.GetProcesses();
+            //查找有没有inspect的进程
             foreach (Process process in processes)
             {
                 if (process.ProcessName.Equals("iworks"))
@@ -79,6 +89,7 @@ namespace inspectWinform
                 }
             }
 
+            //没有找到说明inspect没启动，启动inspect
             if (!inspectRun)
             {
                 Process.Start(inspectPath);
@@ -134,6 +145,7 @@ namespace inspectWinform
 
             if (autoConnectForm.autoConn)
             {
+                //开始连接
                 startConnect();
             }
         }
@@ -153,7 +165,7 @@ namespace inspectWinform
 
         public void startConnect()
         {
-            //给PLC连接地址赋值
+            //给PLC连接地址赋值,如果有一个没填写都认为是空
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
             {
                 cam1CmdAds = "D" + trigger1.Text + " 01";
@@ -187,22 +199,25 @@ namespace inspectWinform
                 cam3ResAds = null;
             }
 
-            //当在有链接的时候点击，需要关闭所有连接
+            //有任何一个通信是已连接的，就需要关闭连接
             if ((inspectSocket != null && inspectSocket.Connected)
                 || plcSocket1 != null && plcSocket1.Connected
                 || plcSocket2 != null && plcSocket2.Connected
                 || plcSocket3 != null && plcSocket3.Connected)
             {
-                closeAllSocket();
+                closeAllSocket(); //关闭所有连接
                 connectAll.Text = "连接";
                 connectAll.BackColor = Color.Silver;
             }
             else
             {
+                //否则建立全部连接
                 connectAllcon();
+                //开始工作
                 startWork();
             }
 
+            //根据连接状态使画面上的输入框只读
             enTextBoxs();
         }
 
@@ -279,16 +294,20 @@ namespace inspectWinform
             //只有在有连接参数的时候才连接
             if (inspectSocket == null && !isEmpty(inspectIp.Text) && !isEmpty(inspectPort.Text))
             {
+                //获取连接参数
                 inspectConnectInfo.ip = inspectIp.Text;
                 inspectConnectInfo.port = int.Parse(inspectPort.Text);
+                //建立连接
                 inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
-                inspectSocket.SendTimeout = 500;
+                //inspectSocket.SendTimeout = 500;
+                //连接状态更新
                 if (inspectSocket != null)
                 {
                     flag = true;
                 }
             }
 
+            //PLC连接需要额外判断复选框是否勾选
             if (conn1En.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
                 !isEmpty(trigger1.Text) &&
                 !isEmpty(result1.Text))
@@ -328,6 +347,7 @@ namespace inspectWinform
                 }
             }
 
+            //判断标志位状态，没有发生更改，说明一个连接都没有建立
             if (flag)
             {
                 connectAll.Text = "关闭连接";
@@ -363,6 +383,14 @@ namespace inspectWinform
 
         #region 相机触发测试
 
+        /// <summary>
+        /// 界面上的相相机触发按钮
+        /// 在已连接状态下点击即可使对应相机拍照
+        /// 可以用于测试相机通信
+        /// 拍照成功后会弹窗显示返回的值，可据此判断连接程序通信格式是否正确
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmdCam1_Click(object sender, EventArgs e)
         {
             string str = "c1;";
@@ -412,6 +440,10 @@ namespace inspectWinform
 
         #region 关闭所有连接
 
+        /// <summary>
+        /// 判断连接是否存在
+        /// 存在则关闭连接，释放资源，最后使Socket为null
+        /// </summary>
         public void closeAllSocket()
         {
             if (inspectSocket != null)
@@ -493,6 +525,7 @@ namespace inspectWinform
 
         #region 退出按钮
 
+        //退出前会关闭所有连接
         private void ExitButton_Click(object sender, EventArgs e)
         {
             DialogResult
@@ -508,6 +541,10 @@ namespace inspectWinform
 
         #region 保存连接数据
 
+        /// <summary>
+        /// 获取全部需要保存的参数，放在预先建立好的对象中
+        /// 把对象转换为JSON的字符串格式，再整体写入
+        /// </summary>
         public void saveDatas()
         {
             allConnectData.inspectIp = inspectIp.Text;
@@ -535,8 +572,12 @@ namespace inspectWinform
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }
 
+        /// <summary>
+        /// 读取指定位置的文件，将内容按JSON格式转换为对象
+        /// </summary>
         public void readSaveData()
         {
+            //文件存在则进行读取，否则创建新文件
             if (File.Exists(filePath))
             {
                 string readAllText = File.ReadAllText(filePath, Encoding.UTF8);
@@ -563,6 +604,13 @@ namespace inspectWinform
 
         #region 给plc发送信息
 
+        /// <summary>
+        /// 本程序只用于测试按钮的通信，正式通信程序在Work的类中
+        /// </summary>
+        /// <param name="socket">Socket</param>
+        /// <param name="plcAddress">PLC的结果地址</param>
+        /// <param name="setResult">发送的结果内容</param>
+        /// <returns></returns>
         private string setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
             string rtn = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult + "\r\n");
@@ -574,6 +622,7 @@ namespace inspectWinform
 
         #region 保存参数按钮
 
+        //执行保存参数操作
         private void save_Click(object sender, EventArgs e)
         {
             saveDatas();
@@ -583,6 +632,7 @@ namespace inspectWinform
 
         #region 打开参数文件位置
 
+        //点击打开文件所在位置按钮，使用文件管理器打开路径并将光标对准文件
         private void savePath_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("explorer.exe", "/select," + filePath);
@@ -592,6 +642,7 @@ namespace inspectWinform
 
         #region 用过复选框选择需要的连接
 
+        //复选框没有选的连接将会被禁用
         private void conn1En_CheckedChanged(object sender, EventArgs e)
         {
             if (!conn1En.Checked)

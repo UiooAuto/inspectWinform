@@ -24,7 +24,8 @@ namespace inspectWinform
             {
                 ipAddress = IPAddress.Parse(serverIp);
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+                socket.SendTimeout = 1000;
+                socket.ReceiveTimeout = 1000;
                 try
                 {
                     socket.Connect(new IPEndPoint(ipAddress, serverPort));
