@@ -124,6 +124,7 @@ namespace inspectWinform
             result3.Text = allConnectData.cam3ResAds;
 
             autoConTimeSet.Text = allConnectData.autoConnTime;
+            
             conn1En.Checked = allConnectData.con1En;
             conn2En.Checked = allConnectData.con2En;
             conn3En.Checked = allConnectData.con3En;
@@ -399,10 +400,12 @@ namespace inspectWinform
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
+                setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0002\r\n");
+                setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
             }
         }
 
@@ -414,10 +417,12 @@ namespace inspectWinform
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0001\r\n");
+                setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0002\r\n");
+                setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
             }
         }
 
@@ -429,10 +434,12 @@ namespace inspectWinform
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0001\r\n");
+                setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0002\r\n");
+                setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
             }
         }
 
@@ -539,7 +546,7 @@ namespace inspectWinform
 
         #endregion
 
-        #region 保存连接数据
+        #region 保存、读取连接数据
 
         /// <summary>
         /// 获取全部需要保存的参数，放在预先建立好的对象中
