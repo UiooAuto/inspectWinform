@@ -1,7 +1,6 @@
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\bin\Debug\inspectWinform.exe.config
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\bin\Debug\inspectWinform.exe
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\bin\Debug\inspectWinform.pdb
-D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csprojAssemblyReference.cache
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.Properties.Resources.resources
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.GenerateResource.cache
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CoreCompileInputs.cache
@@ -12,3 +11,4 @@ D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\bin\Debug\Newt
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\bin\Debug\Newtonsoft.Json.xml
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CopyComplete
 D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.AutoConnectForm.resources
+D:\XXYwork\视觉项目\rider程序\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.AssemblyReference.cache

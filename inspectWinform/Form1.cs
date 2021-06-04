@@ -78,23 +78,6 @@ namespace inspectWinform
             //查询inspect是否已启动，未启动则自动启动
             bool inspectRun = false;
 
-            //拉取进程列表
-            Process[] processes = Process.GetProcesses();
-            //查找有没有inspect的进程
-            foreach (Process process in processes)
-            {
-                if (process.ProcessName.Equals("iworks"))
-                {
-                    inspectRun = true;
-                }
-            }
-
-            //没有找到说明inspect没启动，启动inspect
-            if (!inspectRun)
-            {
-                Process.Start(inspectPath);
-            }
-
             //取消关闭按钮
             this.ControlBox = false;
             //新建Socket连接
@@ -146,6 +129,23 @@ namespace inspectWinform
 
             if (autoConnectForm.autoConn)
             {
+                //拉取进程列表
+                Process[] processes = Process.GetProcesses();
+                //查找有没有inspect的进程
+                foreach (Process process in processes)
+                {
+                    if (process.ProcessName.Equals("iworks"))
+                    {
+                        inspectRun = true;
+                    }
+                }
+
+                //没有找到说明inspect没启动，启动inspect
+                if (!inspectRun)
+                {
+                    Process.Start(inspectPath);
+                }
+                
                 //开始连接
                 startConnect();
             }
