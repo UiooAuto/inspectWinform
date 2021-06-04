@@ -23,5 +23,7 @@
         public bool con1En;
         public bool con2En;
         public bool con3En;
+
+        public string delayStartInspect;
     }
 }

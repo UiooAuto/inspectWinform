@@ -146,6 +146,16 @@ namespace inspectWinform
                     Process.Start(inspectPath);
                 }
                 
+                if (isEmpty(allConnectData.delayStartInspect))
+                {
+                    Thread.Sleep(5000);
+                    autoStartInspectTime.Text = "5";
+                }
+                else
+                {
+                    autoStartInspectTime.Text = allConnectData.delayStartInspect;
+                    Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                }
                 //开始连接
                 startConnect();
             }
@@ -575,6 +585,8 @@ namespace inspectWinform
             allConnectData.con1En = conn1En.Checked;
             allConnectData.con2En = conn2En.Checked;
             allConnectData.con3En = conn3En.Checked;
+
+            allConnectData.delayStartInspect = autoStartInspectTime.Text;
 
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }
