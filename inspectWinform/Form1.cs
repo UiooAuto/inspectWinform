@@ -144,17 +144,17 @@ namespace inspectWinform
                 if (!inspectRun)
                 {
                     Process.Start(inspectPath);
-                }
-                
-                if (isEmpty(allConnectData.delayStartInspect))
-                {
-                    Thread.Sleep(5000);
-                    autoStartInspectTime.Text = "5";
-                }
-                else
-                {
-                    autoStartInspectTime.Text = allConnectData.delayStartInspect;
-                    Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                    
+                    if (isEmpty(allConnectData.delayStartInspect))
+                    {
+                        Thread.Sleep(5000);
+                        autoStartInspectTime.Text = "5";
+                    }
+                    else
+                    {
+                        autoStartInspectTime.Text = allConnectData.delayStartInspect;
+                        Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                    }
                 }
                 //开始连接
                 startConnect();

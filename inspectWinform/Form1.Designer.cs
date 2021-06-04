@@ -705,7 +705,6 @@
         private System.Windows.Forms.TextBox autoStartInspectTime;
 
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox AutoStartInspectTime;
         private System.Windows.Forms.Label label20;
 
         private System.Windows.Forms.CheckBox conn1En;
