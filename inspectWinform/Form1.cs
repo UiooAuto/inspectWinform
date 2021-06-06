@@ -758,5 +758,33 @@ namespace inspectWinform
                 MessageBox.Show("Inspect已启动");
             }
         }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Normal;
+                //激活窗体并给予它焦点
+                this.Activate();
+                //任务栏区显示图标
+                this.ShowInTaskbar = true;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = false;
+            }
+        }
+
+        private void minForm_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+            {
+                //还原窗体显示    
+                WindowState = FormWindowState.Minimized;
+                //任务栏区显示图标
+                this.ShowInTaskbar = false;
+                //托盘区图标隐藏
+                notifyIcon1.Visible = true;
+            }
+        }
     }
 }
