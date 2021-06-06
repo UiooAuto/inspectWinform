@@ -405,8 +405,10 @@ namespace inspectWinform
         private void cmdCam1_Click(object sender, EventArgs e)
         {
             string str = "c1;";
+            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
@@ -422,8 +424,10 @@ namespace inspectWinform
         private void cmdCam2_Click(object sender, EventArgs e)
         {
             string str = "c2;";
+            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0001\r\n");
@@ -440,7 +444,9 @@ namespace inspectWinform
         {
             string str = "c3;";
             InspectUtils.sendCmdToTarget(inspectSocket, str);
+            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0001\r\n");
@@ -630,11 +636,10 @@ namespace inspectWinform
         /// <param name="plcAddress">PLC的结果地址</param>
         /// <param name="setResult">发送的结果内容</param>
         /// <returns></returns>
-        private string setPlcCmd(Socket socket, string plcAddress, string setResult)
+        private void setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
-            string rtn = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult + "\r\n");
-            MessageBox.Show("01WWR" + plcAddress + setResult + "\r\n");
-            return rtn;
+            string rtn1 = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult + "\r\n");
+            MessageBox.Show("给PLC发送：01WWR" + plcAddress + setResult + "\r\n");
         }
 
         #endregion
