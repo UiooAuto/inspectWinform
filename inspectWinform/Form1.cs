@@ -722,5 +722,41 @@ namespace inspectWinform
         }
 
         #endregion
+
+        private void handStartInspect_Click(object sender, EventArgs e)
+        {
+            bool inspectRun = false;
+            //拉取进程列表
+            Process[] processes = Process.GetProcesses();
+            //查找有没有inspect的进程
+            foreach (Process process in processes)
+            {
+                if (process.ProcessName.Equals("iworks"))
+                {
+                    inspectRun = true;
+                }
+            }
+
+            //没有找到说明inspect没启动，启动inspect
+            if (!inspectRun)
+            {
+                Process.Start(inspectPath);
+                    
+                if (isEmpty(allConnectData.delayStartInspect))
+                {
+                    Thread.Sleep(5000);
+                    autoStartInspectTime.Text = "5";
+                }
+                else
+                {
+                    autoStartInspectTime.Text = allConnectData.delayStartInspect;
+                    Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Inspect已启动");
+            }
+        }
     }
 }
