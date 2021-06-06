@@ -31,7 +31,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.handStartInspect = new System.Windows.Forms.Button();
             this.minForm = new System.Windows.Forms.Button();
             this.savePath = new System.Windows.Forms.Button();
@@ -84,40 +83,17 @@
             this.autoStartInspectTime = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.groupBox1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.groupBox1.Controls.Add(this.handStartInspect);
-            this.groupBox1.Controls.Add(this.minForm);
-            this.groupBox1.Controls.Add(this.savePath);
-            this.groupBox1.Controls.Add(this.save);
-            this.groupBox1.Controls.Add(this.ExitButton);
-            this.groupBox1.Controls.Add(this.cmdCam3);
-            this.groupBox1.Controls.Add(this.cmdCam2);
-            this.groupBox1.Controls.Add(this.cmdCam1);
-            this.groupBox1.Controls.Add(this.inspectPort);
-            this.groupBox1.Controls.Add(this.inspectIp);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(0);
-            this.groupBox1.Size = new System.Drawing.Size(392, 675);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
             // 
             // handStartInspect
             // 
             this.handStartInspect.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.handStartInspect.Location = new System.Drawing.Point(40, 66);
+            this.handStartInspect.Location = new System.Drawing.Point(27, 66);
             this.handStartInspect.Margin = new System.Windows.Forms.Padding(4);
             this.handStartInspect.Name = "handStartInspect";
             this.handStartInspect.Size = new System.Drawing.Size(321, 45);
@@ -129,7 +105,7 @@
             // minForm
             // 
             this.minForm.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.minForm.Location = new System.Drawing.Point(40, 554);
+            this.minForm.Location = new System.Drawing.Point(27, 554);
             this.minForm.Margin = new System.Windows.Forms.Padding(4);
             this.minForm.Name = "minForm";
             this.minForm.Size = new System.Drawing.Size(321, 45);
@@ -141,7 +117,7 @@
             // savePath
             // 
             this.savePath.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.savePath.Location = new System.Drawing.Point(40, 480);
+            this.savePath.Location = new System.Drawing.Point(27, 480);
             this.savePath.Margin = new System.Windows.Forms.Padding(4);
             this.savePath.Name = "savePath";
             this.savePath.Size = new System.Drawing.Size(321, 45);
@@ -153,7 +129,7 @@
             // save
             // 
             this.save.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.save.Location = new System.Drawing.Point(40, 426);
+            this.save.Location = new System.Drawing.Point(27, 426);
             this.save.Margin = new System.Windows.Forms.Padding(4);
             this.save.Name = "save";
             this.save.Size = new System.Drawing.Size(321, 45);
@@ -167,7 +143,7 @@
             this.ExitButton.BackColor = System.Drawing.Color.Red;
             this.ExitButton.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
             this.ExitButton.ForeColor = System.Drawing.Color.White;
-            this.ExitButton.Location = new System.Drawing.Point(40, 606);
+            this.ExitButton.Location = new System.Drawing.Point(27, 606);
             this.ExitButton.Margin = new System.Windows.Forms.Padding(4);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(321, 56);
@@ -179,7 +155,7 @@
             // cmdCam3
             // 
             this.cmdCam3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam3.Location = new System.Drawing.Point(40, 354);
+            this.cmdCam3.Location = new System.Drawing.Point(27, 354);
             this.cmdCam3.Margin = new System.Windows.Forms.Padding(4);
             this.cmdCam3.Name = "cmdCam3";
             this.cmdCam3.Size = new System.Drawing.Size(321, 45);
@@ -191,7 +167,7 @@
             // cmdCam2
             // 
             this.cmdCam2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam2.Location = new System.Drawing.Point(40, 300);
+            this.cmdCam2.Location = new System.Drawing.Point(27, 300);
             this.cmdCam2.Margin = new System.Windows.Forms.Padding(4);
             this.cmdCam2.Name = "cmdCam2";
             this.cmdCam2.Size = new System.Drawing.Size(321, 45);
@@ -203,7 +179,7 @@
             // cmdCam1
             // 
             this.cmdCam1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.cmdCam1.Location = new System.Drawing.Point(40, 246);
+            this.cmdCam1.Location = new System.Drawing.Point(27, 246);
             this.cmdCam1.Margin = new System.Windows.Forms.Padding(4);
             this.cmdCam1.Name = "cmdCam1";
             this.cmdCam1.Size = new System.Drawing.Size(321, 45);
@@ -215,7 +191,7 @@
             // inspectPort
             // 
             this.inspectPort.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectPort.Location = new System.Drawing.Point(160, 186);
+            this.inspectPort.Location = new System.Drawing.Point(147, 186);
             this.inspectPort.Margin = new System.Windows.Forms.Padding(4);
             this.inspectPort.Name = "inspectPort";
             this.inspectPort.Size = new System.Drawing.Size(199, 40);
@@ -225,7 +201,7 @@
             // inspectIp
             // 
             this.inspectIp.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.inspectIp.Location = new System.Drawing.Point(160, 120);
+            this.inspectIp.Location = new System.Drawing.Point(147, 120);
             this.inspectIp.Margin = new System.Windows.Forms.Padding(4);
             this.inspectIp.Name = "inspectIp";
             this.inspectIp.Size = new System.Drawing.Size(199, 40);
@@ -235,7 +211,7 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label4.Location = new System.Drawing.Point(40, 180);
+            this.label4.Location = new System.Drawing.Point(27, 180);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 48);
@@ -246,7 +222,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label3.Location = new System.Drawing.Point(40, 114);
+            this.label3.Location = new System.Drawing.Point(27, 114);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(111, 48);
@@ -257,7 +233,7 @@
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (134)));
-            this.label1.Location = new System.Drawing.Point(56, 14);
+            this.label1.Location = new System.Drawing.Point(50, 14);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(281, 48);
@@ -705,12 +681,34 @@
             this.notifyIcon1.Text = "检测程序通信工具";
             this.notifyIcon1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDoubleClick);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panel1.Controls.Add(this.ExitButton);
+            this.panel1.Controls.Add(this.handStartInspect);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.minForm);
+            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.inspectIp);
+            this.panel1.Controls.Add(this.savePath);
+            this.panel1.Controls.Add(this.inspectPort);
+            this.panel1.Controls.Add(this.cmdCam1);
+            this.panel1.Controls.Add(this.save);
+            this.panel1.Controls.Add(this.cmdCam2);
+            this.panel1.Controls.Add(this.cmdCam3);
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(377, 689);
+            this.panel1.TabIndex = 35;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1245, 674);
+            this.ClientSize = new System.Drawing.Size(1254, 674);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label19);
             this.Controls.Add(this.autoStartInspectTime);
             this.Controls.Add(this.label20);
@@ -722,23 +720,24 @@
             this.Controls.Add(this.label17);
             this.Controls.Add(this.connectAll);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(15, 15);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "检测程序通信工具";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.Panel panel1;
 
         private System.Windows.Forms.NotifyIcon notifyIcon1;
 
@@ -814,7 +813,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
 
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
 
         #endregion
