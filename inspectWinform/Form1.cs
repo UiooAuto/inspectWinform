@@ -407,6 +407,8 @@ namespace inspectWinform
         private void cmdCam1_Click(object sender, EventArgs e)
         {
             string str = "c1;";
+            testMsg.Text = "无";
+            testMsg.BackColor = Color.Silver;
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
@@ -415,21 +417,23 @@ namespace inspectWinform
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机1结果：\r\n"+"01WWR" + cam1ResAds + " 0001\\r\\n"+"\r\n"+
-                               "01WWR" + cam1CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机1 OK";
+                testMsg.BackColor = Color.LimeGreen;
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机1结果：\r\n"+"01WWR" + cam1ResAds + " 0002\\r\\n"+"\r\n"+
-                               "01WWR" + cam1CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机1 NG";
+                testMsg.BackColor = Color.Red;
             }
         }
 
         private void cmdCam2_Click(object sender, EventArgs e)
         {
             string str = "c2;";
+            testMsg.Text = "无";
+            testMsg.BackColor = Color.Silver;
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
@@ -438,21 +442,23 @@ namespace inspectWinform
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机2结果：\r\n"+"01WWR" + cam2ResAds + " 0001\\r\\n"+"\r\n"+
-                               "01WWR" + cam2CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机2 OK";
+                testMsg.BackColor = Color.LimeGreen;
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机2结果：\r\n"+"01WWR" + cam2ResAds + " 0002\\r\\n"+"\r\n"+
-                               "01WWR" + cam2CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机2 NG";
+                testMsg.BackColor = Color.Red;
             }
         }
 
         private void cmdCam3_Click(object sender, EventArgs e)
         {
             string str = "c3;";
+            testMsg.Text = "无";
+            testMsg.BackColor = Color.Silver;
             InspectUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
@@ -461,15 +467,15 @@ namespace inspectWinform
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机3结果：\r\n"+"01WWR" + cam3ResAds + " 0001\\r\\n"+"\r\n"+
-                               "01WWR" + cam3CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机3 OK";
+                testMsg.BackColor = Color.LimeGreen;
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
-                testMsg.Text = "给PLC发送相机3结果：\r\n"+"01WWR" + cam3ResAds + " 0002\\r\\n"+"\r\n"+
-                               "01WWR" + cam3CmdAds + " 0000\\r\\n";
+                testMsg.Text = "相机3 NG";
+                testMsg.BackColor = Color.Red;
             }
         }
 
