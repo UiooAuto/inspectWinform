@@ -407,38 +407,46 @@ namespace inspectWinform
         private void cmdCam1_Click(object sender, EventArgs e)
         {
             string str = "c1;";
-            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             InspectUtils.sendCmdToTarget(inspectSocket, str);
+            //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
-            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
+            //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机1结果：\r\n"+"01WWR" + cam1ResAds + " 0001\\r\\n"+"\r\n"+
+                               "01WWR" + cam1CmdAds + " 0000\\r\\n";
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机1结果：\r\n"+"01WWR" + cam1ResAds + " 0002\\r\\n"+"\r\n"+
+                               "01WWR" + cam1CmdAds + " 0000\\r\\n";
             }
         }
 
         private void cmdCam2_Click(object sender, EventArgs e)
         {
             string str = "c2;";
-            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             InspectUtils.sendCmdToTarget(inspectSocket, str);
+            //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
-            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
+            //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机2结果：\r\n"+"01WWR" + cam2ResAds + " 0001\\r\\n"+"\r\n"+
+                               "01WWR" + cam2CmdAds + " 0000\\r\\n";
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket2, cam2ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket2, cam2CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机2结果：\r\n"+"01WWR" + cam2ResAds + " 0002\\r\\n"+"\r\n"+
+                               "01WWR" + cam2CmdAds + " 0000\\r\\n";
             }
         }
 
@@ -446,18 +454,22 @@ namespace inspectWinform
         {
             string str = "c3;";
             InspectUtils.sendCmdToTarget(inspectSocket, str);
-            MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
+            //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
-            MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
+            //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0001\r\n");
                 setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机3结果：\r\n"+"01WWR" + cam3ResAds + " 0001\\r\\n"+"\r\n"+
+                               "01WWR" + cam3CmdAds + " 0000\\r\\n";
             }
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket3, cam3ResAds, " 0002\r\n");
                 setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
+                testMsg.Text = "给PLC发送相机3结果：\r\n"+"01WWR" + cam3ResAds + " 0002\\r\\n"+"\r\n"+
+                               "01WWR" + cam3CmdAds + " 0000\\r\\n";
             }
         }
 
@@ -640,8 +652,8 @@ namespace inspectWinform
         /// <returns></returns>
         private void setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
-            string rtn1 = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult + "\r\n");
-            MessageBox.Show("给PLC发送：01WWR" + plcAddress + setResult + "\r\n");
+            string rtn1 = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult);
+            //MessageBox.Show("给PLC发送：01WWR" + plcAddress + setResult);
         }
 
         #endregion
@@ -726,7 +738,7 @@ namespace inspectWinform
         #endregion
 
         #region 手动打开Inspect
-        
+
         private void handStartInspect_Click(object sender, EventArgs e)
         {
             bool inspectRun = false;
@@ -800,6 +812,7 @@ namespace inspectWinform
         }
 
         #endregion
+
         #region 点击最小化按钮事件
 
         private void minForm_Click(object sender, EventArgs e)
@@ -808,6 +821,5 @@ namespace inspectWinform
         }
 
         #endregion
-        
     }
 }

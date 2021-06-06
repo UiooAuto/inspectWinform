@@ -58,6 +58,7 @@
           <DependentUpon>AutoConnectForm.cs</DependentUpon>
         </Compile>
         <Compile Include="ConnectInfo.cs" />
+        <Compile Include="ConnectThread.cs" />
         <Compile Include="Form1.cs">
             <SubType>Form</SubType>
         </Compile>
