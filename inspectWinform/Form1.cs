@@ -107,7 +107,7 @@ namespace inspectWinform
             result3.Text = allConnectData.cam3ResAds;
 
             autoConTimeSet.Text = allConnectData.autoConnTime;
-            
+
             conn1En.Checked = allConnectData.con1En;
             conn2En.Checked = allConnectData.con2En;
             conn3En.Checked = allConnectData.con3En;
@@ -144,7 +144,7 @@ namespace inspectWinform
                 if (!inspectRun)
                 {
                     Process.Start(inspectPath);
-                    
+
                     if (isEmpty(allConnectData.delayStartInspect))
                     {
                         Thread.Sleep(5000);
@@ -153,11 +153,13 @@ namespace inspectWinform
                     else
                     {
                         autoStartInspectTime.Text = allConnectData.delayStartInspect;
-                        Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                        Thread.Sleep(int.Parse(allConnectData.delayStartInspect) * 1000);
                     }
                 }
+
                 //开始连接
                 startConnect();
+                minWindow();
             }
         }
 
@@ -723,6 +725,8 @@ namespace inspectWinform
 
         #endregion
 
+        #region 手动打开Inspect
+        
         private void handStartInspect_Click(object sender, EventArgs e)
         {
             bool inspectRun = false;
@@ -741,7 +745,7 @@ namespace inspectWinform
             if (!inspectRun)
             {
                 Process.Start(inspectPath);
-                    
+
                 if (isEmpty(allConnectData.delayStartInspect))
                 {
                     Thread.Sleep(5000);
@@ -750,7 +754,7 @@ namespace inspectWinform
                 else
                 {
                     autoStartInspectTime.Text = allConnectData.delayStartInspect;
-                    Thread.Sleep(int.Parse(allConnectData.delayStartInspect)*1000);
+                    Thread.Sleep(int.Parse(allConnectData.delayStartInspect) * 1000);
                 }
             }
             else
@@ -758,6 +762,10 @@ namespace inspectWinform
                 MessageBox.Show("Inspect已启动");
             }
         }
+
+        #endregion
+
+        #region 点击系统托盘图标，还原程序窗口
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -774,7 +782,11 @@ namespace inspectWinform
             }
         }
 
-        private void minForm_Click(object sender, EventArgs e)
+        #endregion
+
+        #region 将程序最小化到托盘
+
+        private void minWindow()
         {
             if (WindowState == FormWindowState.Normal)
             {
@@ -786,5 +798,16 @@ namespace inspectWinform
                 notifyIcon1.Visible = true;
             }
         }
+
+        #endregion
+        #region 点击最小化按钮事件
+
+        private void minForm_Click(object sender, EventArgs e)
+        {
+            minWindow();
+        }
+
+        #endregion
+        
     }
 }
