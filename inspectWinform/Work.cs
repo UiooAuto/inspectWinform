@@ -29,6 +29,7 @@ namespace inspectWinform
         public Label triggerState;
 
         private Thread currentThread;
+
         #region 线程主方法
 
         public void go()
@@ -100,48 +101,18 @@ namespace inspectWinform
                 cmd = cmd.Substring(0, indexOf);
             }
 
-            /*if (currentThread.Name == "cam1" & plcAddress == plc1CmdAds)
-            {*/
-                if ( "11OK0001".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.LimeGreen;
-                }
-                else if ("11OK0000".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.Yellow;
-                }
-                else
-                {
-                    //MessageBox.Show(currentThread.Name);
-                    triggerState.BackColor = Color.Blue;
-                }
-            /*}
-            if (currentThread.Name == "cam2" & plcAddress == plc2CmdAds)
+            //更新界面触发状态指示
+            if ("11OK0001".Equals(cmd))
             {
-                if ("11OK0001".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.LimeGreen;
-                }
-                else if ("11OK0000".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.Yellow;
-                }
+                triggerState.BackColor = Color.LimeGreen;
             }
-            if (currentThread.Name == "cam3" & plcAddress == plc3CmdAds)
+            else if ("11OK0000".Equals(cmd))
             {
-                if ("11OK0001".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.LimeGreen;
-                }
-                else if ("11OK0000".Equals(cmd))
-                {
-                    triggerState.BackColor = Color.Yellow;
-                }
-            }*/
+                triggerState.BackColor = Color.Yellow;
+            }
 
             if (cmd == "11OK0001" && cmd != lastCmd)
             {
-                Console.WriteLine(Thread.CurrentThread.Name + "触发");
                 if (plcAddress == plc1CmdAds)
                 {
                     enCamId = 1;

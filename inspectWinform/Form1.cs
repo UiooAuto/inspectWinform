@@ -228,6 +228,9 @@ namespace inspectWinform
                 trigger1State.BackColor = Color.Silver;
                 trigger2State.BackColor = Color.Silver;
                 trigger3State.BackColor = Color.Silver;
+                conn1En.Enabled = true;
+                conn2En.Enabled = true;
+                conn3En.Enabled = true;
             }
             else
             {
@@ -372,6 +375,9 @@ namespace inspectWinform
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
+                conn1En.Enabled = false;
+                conn2En.Enabled = false;
+                conn3En.Enabled = false;
             }
             else
             {
