@@ -304,21 +304,6 @@ namespace inspectWinform
         {
             //用于标识是否有连接建立成功
             bool flag = false;
-            //只有在有连接参数的时候才连接
-            if (inspectSocket == null && !isEmpty(inspectIp.Text) && !isEmpty(inspectPort.Text))
-            {
-                //获取连接参数
-                inspectConnectInfo.ip = inspectIp.Text;
-                inspectConnectInfo.port = int.Parse(inspectPort.Text);
-                //建立连接
-                inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
-                //inspectSocket.SendTimeout = 500;
-                //连接状态更新
-                if (inspectSocket != null)
-                {
-                    flag = true;
-                }
-            }
 
             //PLC连接需要额外判断复选框是否勾选
             if (conn1En.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
@@ -363,6 +348,17 @@ namespace inspectWinform
             //判断标志位状态，没有发生更改，说明一个连接都没有建立
             if (flag)
             {
+                //只有在有连接参数、有PLC连接成功时才连接Inspect
+                if (inspectSocket == null && !isEmpty(inspectIp.Text) && !isEmpty(inspectPort.Text))
+                {
+                    //获取连接参数
+                    inspectConnectInfo.ip = inspectIp.Text;
+                    inspectConnectInfo.port = int.Parse(inspectPort.Text);
+                    //建立连接
+                    inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
+                    //inspectSocket.SendTimeout = 500;
+                    //连接状态更新
+                }
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
