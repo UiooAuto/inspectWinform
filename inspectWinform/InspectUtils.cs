@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace inspectWinform
 {
@@ -28,7 +30,16 @@ namespace inspectWinform
                 socket.ReceiveTimeout = 1000;
                 try
                 {
-                    socket.Connect(new IPEndPoint(ipAddress, serverPort));
+                    Ping ping = new Ping();
+                    PingReply pingReply = ping.Send(ipAddress, 1000);
+                    if (pingReply.Status == IPStatus.Success)
+                    {
+                        socket.Connect(new IPEndPoint(ipAddress, serverPort));
+                    }
+                    else
+                    {
+                        MessageBox.Show("连接超时");
+                    }
                 }
                 catch (Exception e)
                 {

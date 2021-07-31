@@ -214,9 +214,9 @@ namespace inspectWinform
 
             //有任何一个通信是已连接的，就需要关闭连接
             if ((inspectSocket != null && inspectSocket.Connected)
-                || plcSocket1 != null && plcSocket1.Connected
-                || plcSocket2 != null && plcSocket2.Connected
-                || plcSocket3 != null && plcSocket3.Connected)
+                || (plcSocket1 != null && plcSocket1.Connected)
+                || (plcSocket2 != null && plcSocket2.Connected)
+                || (plcSocket3 != null && plcSocket3.Connected))
             {
                 closeAllSocket(); //关闭所有连接
                 connectAll.Text = "连接";
