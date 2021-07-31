@@ -255,6 +255,7 @@ namespace inspectWinform
                 work1.plc2CmdAds = cam2CmdAds;
                 work1.plc3CmdAds = cam3CmdAds;
                 work1.san = true;
+                work1.triggerState = trigger1State;
                 Thread thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
                 thread1.Start();
@@ -271,6 +272,7 @@ namespace inspectWinform
                 work2.plc2CmdAds = cam2CmdAds;
                 work2.plc3CmdAds = cam3CmdAds;
                 work2.san = true;
+                work2.triggerState = trigger2State;
                 Thread thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
                 thread2.Start();
@@ -287,6 +289,7 @@ namespace inspectWinform
                 work3.plc2CmdAds = cam2CmdAds;
                 work3.plc3CmdAds = cam3CmdAds;
                 work3.san = true;
+                work3.triggerState = trigger3State;
                 Thread thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
                 thread3.Start();
@@ -824,4 +827,19 @@ namespace inspectWinform
 
         #endregion
     }
+    #region 圆形标签类
+    public class CircleLabel : Label//继承标签类    重新生成解决方案就能看见我啦
+    {
+        protected override void OnPaint(PaintEventArgs e)//重新设置控件的形状   protected 保护  override重新
+        {
+            base.OnPaint(e);//递归  每次重新都发生此方法,保证其形状为自定义形状
+            System.Drawing.Drawing2D.GraphicsPath path =new System.Drawing.Drawing2D.GraphicsPath();
+            path.AddEllipse(2, 2,this.Width - 6,this.Height - 6);
+            //Graphics g = e.Graphics;
+            //g.DrawEllipse(new Pen(Color.Red, 2), 2, 2, Width - 6, Height - 6);
+            Region =new Region(path);
+        }
+    }
+ 
+    #endregion
 }
