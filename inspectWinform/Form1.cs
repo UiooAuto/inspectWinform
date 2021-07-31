@@ -55,6 +55,10 @@ namespace inspectWinform
         //用于判断连接状态
         bool connectStatus = false;
 
+        private Thread thread1;
+        private Thread thread2;
+        private Thread thread3;
+
         public Form1()
         {
             InitializeComponent();
@@ -221,6 +225,9 @@ namespace inspectWinform
                 closeAllSocket(); //关闭所有连接
                 connectAll.Text = "连接";
                 connectAll.BackColor = Color.Silver;
+                trigger1State.BackColor = Color.Silver;
+                trigger2State.BackColor = Color.Silver;
+                trigger3State.BackColor = Color.Silver;
             }
             else
             {
@@ -244,7 +251,7 @@ namespace inspectWinform
         public void startWork()
         {
             //仅当对应plc有连接的时候，才开启线程
-            if (plcSocket1 != null)
+            if (plcSocket1 != null && conn1En.Checked)
             {
                 work1.plcSocket = plcSocket1;
                 work1.localSocket = inspectSocket;
@@ -256,12 +263,12 @@ namespace inspectWinform
                 work1.plc3CmdAds = cam3CmdAds;
                 work1.san = true;
                 work1.triggerState = trigger1State;
-                Thread thread1 = new Thread(new ThreadStart(work1.go));
+                thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
                 thread1.Start();
             }
 
-            if (plcSocket2 != null)
+            if (plcSocket2 != null && conn2En.Checked)
             {
                 work2.plcSocket = plcSocket2;
                 work2.localSocket = inspectSocket;
@@ -273,12 +280,12 @@ namespace inspectWinform
                 work2.plc3CmdAds = cam3CmdAds;
                 work2.san = true;
                 work2.triggerState = trigger2State;
-                Thread thread2 = new Thread(new ThreadStart(work2.go));
+                thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
                 thread2.Start();
             }
-
-            if (plcSocket1 != null)
+            
+            if (plcSocket3 != null && conn3En.Checked)
             {
                 work3.plcSocket = plcSocket3;
                 work3.localSocket = inspectSocket;
@@ -290,7 +297,7 @@ namespace inspectWinform
                 work3.plc3CmdAds = cam3CmdAds;
                 work3.san = true;
                 work3.triggerState = trigger3State;
-                Thread thread3 = new Thread(new ThreadStart(work3.go));
+                thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
                 thread3.Start();
             }
@@ -500,6 +507,10 @@ namespace inspectWinform
                 InspectUtils.shutDownConnect(plcSocket1);
                 plcSocket1.Close();
                 plcSocket1 = null;
+                if (thread1!= null)
+                {
+                    thread1.Abort();
+                }
             }
 
             if (plcSocket2 != null)
@@ -507,6 +518,10 @@ namespace inspectWinform
                 InspectUtils.shutDownConnect(plcSocket2);
                 plcSocket2.Close();
                 plcSocket2 = null;
+                if (thread2!=null)
+                {
+                    thread2.Abort();
+                }
             }
 
             if (plcSocket3 != null)
@@ -514,6 +529,10 @@ namespace inspectWinform
                 InspectUtils.shutDownConnect(plcSocket3);
                 plcSocket3.Close();
                 plcSocket3 = null;
+                if (thread3!=null)
+                {
+                    thread3.Abort();
+                }
             }
 
             connectStatus = false;

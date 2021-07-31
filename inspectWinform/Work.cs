@@ -102,13 +102,18 @@ namespace inspectWinform
 
             /*if (currentThread.Name == "cam1" & plcAddress == plc1CmdAds)
             {*/
-                if ("11OK0001".Equals(cmd))
+                if ( "11OK0001".Equals(cmd))
                 {
                     triggerState.BackColor = Color.LimeGreen;
                 }
                 else if ("11OK0000".Equals(cmd))
                 {
                     triggerState.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    //MessageBox.Show(currentThread.Name);
+                    triggerState.BackColor = Color.Blue;
                 }
             /*}
             if (currentThread.Name == "cam2" & plcAddress == plc2CmdAds)

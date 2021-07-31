@@ -865,7 +865,7 @@
 		private System.Windows.Forms.Label label21;
 		private inspectWinform.CircleLabel trigger2State;
 		private System.Windows.Forms.Label label22;
-		private CircleLabel trigger3State;
+		private inspectWinform.CircleLabel trigger3State;
 		private System.Windows.Forms.Label label23;
 	}
 }
