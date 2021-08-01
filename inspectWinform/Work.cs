@@ -8,7 +8,7 @@ using System.Net.Sockets;
 using System.Windows.Forms;
 using Timer = System.Windows.Forms.Timer;
 
-namespace SocketWinform
+namespace InspectWinform
 {
     class Work
     {

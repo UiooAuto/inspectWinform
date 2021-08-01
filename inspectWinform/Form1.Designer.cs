@@ -1,4 +1,4 @@
-﻿namespace SocketWinform
+﻿namespace InspectWinform
 {
     partial class Form1
     {

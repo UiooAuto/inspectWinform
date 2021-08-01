@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SocketWinform.Properties
+namespace InspectWinform.Properties
 {
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.

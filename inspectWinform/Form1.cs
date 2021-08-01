@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace SocketWinform
+namespace InspectWinform
 {
     public partial class Form1 : Form
     {

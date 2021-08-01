@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace SocketWinform
+namespace InspectWinform
 {
     public partial class AutoConnectForm : Form
     {
