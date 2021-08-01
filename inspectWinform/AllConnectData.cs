@@ -1,4 +1,4 @@
-﻿namespace inspectWinform
+﻿namespace SocketWinform
 {
     public class AllConnectData
     {

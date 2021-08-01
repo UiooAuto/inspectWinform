@@ -1,4 +1,4 @@
-﻿namespace inspectWinform
+﻿namespace SocketWinform
 {
     partial class Form1
     {
@@ -74,15 +74,15 @@
 	        this.autoConTimeSet = new System.Windows.Forms.TextBox();
 	        this.label18 = new System.Windows.Forms.Label();
 	        this.groupBox2 = new System.Windows.Forms.GroupBox();
-	        this.trigger1State = new inspectWinform.CircleLabel();
+	        this.trigger1State = new CircleLabel();
 	        this.label21 = new System.Windows.Forms.Label();
 	        this.conn1En = new System.Windows.Forms.CheckBox();
 	        this.groupBox3 = new System.Windows.Forms.GroupBox();
-	        this.trigger2State = new inspectWinform.CircleLabel();
+	        this.trigger2State = new CircleLabel();
 	        this.label22 = new System.Windows.Forms.Label();
 	        this.conn2En = new System.Windows.Forms.CheckBox();
 	        this.groupBox4 = new System.Windows.Forms.GroupBox();
-	        this.trigger3State = new inspectWinform.CircleLabel();
+	        this.trigger3State = new CircleLabel();
 	        this.label23 = new System.Windows.Forms.Label();
 	        this.conn3En = new System.Windows.Forms.CheckBox();
 	        this.label19 = new System.Windows.Forms.Label();
@@ -861,11 +861,11 @@
 
 		#endregion
 
-		private inspectWinform.CircleLabel trigger1State;
+		private CircleLabel trigger1State;
 		private System.Windows.Forms.Label label21;
-		private inspectWinform.CircleLabel trigger2State;
+		private CircleLabel trigger2State;
 		private System.Windows.Forms.Label label22;
-		private inspectWinform.CircleLabel trigger3State;
+		private CircleLabel trigger3State;
 		private System.Windows.Forms.Label label23;
 	}
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 
-namespace inspectWinform
+namespace SocketWinform
 {
     public partial class Form1 : Form
     {
@@ -217,10 +217,7 @@ namespace inspectWinform
             }
 
             //有任何一个通信是已连接的，就需要关闭连接
-            if ((inspectSocket != null && inspectSocket.Connected)
-                || (plcSocket1 != null && plcSocket1.Connected)
-                || (plcSocket2 != null && plcSocket2.Connected)
-                || (plcSocket3 != null && plcSocket3.Connected))
+            if ("关闭连接".Equals(connectAll.Text))
             {
                 closeAllSocket(); //关闭所有连接
                 connectAll.Text = "连接";
@@ -325,7 +322,7 @@ namespace inspectWinform
             {
                 plcConnectArr[0].ip = plcIp1.Text;
                 plcConnectArr[0].port = int.Parse(plcPort1.Text);
-                plcSocket1 = InspectUtils.connectToTarget(plcConnectArr[0].ip, plcConnectArr[0].port);
+                plcSocket1 = SocketUtils.connectToTarget(plcConnectArr[0].ip, plcConnectArr[0].port);
                 if (plcSocket1 != null)
                 {
                     flag = true;
@@ -338,7 +335,7 @@ namespace inspectWinform
             {
                 plcConnectArr[1].ip = plcIp2.Text;
                 plcConnectArr[1].port = int.Parse(plcPort2.Text);
-                plcSocket2 = InspectUtils.connectToTarget(plcConnectArr[1].ip, plcConnectArr[1].port);
+                plcSocket2 = SocketUtils.connectToTarget(plcConnectArr[1].ip, plcConnectArr[1].port);
                 if (plcSocket2 != null)
                 {
                     flag = true;
@@ -351,7 +348,7 @@ namespace inspectWinform
             {
                 plcConnectArr[2].ip = plcIp3.Text;
                 plcConnectArr[2].port = int.Parse(plcPort3.Text);
-                plcSocket3 = InspectUtils.connectToTarget(plcConnectArr[2].ip, plcConnectArr[2].port);
+                plcSocket3 = SocketUtils.connectToTarget(plcConnectArr[2].ip, plcConnectArr[2].port);
                 if (plcSocket3 != null)
                 {
                     flag = true;
@@ -368,7 +365,7 @@ namespace inspectWinform
                     inspectConnectInfo.ip = inspectIp.Text;
                     inspectConnectInfo.port = int.Parse(inspectPort.Text);
                     //建立连接
-                    inspectSocket = InspectUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
+                    inspectSocket = SocketUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
                     //inspectSocket.SendTimeout = 500;
                     //连接状态更新
                 }
@@ -421,9 +418,9 @@ namespace inspectWinform
             string str = "c1;";
             testMsg.Text = "无";
             testMsg.BackColor = Color.Silver;
-            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            SocketUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
-            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = SocketUtils.receiveDataFromTarget(inspectSocket, resByteArr);
             //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
@@ -446,9 +443,9 @@ namespace inspectWinform
             string str = "c2;";
             testMsg.Text = "无";
             testMsg.BackColor = Color.Silver;
-            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            SocketUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
-            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = SocketUtils.receiveDataFromTarget(inspectSocket, resByteArr);
             //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
@@ -471,9 +468,9 @@ namespace inspectWinform
             string str = "c3;";
             testMsg.Text = "无";
             testMsg.BackColor = Color.Silver;
-            InspectUtils.sendCmdToTarget(inspectSocket, str);
+            SocketUtils.sendCmdToTarget(inspectSocket, str);
             //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
-            var receiveData = InspectUtils.receiveDataFromTarget(inspectSocket, resByteArr);
+            var receiveData = SocketUtils.receiveDataFromTarget(inspectSocket, resByteArr);
             //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
@@ -503,14 +500,14 @@ namespace inspectWinform
         {
             if (inspectSocket != null)
             {
-                InspectUtils.shutDownConnect(inspectSocket);
+                SocketUtils.shutDownConnect(inspectSocket);
                 inspectSocket.Close();
                 inspectSocket = null;
             }
 
             if (plcSocket1 != null)
             {
-                InspectUtils.shutDownConnect(plcSocket1);
+                SocketUtils.shutDownConnect(plcSocket1);
                 plcSocket1.Close();
                 plcSocket1 = null;
                 if (thread1!= null)
@@ -521,7 +518,7 @@ namespace inspectWinform
 
             if (plcSocket2 != null)
             {
-                InspectUtils.shutDownConnect(plcSocket2);
+                SocketUtils.shutDownConnect(plcSocket2);
                 plcSocket2.Close();
                 plcSocket2 = null;
                 if (thread2!=null)
@@ -532,7 +529,7 @@ namespace inspectWinform
 
             if (plcSocket3 != null)
             {
-                InspectUtils.shutDownConnect(plcSocket3);
+                SocketUtils.shutDownConnect(plcSocket3);
                 plcSocket3.Close();
                 plcSocket3 = null;
                 if (thread3!=null)
@@ -682,7 +679,7 @@ namespace inspectWinform
         /// <returns></returns>
         private void setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
-            string rtn1 = InspectUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult);
+            string rtn1 = SocketUtils.sendCmdToTarget(socket, "01WWR" + plcAddress + setResult);
             //MessageBox.Show("给PLC发送：01WWR" + plcAddress + setResult);
         }
 

@@ -6,8 +6,9 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
-namespace inspectWinform
+namespace SocketWinform
 {
     class Work
     {
@@ -30,11 +31,21 @@ namespace inspectWinform
 
         private Thread currentThread;
 
+        private bool inspectOK;
+
+        private Timer timer;
+        private int plcCmd;
+
         #region 线程主方法
 
         public void go()
         {
             currentThread = Thread.CurrentThread;
+
+            timer = new Timer();
+            timer.Interval = 2000;
+            timer.Enabled = true;
+            timer.Tick += timer_Tick;
 
             while (san)
             {
@@ -53,24 +64,31 @@ namespace inspectWinform
                     /*
                      * 读取PLC命令
                      */
-                    int plcCmd = getPlcCmd(plcSocket, camCmdAds);
+                    plcCmd = getPlcCmd(plcSocket, camCmdAds);
                     if (plcCmd != 0)
                     {
+                        inspectOK = true;
+                        timer.Start();
                         result = readInspect(plcCmd);
                     }
 
-                    if (result == "1")
+                    if (result == "1" && inspectOK)
                     {
+                        inspectOK = false;
+                        timer.Stop();
                         setPlcCmd(plcSocket, camResAds, " 0001\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
-                    else if (result == "2")
+                    else if (result == "2" && inspectOK)
                     {
+                        inspectOK = false;
+                        timer.Stop();
                         setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
 
                     result = "";
+                    plcCmd = 0;
                     Thread.Sleep(100);
                 }
             }
@@ -82,7 +100,7 @@ namespace inspectWinform
 
         private string setPlcCmd(Socket socket, string plcAddress, string setResult)
         {
-            string rtn = InspectUtils.sendCmdToTarget(socket, writeCmd + plcAddress + setResult + "\r\n");
+            string rtn = SocketUtils.sendCmdToTarget(socket, writeCmd + plcAddress + setResult + "\r\n");
             return rtn;
         }
 
@@ -93,8 +111,8 @@ namespace inspectWinform
         private int getPlcCmd(Socket socket, string plcAddress)
         {
             int enCamId = 0;
-            InspectUtils.sendCmdToTarget(socket, readCmd + plcAddress + "\r\n");
-            var cmd = InspectUtils.receiveDataFromTarget(socket, new byte[1024]);
+            SocketUtils.sendCmdToTarget(socket, readCmd + plcAddress + "\r\n");
+            var cmd = SocketUtils.receiveDataFromTarget(socket, new byte[1024]);
             var indexOf = cmd.IndexOf('\r');
             if (indexOf != -1)
             {
@@ -156,11 +174,35 @@ namespace inspectWinform
                 str = "c3;";
             }
 
-            InspectUtils.sendCmdToTarget(localSocket, str);
-            var receiveData = InspectUtils.receiveDataFromTarget(localSocket, resBytes);
+            SocketUtils.sendCmdToTarget(localSocket, str);
+            var receiveData = SocketUtils.receiveDataFromTarget(localSocket, resBytes);
             return receiveData;
         }
 
         #endregion
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (inspectOK)
+            {
+                SocketUtils.sendCmdToTarget(localSocket, "c"+plcCmd+";");
+                //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
+                var receiveData = SocketUtils.receiveDataFromTarget(localSocket, resBytes);
+                //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
+                if (receiveData == "1")
+                {
+                    setPlcCmd(plcSocket, camResAds, " 0001\r\n");
+                    setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
+                }
+                else if (receiveData == "2")
+                {
+                    setPlcCmd(plcSocket, camResAds, " 0002\r\n");
+                    setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
+                }
+            }
+
+            inspectOK = false;
+            timer.Stop();
+        }
     }
 }

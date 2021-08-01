@@ -18,11 +18,11 @@ D:\RiderWork\inspectWinform\inspectWinform\bin\Debug\inspectWinform.pdb
 D:\RiderWork\inspectWinform\inspectWinform\bin\Debug\Newtonsoft.Json.dll
 D:\RiderWork\inspectWinform\inspectWinform\bin\Debug\Newtonsoft.Json.xml
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.AssemblyReference.cache
-D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.AutoConnectForm.resources
-D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.Form1.resources
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.Properties.Resources.resources
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.GenerateResource.cache
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CoreCompileInputs.cache
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CopyComplete
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.exe
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.pdb
+D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\SocketWinform.AutoConnectForm.resources
+D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\SocketWinform.Form1.resources

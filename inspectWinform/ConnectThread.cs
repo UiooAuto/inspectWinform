@@ -2,7 +2,7 @@
 using System.Net.Sockets;
 using System.Timers;
 
-namespace inspectWinform
+namespace SocketWinform
 {
     public class ConnectThread
     {
@@ -19,7 +19,7 @@ namespace inspectWinform
 
         private void connect()
         {
-            Socket socket = InspectUtils.connectToTarget(serverIp, serverPort);
+            Socket socket = SocketUtils.connectToTarget(serverIp, serverPort);
         }
     }
 }
