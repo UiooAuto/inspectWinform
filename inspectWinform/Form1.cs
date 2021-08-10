@@ -263,6 +263,7 @@ namespace InspectWinform
                 work1.plc3CmdAds = cam3CmdAds;
                 work1.san = true;
                 work1.triggerState = trigger1State;
+                work1.triggerState1 = testMsg;
                 thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
                 thread1.Start();
@@ -280,6 +281,7 @@ namespace InspectWinform
                 work2.plc3CmdAds = cam3CmdAds;
                 work2.san = true;
                 work2.triggerState = trigger2State;
+                work2.triggerState1 = testMsg;
                 thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
                 thread2.Start();
@@ -297,6 +299,7 @@ namespace InspectWinform
                 work3.plc3CmdAds = cam3CmdAds;
                 work3.san = true;
                 work3.triggerState = trigger3State;
+                work3.triggerState1 = testMsg;
                 thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
                 thread3.Start();
@@ -419,9 +422,7 @@ namespace InspectWinform
             testMsg.Text = "无";
             testMsg.BackColor = Color.Silver;
             SocketUtils.sendCmdToTarget(inspectSocket, str);
-            //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
             var receiveData = SocketUtils.receiveDataFromTarget(inspectSocket, resByteArr);
-            //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");

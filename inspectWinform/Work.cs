@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Net.Sockets;
 using System.Windows.Forms;
-using Timer = System.Windows.Forms.Timer;
+using Timer = System.Timers.Timer;
 
 namespace InspectWinform
 {
@@ -28,6 +28,7 @@ namespace InspectWinform
         public string plc3CmdAds;
 
         public Label triggerState;
+        public Label triggerState1;
 
         private Thread currentThread;
 
@@ -43,9 +44,10 @@ namespace InspectWinform
             currentThread = Thread.CurrentThread;
 
             timer = new Timer();
-            timer.Interval = 2000;
-            timer.Enabled = true;
-            timer.Tick += timer_Tick;
+            timer.Interval = 500;
+            //timer.Enabled = true;
+            timer.AutoReset = false;
+            timer.Elapsed += timer_Tick;
 
             while (san)
             {
@@ -67,6 +69,8 @@ namespace InspectWinform
                     plcCmd = getPlcCmd(plcSocket, camCmdAds);
                     if (plcCmd != 0)
                     {
+                        triggerState1.BackColor = Color.Silver;
+                        triggerState1.Text = "无";
                         inspectOK = true;
                         timer.Start();
                         result = readInspect(plcCmd);
@@ -76,6 +80,8 @@ namespace InspectWinform
                     {
                         inspectOK = false;
                         timer.Stop();
+                        triggerState1.BackColor = Color.LimeGreen;
+                        triggerState1.Text = "相机"+plcCmd+" OK";
                         setPlcCmd(plcSocket, camResAds, " 0001\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
@@ -83,6 +89,8 @@ namespace InspectWinform
                     {
                         inspectOK = false;
                         timer.Stop();
+                        triggerState1.BackColor = Color.Red;
+                        triggerState1.Text = "相机"+plcCmd+" NG";
                         setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                     }
@@ -192,17 +200,15 @@ namespace InspectWinform
                 if (receiveData == "1")
                 {
                     setPlcCmd(plcSocket, camResAds, " 0001\r\n");
-                    setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                 }
                 else if (receiveData == "2")
                 {
                     setPlcCmd(plcSocket, camResAds, " 0002\r\n");
-                    setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                 }
+                setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
             }
 
             inspectOK = false;
-            timer.Stop();
         }
     }
 }
