@@ -44,7 +44,7 @@ namespace InspectWinform
             currentThread = Thread.CurrentThread;
 
             timer = new Timer();
-            timer.Interval = 500;
+            timer.Interval = 3000;
             //timer.Enabled = true;
             timer.AutoReset = false;
             timer.Elapsed += timer_Tick;
@@ -71,8 +71,8 @@ namespace InspectWinform
                     {
                         triggerState1.BackColor = Color.Silver;
                         triggerState1.Text = "无";
-                        inspectOK = true;
-                        timer.Start();
+                        /*inspectOK = true;
+                        timer.Start();*/
                         result = readInspect(plcCmd);
                     }
 
@@ -80,24 +80,27 @@ namespace InspectWinform
                     {
                         inspectOK = false;
                         timer.Stop();
+                        timer.Enabled = false;
                         triggerState1.BackColor = Color.LimeGreen;
-                        triggerState1.Text = "相机"+plcCmd+" OK";
+                        triggerState1.Text = "相机" + plcCmd + " OK";
                         setPlcCmd(plcSocket, camResAds, " 0001\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
+                        result = "";
+                        plcCmd = 0;
                     }
                     else if (result == "2" && inspectOK)
                     {
                         inspectOK = false;
                         timer.Stop();
+                        timer.Enabled = false;
                         triggerState1.BackColor = Color.Red;
-                        triggerState1.Text = "相机"+plcCmd+" NG";
+                        triggerState1.Text = "相机" + plcCmd + " NG";
                         setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
+                        result = "";
+                        plcCmd = 0;
                     }
-
-                    result = "";
-                    plcCmd = 0;
-                    Thread.Sleep(100);
+                    Thread.Sleep(10);
                 }
             }
         }
@@ -131,10 +134,15 @@ namespace InspectWinform
             if ("11OK0001".Equals(cmd))
             {
                 triggerState.BackColor = Color.LimeGreen;
+                inspectOK = true; //开启触发超时定时器
+                timer.Start();
             }
             else if ("11OK0000".Equals(cmd))
             {
                 triggerState.BackColor = Color.Yellow;
+                inspectOK = false; //关闭触发超时定时器
+                timer.Stop();
+                timer.Enabled = false;
             }
 
             if (cmd == "11OK0001" && cmd != lastCmd)
@@ -189,26 +197,62 @@ namespace InspectWinform
 
         #endregion
 
+        #region 触发超时定时器超时事件
+
         private void timer_Tick(object sender, EventArgs e)
         {
             if (inspectOK)
             {
-                SocketUtils.sendCmdToTarget(localSocket, "c"+plcCmd+";");
-                //MessageBox.Show("向" + inspectIp.Text + ":" + inspectPort.Text + "发送消息：" + str);
+                SocketUtils.sendCmdToTarget(plcSocket, readCmd + camCmdAds + "\r\n");
+                var cmd = SocketUtils.receiveDataFromTarget(plcSocket, new byte[1024]);
+                var indexOf = cmd.IndexOf('\r');
+                if (indexOf != -1)
+                {
+                    cmd = cmd.Substring(0, indexOf);
+                }
+                if (cmd == "11OK0001")
+                {
+                    if (camCmdAds == plc1CmdAds)
+                    {
+                        plcCmd = 1;
+                    }
+
+                    if (camCmdAds == plc2CmdAds)
+                    {
+                        plcCmd = 2;
+                    }
+
+                    if (camCmdAds == plc3CmdAds)
+                    {
+                        plcCmd = 3;
+                    }
+                }
+                SocketUtils.sendCmdToTarget(localSocket, "c" + plcCmd + ";");
                 var receiveData = SocketUtils.receiveDataFromTarget(localSocket, resBytes);
-                //MessageBox.Show("从" + inspectIp.Text + ":" + inspectPort.Text + "接收到消息：" + receiveData);
                 if (receiveData == "1")
                 {
                     setPlcCmd(plcSocket, camResAds, " 0001\r\n");
+                    triggerState1.BackColor = Color.LimeGreen;
+                    triggerState1.Text = "相机" + plcCmd + " OK*";
                 }
                 else if (receiveData == "2")
                 {
+                    triggerState1.BackColor = Color.Red;
+                    triggerState1.Text = "相机" + plcCmd + " NG*";
                     setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                 }
-                setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
+                else
+                {
+                    triggerState1.BackColor = Color.Silver;
+                    triggerState1.Text = "无*";
+                }
             }
-
+            setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
             inspectOK = false;
+            result = "";
+            plcCmd = 0;
         }
+
+        #endregion
     }
 }

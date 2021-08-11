@@ -23,8 +23,8 @@ namespace InspectWinform
             {
                 ipAddress = IPAddress.Parse(serverIp);
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                socket.SendTimeout = 1000;
-                socket.ReceiveTimeout = 1000;
+                socket.SendTimeout = 500;
+                socket.ReceiveTimeout = 500;
                 try
                 {
                     Ping ping = new Ping();
