@@ -36,6 +36,7 @@ namespace InspectWinform
 
         private Timer timer;
         private int plcCmd;
+        public int overTime;
 
         #region 线程主方法
 
@@ -44,7 +45,7 @@ namespace InspectWinform
             currentThread = Thread.CurrentThread;
 
             timer = new Timer();
-            timer.Interval = 1000;
+            timer.Interval = overTime;
             //timer.Enabled = true;
             timer.AutoReset = false;
             timer.Elapsed += timer_Tick;
@@ -60,13 +61,14 @@ namespace InspectWinform
                 {
                     result = "";
                     /*
-                     *var plcCmdStr = InspectUtils.receiveDataFromTarget(plcSocket,resBytes);
-                     *var plcCmd = int.Parse(plcCmdStr);
-                     */
-                    /*
                      * 读取PLC命令
                      */
-                    plcCmd = getPlcCmd(plcSocket, camCmdAds);
+
+                    if (!inspectOK)
+                    {
+                        plcCmd = getPlcCmd(plcSocket, camCmdAds);
+                    }
+                    
                     if (plcCmd != 0)
                     {
                         triggerState1.BackColor = Color.Silver;
@@ -130,7 +132,7 @@ namespace InspectWinform
                 cmd = cmd.Substring(0, indexOf);
             }
 
-            //更新界面触发状态指示
+            //更新界面触发状态指示,启动触发超时定时器
             if ("11OK0001".Equals(cmd))
             {
                 triggerState.BackColor = Color.LimeGreen;
@@ -201,6 +203,7 @@ namespace InspectWinform
 
         private void timer_Tick(object sender, EventArgs e)
         {
+            
             if (inspectOK)
             {
                 SocketUtils.sendCmdToTarget(plcSocket, readCmd + camCmdAds + "\r\n");
@@ -233,18 +236,18 @@ namespace InspectWinform
                 {
                     setPlcCmd(plcSocket, camResAds, " 0001\r\n");
                     triggerState1.BackColor = Color.LimeGreen;
-                    triggerState1.Text = "相机" + plcCmd + " OK";
+                    triggerState1.Text = "相机" + plcCmd + " OK*";
                 }
                 else if (receiveData == "2")
                 {
                     triggerState1.BackColor = Color.Red;
-                    triggerState1.Text = "相机" + plcCmd + " NG";
+                    triggerState1.Text = "相机" + plcCmd + " NG*";
                     setPlcCmd(plcSocket, camResAds, " 0002\r\n");
                 }
                 else
                 {
                     triggerState1.BackColor = Color.Silver;
-                    triggerState1.Text = "无";
+                    triggerState1.Text = "无*";
                 }
             }
             setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");

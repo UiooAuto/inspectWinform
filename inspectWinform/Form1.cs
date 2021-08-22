@@ -54,6 +54,7 @@ namespace InspectWinform
 
         //用于判断连接状态
         bool connectStatus = false;
+        public int overTimeSet;
 
         private Thread thread1;
         private Thread thread2;
@@ -116,6 +117,15 @@ namespace InspectWinform
             conn2En.Checked = allConnectData.con2En;
             conn3En.Checked = allConnectData.con3En;
 
+            if (isEmpty(allConnectData.overTimeSet))
+            {
+                overTime.Text = "2";
+            }
+            else
+            {
+                overTime.Text = allConnectData.overTimeSet;
+            }
+
             //创建窗口对象
             AutoConnectForm autoConnectForm = new AutoConnectForm();
             //如果文件中没有保存等待时间，则默认为10
@@ -131,6 +141,15 @@ namespace InspectWinform
             //运行窗口，阻塞主体程序运行
             autoConnectForm.ShowDialog();
 
+            if (isEmpty(allConnectData.delayStartInspect))
+            {
+                autoStartInspectTime.Text = "5";
+            }
+            else
+            {
+                autoStartInspectTime.Text = allConnectData.delayStartInspect;
+            }
+            
             if (autoConnectForm.autoConn)
             {
                 //拉取进程列表
@@ -250,6 +269,7 @@ namespace InspectWinform
         /// </summary>
         public void startWork()
         {
+            overTimeSet = (int)(double.Parse(overTime.Text) * 1000 / 1);
             //仅当对应plc有连接的时候，才开启线程
             if (plcSocket1 != null && conn1En.Checked)
             {
@@ -264,6 +284,7 @@ namespace InspectWinform
                 work1.san = true;
                 work1.triggerState = trigger1State;
                 work1.triggerState1 = testMsg;
+                work1.overTime = overTimeSet;
                 thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
                 thread1.Start();
@@ -282,6 +303,7 @@ namespace InspectWinform
                 work2.san = true;
                 work2.triggerState = trigger2State;
                 work2.triggerState1 = testMsg;
+                work2.overTime = overTimeSet;
                 thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
                 thread2.Start();
@@ -300,6 +322,7 @@ namespace InspectWinform
                 work3.san = true;
                 work3.triggerState = trigger3State;
                 work3.triggerState1 = testMsg;
+                work3.overTime = overTimeSet;
                 thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
                 thread3.Start();
@@ -635,6 +658,7 @@ namespace InspectWinform
             allConnectData.con3En = conn3En.Checked;
 
             allConnectData.delayStartInspect = autoStartInspectTime.Text;
+            allConnectData.overTimeSet = overTime.Text;
 
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allConnectData));
         }

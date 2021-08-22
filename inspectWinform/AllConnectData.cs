@@ -25,5 +25,7 @@
         public bool con3En;
 
         public string delayStartInspect;
+
+        public string overTimeSet;
     }
 }

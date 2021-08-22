@@ -24,8 +24,6 @@ D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CoreC
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CopyComplete
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.exe
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\inspectWinform.pdb
-D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\SocketWinform.AutoConnectForm.resources
-D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\SocketWinform.Form1.resources
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\bin\Debug\inspectWinform.exe.config
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\bin\Debug\inspectWinform.exe
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\bin\Debug\inspectWinform.pdb
@@ -40,3 +38,5 @@ D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CopyComplete
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.exe
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.pdb
+D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\InspectWinform.AutoConnectForm.resources
+D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\InspectWinform.Form1.resources
