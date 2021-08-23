@@ -449,6 +449,7 @@ namespace InspectWinform
             if (receiveData == "1")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0001\r\n");
+                Thread.Sleep(30);
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
                 testMsg.Text = "相机1 OK";
                 testMsg.BackColor = Color.LimeGreen;
@@ -456,6 +457,7 @@ namespace InspectWinform
             else if (receiveData == "2")
             {
                 setPlcCmd(plcSocket1, cam1ResAds, " 0002\r\n");
+                Thread.Sleep(30);
                 setPlcCmd(plcSocket1, cam1CmdAds, " 0000\r\n");
                 testMsg.Text = "相机1 NG";
                 testMsg.BackColor = Color.Red;

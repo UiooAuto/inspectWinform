@@ -86,6 +86,7 @@ namespace InspectWinform
                         triggerState1.BackColor = Color.LimeGreen;
                         triggerState1.Text = "相机" + plcCmd + " OK";
                         setPlcCmd(plcSocket, camResAds, " 0001\r\n");
+                        Thread.Sleep(30);
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                         result = "";
                         plcCmd = 0;
@@ -98,6 +99,7 @@ namespace InspectWinform
                         triggerState1.BackColor = Color.Red;
                         triggerState1.Text = "相机" + plcCmd + " NG";
                         setPlcCmd(plcSocket, camResAds, " 0002\r\n");
+                        Thread.Sleep(30);
                         setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
                         result = "";
                         plcCmd = 0;
@@ -250,6 +252,7 @@ namespace InspectWinform
                     triggerState1.Text = "无*";
                 }
             }
+            Thread.Sleep(30);
             setPlcCmd(plcSocket, camCmdAds, " 0000\r\n");
             inspectOK = false;
             result = "";
