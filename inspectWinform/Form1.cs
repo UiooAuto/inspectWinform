@@ -623,6 +623,7 @@ namespace InspectWinform
             if (TS == DialogResult.Yes)
             {
                 closeAllSocket();
+                Thread.Sleep(10);
                 System.Environment.Exit(0);
             }
         }
