@@ -35,7 +35,6 @@ D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\InspectWinform
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.Properties.Resources.resources
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.GenerateResource.cache
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CoreCompileInputs.cache
-D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.csproj.CopyComplete
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.exe
 D:\XXYWORK\CODE\RiderCode\inspectWinform\inspectWinform\obj\Debug\inspectWinform.pdb
 D:\RiderWork\inspectWinform\inspectWinform\obj\Debug\InspectWinform.AutoConnectForm.resources

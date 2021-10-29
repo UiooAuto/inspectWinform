@@ -38,6 +38,8 @@ namespace InspectWinform
         private int plcCmd;
         public int overTime;
 
+        public int connectStuts = 0;
+
         #region 线程主方法
 
         public void go()
@@ -67,6 +69,14 @@ namespace InspectWinform
                     if (!inspectOK)
                     {
                         plcCmd = getPlcCmd(plcSocket, camCmdAds);
+                        if (plcSocket.Connected)
+                        {
+                            connectStuts = 1;
+                        }
+                        else
+                        {
+                            connectStuts = 2;
+                        }
                     }
                     
                     if (plcCmd != 0)

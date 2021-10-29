@@ -285,6 +285,9 @@ namespace InspectWinform
                 work1.triggerState = trigger1State;
                 work1.triggerState1 = testMsg;
                 work1.overTime = overTimeSet;
+
+                work1.connectStuts = 0;
+                
                 thread1 = new Thread(new ThreadStart(work1.go));
                 thread1.Name = "cam1";
                 thread1.Start();
@@ -304,6 +307,9 @@ namespace InspectWinform
                 work2.triggerState = trigger2State;
                 work2.triggerState1 = testMsg;
                 work2.overTime = overTimeSet;
+                
+                work2.connectStuts = 0;
+                
                 thread2 = new Thread(new ThreadStart(work2.go));
                 thread2.Name = "cam2";
                 thread2.Start();
@@ -323,10 +329,17 @@ namespace InspectWinform
                 work3.triggerState = trigger3State;
                 work3.triggerState1 = testMsg;
                 work3.overTime = overTimeSet;
+                
+                work3.connectStuts = 0;
+                
                 thread3 = new Thread(new ThreadStart(work3.go));
                 thread3.Name = "cam3";
                 thread3.Start();
             }
+
+            Thread cheakthread = new Thread(new ThreadStart(AutoCheckConnect));
+            cheakthread.IsBackground = true;
+            cheakthread.Start();
         }
 
         #endregion
@@ -395,6 +408,9 @@ namespace InspectWinform
                     //inspectSocket.SendTimeout = 500;
                     //连接状态更新
                 }
+
+                testMsg.Text = "无";
+                testMsg.BackColor = Color.Silver;
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
@@ -511,6 +527,47 @@ namespace InspectWinform
                 setPlcCmd(plcSocket3, cam3CmdAds, " 0000\r\n");
                 testMsg.Text = "相机3 NG";
                 testMsg.BackColor = Color.Red;
+            }
+        }
+
+        #endregion
+
+        #region 自动检测连接状态并更新界面
+
+        public void AutoCheckConnect()
+        {
+            while (true)
+            {
+                if (work1 != null)
+                {
+                    if (work1.connectStuts == 2)
+                    {
+                        startConnect();
+                        testMsg.Text = "连接中断";
+                        testMsg.BackColor = Color.Red;
+                        return;
+                    }
+                }
+                if (work2 != null)
+                {
+                    if (work2.connectStuts == 2)
+                    {
+                        startConnect();
+                        testMsg.Text = "连接中断";
+                        testMsg.BackColor = Color.Red;
+                        return;
+                    }
+                }
+                if (work3 != null)
+                {
+                    if (work3.connectStuts == 2)
+                    {
+                        startConnect();
+                        testMsg.Text = "连接中断";
+                        testMsg.BackColor = Color.Red;
+                        return;
+                    }
+                }
             }
         }
 
