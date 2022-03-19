@@ -83,10 +83,6 @@ namespace InspectWinform
             //取消关闭按钮
             this.ControlBox = false;
             //新建Socket连接
-            inspectConnectInfo = new ConnectInfo();
-            plcConnectArr[0] = new ConnectInfo();
-            plcConnectArr[1] = new ConnectInfo();
-            plcConnectArr[2] = new ConnectInfo();
 
             //读取前一次的连接数据
             readSaveData();
@@ -95,11 +91,7 @@ namespace InspectWinform
             inspectIp.Text = allConnectData.inspectIp;
             inspectPort.Text = allConnectData.inspectPort;
             plcIp1.Text = allConnectData.plcIp1;
-            plcIp2.Text = allConnectData.plcIp2;
-            plcIp3.Text = allConnectData.plcIp3;
             plcPort1.Text = allConnectData.plcPort1;
-            plcPort2.Text = allConnectData.plcPort2;
-            plcPort3.Text = allConnectData.plcPort3;
 
             trigger1.Text = allConnectData.cam1CmdAds;
             trigger2.Text = allConnectData.cam2CmdAds;
@@ -110,9 +102,9 @@ namespace InspectWinform
 
             autoConTimeSet.Text = allConnectData.autoConnTime;
 
-            conn1En.Checked = allConnectData.con1En;
-            conn2En.Checked = allConnectData.con2En;
-            conn3En.Checked = allConnectData.con3En;
+            cb_EnCam1.Checked = allConnectData.con1En;
+            cb_EnCam2.Checked = allConnectData.con2En;
+            cb_EnCam3.Checked = allConnectData.con3En;
 
             if (isEmpty(allConnectData.overTimeSet))
             {
@@ -426,8 +418,8 @@ namespace InspectWinform
                 trigger2State.BackColor = Color.Silver;
                 trigger3State.BackColor = Color.Silver;
                 cb_EnCam1.Enabled = true;
-                cb_EnCam1.Enabled = true;
-                cb_EnCam1.Enabled = true;
+                cb_EnCam2.Enabled = true;
+                cb_EnCam3.Enabled = true;
             }
             else
             {
@@ -452,7 +444,7 @@ namespace InspectWinform
         {
             overTimeSet = (int)(double.Parse(overTime.Text) * 1000 / 1);
             //仅当对应plc有连接的时候，才开启线程
-            if (plcSocket1 != null && conn1En.Checked)
+            if (plcSocket1 != null && cb_EnCam1.Checked)
             {
                 work1.plcSocket = plcSocket1;
                 work1.localSocket = inspectSocket;
@@ -474,7 +466,7 @@ namespace InspectWinform
                 thread1.Start();
             }
 
-            if (plcSocket2 != null && conn2En.Checked)
+            if (plcSocket2 != null && cb_EnCam2.Checked)
             {
                 work2.plcSocket = plcSocket2;
                 work2.localSocket = inspectSocket;
@@ -496,7 +488,7 @@ namespace InspectWinform
                 thread2.Start();
             }
             
-            if (plcSocket3 != null && conn3En.Checked)
+            if (plcSocket3 != null && cb_EnCam3.Checked)
             {
                 work3.plcSocket = plcSocket3;
                 work3.localSocket = inspectSocket;
@@ -536,7 +528,7 @@ namespace InspectWinform
             bool flag = false;
 
             //PLC连接需要额外判断复选框是否勾选
-            if (conn1En.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
+            if (cb_EnCam1.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
                 !isEmpty(trigger1.Text) &&
                 !isEmpty(result1.Text))
             {
@@ -549,7 +541,7 @@ namespace InspectWinform
                 }
             }
 
-            if (conn2En.Checked && plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) &&
+            if (cb_EnCam2.Checked && plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) &&
                 !isEmpty(trigger2.Text) &&
                 !isEmpty(result2.Text))
             {
@@ -562,7 +554,7 @@ namespace InspectWinform
                 }
             }
 
-            if (conn3En.Checked && plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) &&
+            if (cb_EnCam3.Checked && plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) &&
                 !isEmpty(trigger3.Text) &&
                 !isEmpty(result3.Text))
             {
@@ -596,8 +588,8 @@ namespace InspectWinform
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
                 cb_EnCam1.Enabled = false;
-                cb_EnCam1.Enabled = false;
-                cb_EnCam1.Enabled = false;
+                cb_EnCam2.Enabled = false;
+                cb_EnCam3.Enabled = false;
             }
             else
             {
@@ -894,9 +886,9 @@ namespace InspectWinform
 
             allConnectData.autoConnTime = autoConTimeSet.Text;
 
-            allConnectData.con1En = conn1En.Checked;
-            allConnectData.con2En = conn2En.Checked;
-            allConnectData.con3En = conn3En.Checked;
+            allConnectData.con1En = cb_EnCam1.Checked;
+            allConnectData.con2En = cb_EnCam2.Checked;
+            allConnectData.con3En = cb_EnCam3.Checked;
 
             allConnectData.delayStartInspect = autoStartInspectTime.Text;
             allConnectData.overTimeSet = overTime.Text;
@@ -974,9 +966,9 @@ namespace InspectWinform
         #region 用过复选框选择需要的连接
 
         //复选框没有选的连接将会被禁用
-        private void conn1En_CheckedChanged(object sender, EventArgs e)
+        private void cb_EnCam1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!conn1En.Checked)
+            if (!cb_EnCam1.Checked)
             {
                 plcIp1.Enabled = false;
                 plcPort1.Enabled = false;
@@ -992,9 +984,9 @@ namespace InspectWinform
             }
         }
 
-        private void conn2En_CheckedChanged(object sender, EventArgs e)
+        private void cb_EnCam2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!conn2En.Checked)
+            if (!cb_EnCam2.Checked)
             {
                 plcIp2.Enabled = false;
                 plcPort2.Enabled = false;
@@ -1010,9 +1002,9 @@ namespace InspectWinform
             }
         }
 
-        private void conn3En_CheckedChanged(object sender, EventArgs e)
+        private void cb_EnCam3_CheckedChanged(object sender, EventArgs e)
         {
-            if (!conn3En.Checked)
+            if (!cb_EnCam3.Checked)
             {
                 plcIp3.Enabled = false;
                 plcPort3.Enabled = false;
