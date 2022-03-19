@@ -17,6 +17,8 @@ namespace InspectWinform
 {
     public partial class Form1 : Form
     {
+        public string readCmd = "01WRDD";
+        public string writeCmd = "01WWRD";
         //用于保存连接数据的对象
         private AllConnectData allConnectData = new AllConnectData();
 
@@ -38,11 +40,6 @@ namespace InspectWinform
         Socket plcSocket1;
         Socket plcSocket2;
         Socket plcSocket3;
-
-        //用于多线程执行的对象
-        static Work work1 = new Work();
-        static Work work2 = new Work();
-        static Work work3 = new Work();
 
         //准备plc所用的各种地址
         string cam1CmdAds;
@@ -197,6 +194,190 @@ namespace InspectWinform
 
         #endregion
 
+        #region 重做部分
+
+        #region 连接参数
+
+        public Socket inspect;
+        public Socket plc;
+
+        #endregion
+
+        #region 程序主要工作流程
+
+        public bool san = false;
+        public void Work()
+        {
+            string lastCmd1 = "";
+            string lastCmd2 = "";
+            string lastCmd3 = "";
+
+            while (san)
+            {
+                string cam1Result = "";
+                string cam2Result = "";
+                string cam3Result = "";
+
+                bool triggerCam1 = false;
+                bool triggerCam2 = false;
+                bool triggerCam3 = false;
+                //读取plc
+                byte[] recBytes = new byte[1024 * 1024];
+                string cmd = readCmd + trigger1.Text + " 01\r\n";
+                plc.Send(Encoding.UTF8.GetBytes(cmd));
+                int v = plc.Receive(recBytes);
+
+                Thread.Sleep(30);
+
+                string cmdString = Encoding.UTF8.GetString(recBytes, 0, v);
+
+                int indexOf = cmdString.IndexOf('\r');
+                if (indexOf != -1)
+                {
+                    cmdString = cmdString.Substring(0, indexOf);
+                }
+
+                if (cmdString != lastCmd)//代表指令有更新
+                {
+                    if ("11OK0000".Equals(cmdString))//0代表一个也不触发
+                    {
+                        triggerCam = 0;
+                        trigger1State.BackColor = Color.Yellow;
+                        trigger2State.BackColor = Color.Yellow;
+                    }
+                    else if ("11OK0001".Equals(cmdString))//发1代表全部触发
+                    {
+                        triggerCam = 3;
+                        trigger1State.BackColor = Color.Green;
+                        trigger2State.BackColor = Color.Green;
+                    }
+                    else if ("11OK0002".Equals(cmdString))//发2代表触发上
+                    {
+                        triggerCam = 1;
+                        trigger1State.BackColor = Color.Green;
+                    }
+                    else if ("11OK0003".Equals(cmdString))//发3代表触发下
+                    {
+                        triggerCam = 2;
+                        trigger2State.BackColor = Color.Green;
+                    }
+                    lastCmd = cmdString;
+                }
+                else
+                {
+                    lastCmd = cmdString;
+                    continue;
+                }
+
+
+                if (triggerCam == 0)//不触发需要更新标签显示并开启下一次循环
+                {
+                    continue;
+                }
+                if ((triggerCam == 1) || (triggerCam == 3))//如果命令上相机检测或所有相机检测，则上相机检测
+                {
+                    Array.Clear(recBytes, 0, recBytes.Length);
+                    inspect.Send(Encoding.UTF8.GetBytes("c1;"));
+                    int v1 = inspect.Receive(recBytes);
+                    Thread.Sleep(30);
+                    cam1Result = Encoding.UTF8.GetString(recBytes, 0, v1);
+                }
+                if ((triggerCam == 2) || (triggerCam == 3))//如果命令下相机检测或所有相机检测，则下相机检测
+                {
+                    Array.Clear(recBytes, 0, recBytes.Length);
+                    inspect.Send(Encoding.UTF8.GetBytes("c2;"));
+                    int v2 = inspect.Receive(recBytes);
+                    Thread.Sleep(30);
+                    cam2Result = Encoding.UTF8.GetString(recBytes, 0, v2);
+                }
+
+                if (triggerCam == 1)
+                {
+                    if ("1" == cam1Result)//只检测上面并且检测ok则返回plc1，检测NG则返回3
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0001\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                    else
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0003\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                }
+                else if (triggerCam == 2)//只检测下面并且检测ok则返回plc1，检测NG则返回2
+                {
+                    if ("1" == cam2Result)
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0001\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                    else
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0002\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                }
+                else if (triggerCam == 3)
+                {
+                    if (("1" == cam1Result) && ("1" == cam2Result))//上下全检测，全部ok
+                    {
+                        //需要给plc写入结果
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0001\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                    else if (("1" == cam1Result) && ("1" != cam2Result))//上下全检测，上ok下ng
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0002\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                    else if (("1" != cam1Result) && ("1" == cam2Result))//上下全检测，上ng下ok
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0003\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                    else if (("1" != cam1Result) && ("1" != cam2Result))//上下全检测，全部ng
+                    {
+                        Array.Clear(recBytes, 0, recBytes.Length);
+                        string cmdStr = writeCmd + result1.Text + " 01 0004\r\n";
+                        plc.Send(Encoding.UTF8.GetBytes(cmdStr));
+                        int v1 = plc.Receive(recBytes);
+                        Thread.Sleep(30);
+                    }
+                }
+                //清楚PLC的触发位
+                Array.Clear(recBytes, 0, recBytes.Length);
+                string cmdStr1 = writeCmd + trigger1.Text + " 01 0000\r\n";
+                plc.Send(Encoding.UTF8.GetBytes(cmdStr1));
+                plc.Receive(recBytes);
+                Thread.Sleep(30);
+            }
+        }
+
+        #endregion
+
+        #endregion
+
         #region 连接功能
 
         public void startConnect()
@@ -244,9 +425,9 @@ namespace InspectWinform
                 trigger1State.BackColor = Color.Silver;
                 trigger2State.BackColor = Color.Silver;
                 trigger3State.BackColor = Color.Silver;
-                conn1En.Enabled = true;
-                conn2En.Enabled = true;
-                conn3En.Enabled = true;
+                cb_EnCam1.Enabled = true;
+                cb_EnCam1.Enabled = true;
+                cb_EnCam1.Enabled = true;
             }
             else
             {
@@ -414,9 +595,9 @@ namespace InspectWinform
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
-                conn1En.Enabled = false;
-                conn2En.Enabled = false;
-                conn3En.Enabled = false;
+                cb_EnCam1.Enabled = false;
+                cb_EnCam1.Enabled = false;
+                cb_EnCam1.Enabled = false;
             }
             else
             {
@@ -933,6 +1114,42 @@ namespace InspectWinform
         }
 
         #endregion
+
+        private void cb_EnCam1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_EnCam1.Checked)
+            {
+                gb_Cam1.Enabled = true;
+            }
+            else
+            {
+                gb_Cam1.Enabled = false;
+            }
+        }
+
+        private void cb_EnCam2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_EnCam2.Checked)
+            {
+                gb_Cam2.Enabled = true;
+            }
+            else
+            {
+                gb_Cam2.Enabled = false;
+            }
+        }
+
+        private void cb_EnCam3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_EnCam3.Checked)
+            {
+                gb_Cam3.Enabled = true;
+            }
+            else
+            {
+                gb_Cam3.Enabled = false;
+            }
+        }
     }
     #region 圆形标签类
     public class CircleLabel : Label//继承标签类    重新生成解决方案就能看见我啦
