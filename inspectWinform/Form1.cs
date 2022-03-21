@@ -235,8 +235,6 @@ namespace InspectWinform
 
                     try
                     {
-
-
                         if (cb_EnCam1.Checked)
                         {
                             //读取plc
@@ -372,6 +370,12 @@ namespace InspectWinform
                             }
                         }
 
+                        if (!plc.Connected)
+                        {
+                            startConnect();
+                            return;
+                        }
+
                         if (!(triggerCam1 || triggerCam2 || triggerCam3))
                         {
                             //如果一个都没触发，开始下一次读取
@@ -491,11 +495,15 @@ namespace InspectWinform
                     }
                     catch (Exception)//出现任何异常则切断连接
                     {
-                        startConnect();
+                        ;
                     }
                 }
 
-                
+                if (!plc.Connected)
+                {
+                    startConnect();
+                    return;
+                }
             }
         }
 
@@ -511,16 +519,29 @@ namespace InspectWinform
             if ("关闭连接".Equals(connectAll.Text))
             {
                 san = false;
-                cheakthread.Abort();
-                closeAllSocket(); //关闭所有连接
                 connectAll.Text = "连接";
                 connectAll.BackColor = Color.Silver;
                 trigger1State.BackColor = Color.Silver;
                 trigger2State.BackColor = Color.Silver;
                 trigger3State.BackColor = Color.Silver;
+
+                inspectIp.ReadOnly = false;
+                inspectPort.ReadOnly = false;
+                plcIp1.ReadOnly = false;
+                plcPort1.ReadOnly = false;
+
+                trigger1.ReadOnly = false;
+                trigger2.ReadOnly = false;
+                trigger3.ReadOnly = false;
+                result1.ReadOnly = false;
+                result2.ReadOnly = false;
+                result3.ReadOnly = false;
+
                 cb_EnCam1.Enabled = true;
                 cb_EnCam2.Enabled = true;
                 cb_EnCam3.Enabled = true;
+
+                closeAllSocket(); //关闭所有连接
             }
             else
             {
@@ -640,6 +661,7 @@ namespace InspectWinform
                     }
                     catch (Exception)
                     {
+                        plc = null;
                         return false;
                     }
                     flag = true;
@@ -647,6 +669,7 @@ namespace InspectWinform
                 else
                 {
                     MessageBox.Show("PLC连接超时");
+                    plc = null;
                     return false;
                 }
             }
@@ -674,6 +697,7 @@ namespace InspectWinform
             else
             {
                 MessageBox.Show("连接失败");
+                plc = null;
                 return false;
             }
         }
@@ -865,6 +889,12 @@ namespace InspectWinform
         /// </summary>
         public void closeAllSocket()
         {
+
+            san = false;
+
+            Thread.Sleep(500);
+            cheakthread.Abort();
+
             if (inspect != null)
             {
                 try
