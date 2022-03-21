@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -170,8 +172,15 @@ namespace InspectWinform
                 }
 
                 //开始连接
-                startConnect();
-                minWindow();
+                bool v = startConnect();
+                if (v)
+                {
+                    minWindow();//连接成功才会最小化
+                }
+                else
+                {
+                    MessageBox.Show("连接失败");
+                }
             }
         }
 
@@ -372,7 +381,7 @@ namespace InspectWinform
 
         #region 连接功能
 
-        public void startConnect()
+        public bool startConnect()
         {
             //给PLC连接地址赋值,如果有一个没填写都认为是空
             if (!isEmpty(trigger1.Text) && !isEmpty(result1.Text))
@@ -424,13 +433,20 @@ namespace InspectWinform
             else
             {
                 //否则建立全部连接
-                connectAllcon();
-                //开始工作
-                startWork();
+                bool v = connectAllcon(); 
+                if (v)
+                {
+                    //开始工作
+                    startWork();
+                }
+                else
+                {
+                    return false;
+                }
             }
-
+            return true;
             //根据连接状态使画面上的输入框只读
-            enTextBoxs();
+            //enTextBoxs();
         }
 
         #endregion
@@ -522,64 +538,63 @@ namespace InspectWinform
         /// <summary>
         /// 建立所有连接
         /// </summary>
-        public void connectAllcon()
+        public bool connectAllcon()
         {
+            if (!cb_EnCam1.Checked && !cb_EnCam1.Checked && !cb_EnCam1.Checked)
+            {
+                MessageBox.Show("至少开启一个相机");
+                return false;
+            }
+
             //用于标识是否有连接建立成功
             bool flag = false;
-
-            //PLC连接需要额外判断复选框是否勾选
-            if (cb_EnCam1.Checked && plcSocket1 == null && !isEmpty(plcIp1.Text) && !isEmpty(plcPort1.Text) &&
-                !isEmpty(trigger1.Text) &&
-                !isEmpty(result1.Text))
+            bool inspectRun = false;//inspect是否开启了
+            Process[] processes = Process.GetProcesses();
+            //查找有没有inspect的进程
+            foreach (Process process in processes)
             {
-                plcConnectArr[0].ip = plcIp1.Text;
-                plcConnectArr[0].port = int.Parse(plcPort1.Text);
-                plcSocket1 = SocketUtils.connectToTarget(plcConnectArr[0].ip, plcConnectArr[0].port);
-                if (plcSocket1 != null)
+                if (process.ProcessName.Equals("iworks"))
                 {
-                    flag = true;
+                    inspectRun = true;
                 }
             }
 
-            if (cb_EnCam2.Checked && plcSocket2 == null && !isEmpty(plcIp2.Text) && !isEmpty(plcPort2.Text) &&
-                !isEmpty(trigger2.Text) &&
-                !isEmpty(result2.Text))
+            if (!inspectRun)
             {
-                plcConnectArr[1].ip = plcIp2.Text;
-                plcConnectArr[1].port = int.Parse(plcPort2.Text);
-                plcSocket2 = SocketUtils.connectToTarget(plcConnectArr[1].ip, plcConnectArr[1].port);
-                if (plcSocket2 != null)
+                MessageBox.Show("视觉检测程序未开启");
+                return false;
+            }            
+
+            if (plc == null & !isEmpty(plcIp1.Text) & !isEmpty(plcPort1.Text))//连接PLC
+            {
+                plc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                plc.SendTimeout = 500;
+                plc.ReceiveTimeout = 500;
+
+                Ping ping = new Ping();
+                PingReply pingReply = ping.Send(plcIp1.Text, 1000);
+                if (pingReply.Status == IPStatus.Success)
                 {
+                    plc.Connect(new IPEndPoint(IPAddress.Parse(plcIp1.Text), int.Parse(plcPort1.Text)));
                     flag = true;
+                }
+                else
+                {
+                    MessageBox.Show("PLC连接超时");
+                    return false;
                 }
             }
 
-            if (cb_EnCam3.Checked && plcSocket3 == null && !isEmpty(plcIp3.Text) && !isEmpty(plcPort3.Text) &&
-                !isEmpty(trigger3.Text) &&
-                !isEmpty(result3.Text))
-            {
-                plcConnectArr[2].ip = plcIp3.Text;
-                plcConnectArr[2].port = int.Parse(plcPort3.Text);
-                plcSocket3 = SocketUtils.connectToTarget(plcConnectArr[2].ip, plcConnectArr[2].port);
-                if (plcSocket3 != null)
-                {
-                    flag = true;
-                }
-            }
-
-            //判断标志位状态，没有发生更改，说明一个连接都没有建立
             if (flag)
             {
-                //只有在有连接参数、有PLC连接成功时才连接Inspect
-                if (inspectSocket == null && !isEmpty(inspectIp.Text) && !isEmpty(inspectPort.Text))
+
+                //只有在有连接参数、有PLC连接成功、Inspect开启时才连接Inspect
+                if (inspect == null & !isEmpty(inspectIp.Text) & !isEmpty(inspectPort.Text))
                 {
-                    //获取连接参数
-                    inspectConnectInfo.ip = inspectIp.Text;
-                    inspectConnectInfo.port = int.Parse(inspectPort.Text);
-                    //建立连接
-                    inspectSocket = SocketUtils.connectToTarget(inspectConnectInfo.ip, inspectConnectInfo.port);
-                    //inspectSocket.SendTimeout = 500;
-                    //连接状态更新
+                    inspect = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    inspect.SendTimeout = 5000;
+                    inspect.ReceiveTimeout = 5000;
+                    inspect.Connect(new IPEndPoint(IPAddress.Parse(inspectIp.Text), int.Parse(inspectPort.Text)));
                 }
 
                 testMsg.Text = "无";
@@ -587,13 +602,13 @@ namespace InspectWinform
                 connectAll.Text = "关闭连接";
                 connectAll.BackColor = Color.LimeGreen;
                 connectStatus = true;
-                cb_EnCam1.Enabled = false;
-                cb_EnCam2.Enabled = false;
-                cb_EnCam3.Enabled = false;
+
+                return true;
             }
             else
             {
                 MessageBox.Show("连接失败");
+                return false;
             }
         }
 
@@ -754,46 +769,43 @@ namespace InspectWinform
         /// </summary>
         public void closeAllSocket()
         {
-            if (inspectSocket != null)
-            {
-                SocketUtils.shutDownConnect(inspectSocket);
-                inspectSocket.Close();
-                inspectSocket = null;
-            }
+            san = false;
 
-            if (plcSocket1 != null)
+            if (inspect != null)
             {
-                SocketUtils.shutDownConnect(plcSocket1);
-                plcSocket1.Close();
-                plcSocket1 = null;
-                if (thread1!= null)
+                try
                 {
-                    thread1.Abort();
+                    inspect.Shutdown(SocketShutdown.Both);
+                }
+                catch
+                {
+                }
+                try
+                {
+                    inspect.Close();
+                }
+                catch
+                {
                 }
             }
 
-            if (plcSocket2 != null)
+            if (plc != null)
             {
-                SocketUtils.shutDownConnect(plcSocket2);
-                plcSocket2.Close();
-                plcSocket2 = null;
-                if (thread2!=null)
+                try
                 {
-                    thread2.Abort();
+                    plc.Shutdown(SocketShutdown.Both);
+                }
+                catch
+                {
+                }
+                try
+                {
+                    plc.Close();
+                }
+                catch
+                {
                 }
             }
-
-            if (plcSocket3 != null)
-            {
-                SocketUtils.shutDownConnect(plcSocket3);
-                plcSocket3.Close();
-                plcSocket3 = null;
-                if (thread3!=null)
-                {
-                    thread3.Abort();
-                }
-            }
-
             connectStatus = false;
         }
 
@@ -968,55 +980,37 @@ namespace InspectWinform
         //复选框没有选的连接将会被禁用
         private void cb_EnCam1_CheckedChanged(object sender, EventArgs e)
         {
-            if (!cb_EnCam1.Checked)
+            if (cb_EnCam1.Checked)
             {
-                plcIp1.Enabled = false;
-                plcPort1.Enabled = false;
-                trigger1.Enabled = false;
-                result1.Enabled = false;
+                gb_Cam1.Enabled = true;
             }
             else
             {
-                plcIp1.Enabled = true;
-                plcPort1.Enabled = true;
-                trigger1.Enabled = true;
-                result1.Enabled = true;
+                gb_Cam1.Enabled = false;
             }
         }
 
         private void cb_EnCam2_CheckedChanged(object sender, EventArgs e)
         {
-            if (!cb_EnCam2.Checked)
+            if (cb_EnCam2.Checked)
             {
-                plcIp2.Enabled = false;
-                plcPort2.Enabled = false;
-                trigger2.Enabled = false;
-                result2.Enabled = false;
+                gb_Cam2.Enabled = true;
             }
             else
             {
-                plcIp2.Enabled = true;
-                plcPort2.Enabled = true;
-                trigger2.Enabled = true;
-                result2.Enabled = true;
+                gb_Cam2.Enabled = false;
             }
         }
 
         private void cb_EnCam3_CheckedChanged(object sender, EventArgs e)
         {
-            if (!cb_EnCam3.Checked)
+            if (cb_EnCam3.Checked)
             {
-                plcIp3.Enabled = false;
-                plcPort3.Enabled = false;
-                trigger3.Enabled = false;
-                result3.Enabled = false;
+                gb_Cam3.Enabled = true;
             }
             else
             {
-                plcIp3.Enabled = true;
-                plcPort3.Enabled = true;
-                trigger3.Enabled = true;
-                result3.Enabled = true;
+                gb_Cam3.Enabled = false;
             }
         }
 
@@ -1106,42 +1100,7 @@ namespace InspectWinform
         }
 
         #endregion
-
-        private void cb_EnCam1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_EnCam1.Checked)
-            {
-                gb_Cam1.Enabled = true;
-            }
-            else
-            {
-                gb_Cam1.Enabled = false;
-            }
-        }
-
-        private void cb_EnCam2_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_EnCam2.Checked)
-            {
-                gb_Cam2.Enabled = true;
-            }
-            else
-            {
-                gb_Cam2.Enabled = false;
-            }
-        }
-
-        private void cb_EnCam3_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cb_EnCam3.Checked)
-            {
-                gb_Cam3.Enabled = true;
-            }
-            else
-            {
-                gb_Cam3.Enabled = false;
-            }
-        }
+        
     }
     #region 圆形标签类
     public class CircleLabel : Label//继承标签类    重新生成解决方案就能看见我啦
