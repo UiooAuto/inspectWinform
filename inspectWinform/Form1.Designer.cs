@@ -50,6 +50,30 @@
             this.autoConTimeSet = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_EnCam1 = new System.Windows.Forms.CheckBox();
+            this.cb_EnCam2 = new System.Windows.Forms.CheckBox();
+            this.cb_EnCam3 = new System.Windows.Forms.CheckBox();
+            this.gb_Cam1 = new System.Windows.Forms.GroupBox();
+            this.result1 = new System.Windows.Forms.TextBox();
+            this.trigger1State = new InspectWinform.CircleLabel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.trigger1 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.gb_Cam2 = new System.Windows.Forms.GroupBox();
+            this.result2 = new System.Windows.Forms.TextBox();
+            this.trigger2 = new System.Windows.Forms.TextBox();
+            this.trigger2State = new InspectWinform.CircleLabel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.gb_Cam3 = new System.Windows.Forms.GroupBox();
+            this.trigger3 = new System.Windows.Forms.TextBox();
+            this.result3 = new System.Windows.Forms.TextBox();
+            this.trigger3State = new InspectWinform.CircleLabel();
+            this.label29 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.autoStartInspectTime = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -64,36 +88,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.plcPort1 = new System.Windows.Forms.TextBox();
-            this.gb_Cam3 = new System.Windows.Forms.GroupBox();
-            this.trigger3State = new InspectWinform.CircleLabel();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
-            this.result3 = new System.Windows.Forms.TextBox();
-            this.trigger3 = new System.Windows.Forms.TextBox();
-            this.gb_Cam2 = new System.Windows.Forms.GroupBox();
-            this.trigger2State = new InspectWinform.CircleLabel();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.trigger2 = new System.Windows.Forms.TextBox();
-            this.result2 = new System.Windows.Forms.TextBox();
-            this.gb_Cam1 = new System.Windows.Forms.GroupBox();
-            this.trigger1State = new InspectWinform.CircleLabel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.trigger1 = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.result1 = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.cb_EnCam1 = new System.Windows.Forms.CheckBox();
-            this.cb_EnCam3 = new System.Windows.Forms.CheckBox();
-            this.cb_EnCam2 = new System.Windows.Forms.CheckBox();
             this.groupBox2.SuspendLayout();
+            this.gb_Cam1.SuspendLayout();
+            this.gb_Cam2.SuspendLayout();
+            this.gb_Cam3.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.gb_Cam3.SuspendLayout();
-            this.gb_Cam2.SuspendLayout();
-            this.gb_Cam1.SuspendLayout();
             this.SuspendLayout();
             // 
             // handStartInspect
@@ -286,6 +286,8 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.cb_EnCam1);
+            this.groupBox2.Controls.Add(this.cb_EnCam3);
+            this.groupBox2.Controls.Add(this.cb_EnCam2);
             this.groupBox2.Controls.Add(this.gb_Cam1);
             this.groupBox2.Controls.Add(this.gb_Cam2);
             this.groupBox2.Controls.Add(this.gb_Cam3);
@@ -295,6 +297,261 @@
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "相机选择";
+            // 
+            // cb_EnCam1
+            // 
+            this.cb_EnCam1.Checked = true;
+            this.cb_EnCam1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_EnCam1.Location = new System.Drawing.Point(52, 32);
+            this.cb_EnCam1.Name = "cb_EnCam1";
+            this.cb_EnCam1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cb_EnCam1.Size = new System.Drawing.Size(78, 24);
+            this.cb_EnCam1.TabIndex = 45;
+            this.cb_EnCam1.Text = "勾选启用";
+            this.cb_EnCam1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cb_EnCam1.UseVisualStyleBackColor = true;
+            this.cb_EnCam1.CheckedChanged += new System.EventHandler(this.cb_EnCam1_CheckedChanged);
+            // 
+            // cb_EnCam2
+            // 
+            this.cb_EnCam2.Checked = true;
+            this.cb_EnCam2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_EnCam2.Location = new System.Drawing.Point(52, 147);
+            this.cb_EnCam2.Name = "cb_EnCam2";
+            this.cb_EnCam2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cb_EnCam2.Size = new System.Drawing.Size(78, 24);
+            this.cb_EnCam2.TabIndex = 49;
+            this.cb_EnCam2.Text = "勾选启用";
+            this.cb_EnCam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cb_EnCam2.UseVisualStyleBackColor = true;
+            this.cb_EnCam2.CheckedChanged += new System.EventHandler(this.cb_EnCam2_CheckedChanged);
+            // 
+            // cb_EnCam3
+            // 
+            this.cb_EnCam3.Checked = true;
+            this.cb_EnCam3.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_EnCam3.Location = new System.Drawing.Point(52, 262);
+            this.cb_EnCam3.Name = "cb_EnCam3";
+            this.cb_EnCam3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cb_EnCam3.Size = new System.Drawing.Size(78, 24);
+            this.cb_EnCam3.TabIndex = 48;
+            this.cb_EnCam3.Text = "勾选启用";
+            this.cb_EnCam3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cb_EnCam3.UseVisualStyleBackColor = true;
+            this.cb_EnCam3.CheckedChanged += new System.EventHandler(this.cb_EnCam3_CheckedChanged);
+            // 
+            // gb_Cam1
+            // 
+            this.gb_Cam1.Controls.Add(this.result1);
+            this.gb_Cam1.Controls.Add(this.trigger1State);
+            this.gb_Cam1.Controls.Add(this.label21);
+            this.gb_Cam1.Controls.Add(this.trigger1);
+            this.gb_Cam1.Controls.Add(this.label14);
+            this.gb_Cam1.Controls.Add(this.label11);
+            this.gb_Cam1.Location = new System.Drawing.Point(10, 37);
+            this.gb_Cam1.Name = "gb_Cam1";
+            this.gb_Cam1.Size = new System.Drawing.Size(545, 73);
+            this.gb_Cam1.TabIndex = 41;
+            this.gb_Cam1.TabStop = false;
+            this.gb_Cam1.Text = "相机1";
+            // 
+            // result1
+            // 
+            this.result1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.result1.Location = new System.Drawing.Point(321, 26);
+            this.result1.Name = "result1";
+            this.result1.Size = new System.Drawing.Size(119, 29);
+            this.result1.TabIndex = 29;
+            this.result1.Text = "6032";
+            // 
+            // trigger1State
+            // 
+            this.trigger1State.BackColor = System.Drawing.Color.Silver;
+            this.trigger1State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.trigger1State.Location = new System.Drawing.Point(507, 25);
+            this.trigger1State.Name = "trigger1State";
+            this.trigger1State.Size = new System.Drawing.Size(30, 30);
+            this.trigger1State.TabIndex = 30;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(458, 34);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(53, 12);
+            this.label21.TabIndex = 31;
+            this.label21.Text = "触发状态";
+            // 
+            // trigger1
+            // 
+            this.trigger1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.trigger1.Location = new System.Drawing.Point(103, 26);
+            this.trigger1.Name = "trigger1";
+            this.trigger1.Size = new System.Drawing.Size(107, 29);
+            this.trigger1.TabIndex = 28;
+            this.trigger1.Text = "6030";
+            // 
+            // label14
+            // 
+            this.label14.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label14.Location = new System.Drawing.Point(221, 24);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(105, 32);
+            this.label14.TabIndex = 27;
+            this.label14.Text = "结果地址：";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label11.Location = new System.Drawing.Point(1, 24);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 32);
+            this.label11.TabIndex = 26;
+            this.label11.Text = "触发地址：";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gb_Cam2
+            // 
+            this.gb_Cam2.Controls.Add(this.result2);
+            this.gb_Cam2.Controls.Add(this.trigger2);
+            this.gb_Cam2.Controls.Add(this.trigger2State);
+            this.gb_Cam2.Controls.Add(this.label26);
+            this.gb_Cam2.Controls.Add(this.label27);
+            this.gb_Cam2.Controls.Add(this.label28);
+            this.gb_Cam2.Location = new System.Drawing.Point(10, 152);
+            this.gb_Cam2.Name = "gb_Cam2";
+            this.gb_Cam2.Size = new System.Drawing.Size(545, 73);
+            this.gb_Cam2.TabIndex = 40;
+            this.gb_Cam2.TabStop = false;
+            this.gb_Cam2.Text = "相机2";
+            // 
+            // result2
+            // 
+            this.result2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.result2.Location = new System.Drawing.Point(321, 26);
+            this.result2.Name = "result2";
+            this.result2.Size = new System.Drawing.Size(119, 29);
+            this.result2.TabIndex = 36;
+            this.result2.Text = "8032";
+            // 
+            // trigger2
+            // 
+            this.trigger2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.trigger2.Location = new System.Drawing.Point(103, 26);
+            this.trigger2.Name = "trigger2";
+            this.trigger2.Size = new System.Drawing.Size(107, 29);
+            this.trigger2.TabIndex = 35;
+            this.trigger2.Text = "8030";
+            // 
+            // trigger2State
+            // 
+            this.trigger2State.BackColor = System.Drawing.Color.Silver;
+            this.trigger2State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.trigger2State.Location = new System.Drawing.Point(507, 25);
+            this.trigger2State.Name = "trigger2State";
+            this.trigger2State.Size = new System.Drawing.Size(30, 30);
+            this.trigger2State.TabIndex = 37;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(458, 34);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(53, 12);
+            this.label26.TabIndex = 38;
+            this.label26.Text = "触发状态";
+            // 
+            // label27
+            // 
+            this.label27.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label27.Location = new System.Drawing.Point(1, 24);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(105, 32);
+            this.label27.TabIndex = 33;
+            this.label27.Text = "触发地址：";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label28
+            // 
+            this.label28.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label28.Location = new System.Drawing.Point(221, 24);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(105, 32);
+            this.label28.TabIndex = 34;
+            this.label28.Text = "结果地址：";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // gb_Cam3
+            // 
+            this.gb_Cam3.Controls.Add(this.trigger3);
+            this.gb_Cam3.Controls.Add(this.result3);
+            this.gb_Cam3.Controls.Add(this.trigger3State);
+            this.gb_Cam3.Controls.Add(this.label29);
+            this.gb_Cam3.Controls.Add(this.label30);
+            this.gb_Cam3.Controls.Add(this.label31);
+            this.gb_Cam3.Location = new System.Drawing.Point(10, 267);
+            this.gb_Cam3.Name = "gb_Cam3";
+            this.gb_Cam3.Size = new System.Drawing.Size(545, 73);
+            this.gb_Cam3.TabIndex = 39;
+            this.gb_Cam3.TabStop = false;
+            this.gb_Cam3.Text = "相机3";
+            // 
+            // trigger3
+            // 
+            this.trigger3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.trigger3.Location = new System.Drawing.Point(103, 26);
+            this.trigger3.Name = "trigger3";
+            this.trigger3.Size = new System.Drawing.Size(107, 29);
+            this.trigger3.TabIndex = 41;
+            this.trigger3.Text = "10030";
+            // 
+            // result3
+            // 
+            this.result3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.result3.Location = new System.Drawing.Point(321, 26);
+            this.result3.Name = "result3";
+            this.result3.Size = new System.Drawing.Size(119, 29);
+            this.result3.TabIndex = 42;
+            this.result3.Text = "10032";
+            // 
+            // trigger3State
+            // 
+            this.trigger3State.BackColor = System.Drawing.Color.Silver;
+            this.trigger3State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.trigger3State.Location = new System.Drawing.Point(507, 25);
+            this.trigger3State.Name = "trigger3State";
+            this.trigger3State.Size = new System.Drawing.Size(30, 30);
+            this.trigger3State.TabIndex = 43;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(458, 34);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(53, 12);
+            this.label29.TabIndex = 44;
+            this.label29.Text = "触发状态";
+            // 
+            // label30
+            // 
+            this.label30.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label30.Location = new System.Drawing.Point(1, 24);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(105, 32);
+            this.label30.TabIndex = 39;
+            this.label30.Text = "触发地址：";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label31
+            // 
+            this.label31.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label31.Location = new System.Drawing.Point(221, 24);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(105, 32);
+            this.label31.TabIndex = 40;
+            this.label31.Text = "结果地址：";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label19
             // 
@@ -440,263 +697,6 @@
             this.plcPort1.TabIndex = 42;
             this.plcPort1.Text = "12289";
             // 
-            // gb_Cam3
-            // 
-            this.gb_Cam3.Controls.Add(this.cb_EnCam3);
-            this.gb_Cam3.Controls.Add(this.trigger3);
-            this.gb_Cam3.Controls.Add(this.result3);
-            this.gb_Cam3.Controls.Add(this.trigger3State);
-            this.gb_Cam3.Controls.Add(this.label29);
-            this.gb_Cam3.Controls.Add(this.label30);
-            this.gb_Cam3.Controls.Add(this.label31);
-            this.gb_Cam3.Location = new System.Drawing.Point(10, 267);
-            this.gb_Cam3.Name = "gb_Cam3";
-            this.gb_Cam3.Size = new System.Drawing.Size(545, 73);
-            this.gb_Cam3.TabIndex = 39;
-            this.gb_Cam3.TabStop = false;
-            this.gb_Cam3.Text = "相机3";
-            // 
-            // trigger3State
-            // 
-            this.trigger3State.BackColor = System.Drawing.Color.Silver;
-            this.trigger3State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.trigger3State.Location = new System.Drawing.Point(507, 25);
-            this.trigger3State.Name = "trigger3State";
-            this.trigger3State.Size = new System.Drawing.Size(30, 30);
-            this.trigger3State.TabIndex = 43;
-            // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(458, 34);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(53, 12);
-            this.label29.TabIndex = 44;
-            this.label29.Text = "触发状态";
-            // 
-            // label30
-            // 
-            this.label30.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label30.Location = new System.Drawing.Point(1, 24);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(105, 32);
-            this.label30.TabIndex = 39;
-            this.label30.Text = "触发地址：";
-            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label31
-            // 
-            this.label31.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label31.Location = new System.Drawing.Point(221, 24);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(105, 32);
-            this.label31.TabIndex = 40;
-            this.label31.Text = "结果地址：";
-            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // result3
-            // 
-            this.result3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.result3.Location = new System.Drawing.Point(321, 26);
-            this.result3.Name = "result3";
-            this.result3.Size = new System.Drawing.Size(119, 29);
-            this.result3.TabIndex = 42;
-            this.result3.Text = "10032";
-            // 
-            // trigger3
-            // 
-            this.trigger3.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.trigger3.Location = new System.Drawing.Point(103, 26);
-            this.trigger3.Name = "trigger3";
-            this.trigger3.Size = new System.Drawing.Size(107, 29);
-            this.trigger3.TabIndex = 41;
-            this.trigger3.Text = "10030";
-            // 
-            // gb_Cam2
-            // 
-            this.gb_Cam2.Controls.Add(this.cb_EnCam2);
-            this.gb_Cam2.Controls.Add(this.result2);
-            this.gb_Cam2.Controls.Add(this.trigger2);
-            this.gb_Cam2.Controls.Add(this.trigger2State);
-            this.gb_Cam2.Controls.Add(this.label26);
-            this.gb_Cam2.Controls.Add(this.label27);
-            this.gb_Cam2.Controls.Add(this.label28);
-            this.gb_Cam2.Location = new System.Drawing.Point(10, 152);
-            this.gb_Cam2.Name = "gb_Cam2";
-            this.gb_Cam2.Size = new System.Drawing.Size(545, 73);
-            this.gb_Cam2.TabIndex = 40;
-            this.gb_Cam2.TabStop = false;
-            this.gb_Cam2.Text = "相机2";
-            // 
-            // trigger2State
-            // 
-            this.trigger2State.BackColor = System.Drawing.Color.Silver;
-            this.trigger2State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.trigger2State.Location = new System.Drawing.Point(507, 25);
-            this.trigger2State.Name = "trigger2State";
-            this.trigger2State.Size = new System.Drawing.Size(30, 30);
-            this.trigger2State.TabIndex = 37;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(458, 34);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(53, 12);
-            this.label26.TabIndex = 38;
-            this.label26.Text = "触发状态";
-            // 
-            // label27
-            // 
-            this.label27.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label27.Location = new System.Drawing.Point(1, 24);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(105, 32);
-            this.label27.TabIndex = 33;
-            this.label27.Text = "触发地址：";
-            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label28
-            // 
-            this.label28.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label28.Location = new System.Drawing.Point(221, 24);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(105, 32);
-            this.label28.TabIndex = 34;
-            this.label28.Text = "结果地址：";
-            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // trigger2
-            // 
-            this.trigger2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.trigger2.Location = new System.Drawing.Point(103, 26);
-            this.trigger2.Name = "trigger2";
-            this.trigger2.Size = new System.Drawing.Size(107, 29);
-            this.trigger2.TabIndex = 35;
-            this.trigger2.Text = "8030";
-            // 
-            // result2
-            // 
-            this.result2.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.result2.Location = new System.Drawing.Point(321, 26);
-            this.result2.Name = "result2";
-            this.result2.Size = new System.Drawing.Size(119, 29);
-            this.result2.TabIndex = 36;
-            this.result2.Text = "8032";
-            // 
-            // gb_Cam1
-            // 
-            this.gb_Cam1.Controls.Add(this.result1);
-            this.gb_Cam1.Controls.Add(this.trigger1State);
-            this.gb_Cam1.Controls.Add(this.label21);
-            this.gb_Cam1.Controls.Add(this.trigger1);
-            this.gb_Cam1.Controls.Add(this.label14);
-            this.gb_Cam1.Controls.Add(this.label11);
-            this.gb_Cam1.Location = new System.Drawing.Point(10, 37);
-            this.gb_Cam1.Name = "gb_Cam1";
-            this.gb_Cam1.Size = new System.Drawing.Size(545, 73);
-            this.gb_Cam1.TabIndex = 41;
-            this.gb_Cam1.TabStop = false;
-            this.gb_Cam1.Text = "相机1";
-            // 
-            // trigger1State
-            // 
-            this.trigger1State.BackColor = System.Drawing.Color.Silver;
-            this.trigger1State.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.trigger1State.Location = new System.Drawing.Point(507, 25);
-            this.trigger1State.Name = "trigger1State";
-            this.trigger1State.Size = new System.Drawing.Size(30, 30);
-            this.trigger1State.TabIndex = 30;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(458, 34);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(53, 12);
-            this.label21.TabIndex = 31;
-            this.label21.Text = "触发状态";
-            // 
-            // trigger1
-            // 
-            this.trigger1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.trigger1.Location = new System.Drawing.Point(103, 26);
-            this.trigger1.Name = "trigger1";
-            this.trigger1.Size = new System.Drawing.Size(107, 29);
-            this.trigger1.TabIndex = 28;
-            this.trigger1.Text = "6030";
-            // 
-            // label14
-            // 
-            this.label14.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label14.Location = new System.Drawing.Point(221, 24);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(105, 32);
-            this.label14.TabIndex = 27;
-            this.label14.Text = "结果地址：";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // result1
-            // 
-            this.result1.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.result1.Location = new System.Drawing.Point(321, 26);
-            this.result1.Name = "result1";
-            this.result1.Size = new System.Drawing.Size(119, 29);
-            this.result1.TabIndex = 29;
-            this.result1.Text = "6032";
-            // 
-            // label11
-            // 
-            this.label11.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label11.Location = new System.Drawing.Point(1, 24);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(105, 32);
-            this.label11.TabIndex = 26;
-            this.label11.Text = "触发地址：";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // cb_EnCam1
-            // 
-            this.cb_EnCam1.Checked = true;
-            this.cb_EnCam1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_EnCam1.Location = new System.Drawing.Point(52, 32);
-            this.cb_EnCam1.Name = "cb_EnCam1";
-            this.cb_EnCam1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cb_EnCam1.Size = new System.Drawing.Size(78, 24);
-            this.cb_EnCam1.TabIndex = 45;
-            this.cb_EnCam1.Text = "勾选启用";
-            this.cb_EnCam1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cb_EnCam1.UseVisualStyleBackColor = true;
-            this.cb_EnCam1.CheckedChanged += new System.EventHandler(this.cb_EnCam1_CheckedChanged);
-            // 
-            // cb_EnCam3
-            // 
-            this.cb_EnCam3.Checked = true;
-            this.cb_EnCam3.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_EnCam3.Location = new System.Drawing.Point(42, -5);
-            this.cb_EnCam3.Name = "cb_EnCam3";
-            this.cb_EnCam3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cb_EnCam3.Size = new System.Drawing.Size(78, 24);
-            this.cb_EnCam3.TabIndex = 48;
-            this.cb_EnCam3.Text = "勾选启用";
-            this.cb_EnCam3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cb_EnCam3.UseVisualStyleBackColor = true;
-            this.cb_EnCam3.CheckedChanged += new System.EventHandler(this.cb_EnCam3_CheckedChanged);
-            // 
-            // cb_EnCam2
-            // 
-            this.cb_EnCam2.Checked = true;
-            this.cb_EnCam2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_EnCam2.Location = new System.Drawing.Point(42, -4);
-            this.cb_EnCam2.Name = "cb_EnCam2";
-            this.cb_EnCam2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cb_EnCam2.Size = new System.Drawing.Size(78, 24);
-            this.cb_EnCam2.TabIndex = 49;
-            this.cb_EnCam2.Text = "勾选启用";
-            this.cb_EnCam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cb_EnCam2.UseVisualStyleBackColor = true;
-            this.cb_EnCam2.CheckedChanged += new System.EventHandler(this.cb_EnCam2_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -725,15 +725,15 @@
             this.Name = "Form1";
             this.Text = "检测程序通信工具";
             this.groupBox2.ResumeLayout(false);
+            this.gb_Cam1.ResumeLayout(false);
+            this.gb_Cam1.PerformLayout();
+            this.gb_Cam2.ResumeLayout(false);
+            this.gb_Cam2.PerformLayout();
+            this.gb_Cam3.ResumeLayout(false);
+            this.gb_Cam3.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.gb_Cam3.ResumeLayout(false);
-            this.gb_Cam3.PerformLayout();
-            this.gb_Cam2.ResumeLayout(false);
-            this.gb_Cam2.PerformLayout();
-            this.gb_Cam1.ResumeLayout(false);
-            this.gb_Cam1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
