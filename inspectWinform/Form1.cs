@@ -900,7 +900,7 @@ namespace InspectWinform
             catch (Exception)
             {
 
-                throw;
+                ;
             }
 
             if (inspect != null)
