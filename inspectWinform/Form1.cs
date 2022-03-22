@@ -893,7 +893,15 @@ namespace InspectWinform
             san = false;
 
             Thread.Sleep(500);
-            cheakthread.Abort();
+            try
+            {
+                cheakthread.Abort();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
             if (inspect != null)
             {

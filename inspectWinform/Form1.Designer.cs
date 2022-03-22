@@ -51,8 +51,8 @@
             this.label18 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_EnCam1 = new System.Windows.Forms.CheckBox();
-            this.cb_EnCam2 = new System.Windows.Forms.CheckBox();
             this.cb_EnCam3 = new System.Windows.Forms.CheckBox();
+            this.cb_EnCam2 = new System.Windows.Forms.CheckBox();
             this.gb_Cam1 = new System.Windows.Forms.GroupBox();
             this.result1 = new System.Windows.Forms.TextBox();
             this.trigger1State = new InspectWinform.CircleLabel();
@@ -312,20 +312,6 @@
             this.cb_EnCam1.UseVisualStyleBackColor = true;
             this.cb_EnCam1.CheckedChanged += new System.EventHandler(this.cb_EnCam1_CheckedChanged);
             // 
-            // cb_EnCam2
-            // 
-            this.cb_EnCam2.Checked = true;
-            this.cb_EnCam2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_EnCam2.Location = new System.Drawing.Point(52, 147);
-            this.cb_EnCam2.Name = "cb_EnCam2";
-            this.cb_EnCam2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.cb_EnCam2.Size = new System.Drawing.Size(78, 24);
-            this.cb_EnCam2.TabIndex = 49;
-            this.cb_EnCam2.Text = "勾选启用";
-            this.cb_EnCam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cb_EnCam2.UseVisualStyleBackColor = true;
-            this.cb_EnCam2.CheckedChanged += new System.EventHandler(this.cb_EnCam2_CheckedChanged);
-            // 
             // cb_EnCam3
             // 
             this.cb_EnCam3.Checked = true;
@@ -339,6 +325,20 @@
             this.cb_EnCam3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cb_EnCam3.UseVisualStyleBackColor = true;
             this.cb_EnCam3.CheckedChanged += new System.EventHandler(this.cb_EnCam3_CheckedChanged);
+            // 
+            // cb_EnCam2
+            // 
+            this.cb_EnCam2.Checked = true;
+            this.cb_EnCam2.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_EnCam2.Location = new System.Drawing.Point(52, 147);
+            this.cb_EnCam2.Name = "cb_EnCam2";
+            this.cb_EnCam2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.cb_EnCam2.Size = new System.Drawing.Size(78, 24);
+            this.cb_EnCam2.TabIndex = 49;
+            this.cb_EnCam2.Text = "勾选启用";
+            this.cb_EnCam2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cb_EnCam2.UseVisualStyleBackColor = true;
+            this.cb_EnCam2.CheckedChanged += new System.EventHandler(this.cb_EnCam2_CheckedChanged);
             // 
             // gb_Cam1
             // 
@@ -723,7 +723,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(15, 15);
             this.Name = "Form1";
-            this.Text = "检测程序通信工具";
+            this.Text = "检测程序通信工具 v2.0.0";
             this.groupBox2.ResumeLayout(false);
             this.gb_Cam1.ResumeLayout(false);
             this.gb_Cam1.PerformLayout();
