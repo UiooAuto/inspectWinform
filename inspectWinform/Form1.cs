@@ -370,12 +370,6 @@ namespace InspectWinform
                             }
                         }
 
-                        if (!plc.Connected)
-                        {
-                            startConnect();
-                            return;
-                        }
-
                         if (!(triggerCam1 || triggerCam2 || triggerCam3))
                         {
                             //如果一个都没触发，开始下一次读取
@@ -495,14 +489,9 @@ namespace InspectWinform
                     }
                     catch (Exception)//出现任何异常则切断连接
                     {
-                        ;
+                        startConnect();
+                        return;
                     }
-                }
-
-                if (!plc.Connected)
-                {
-                    startConnect();
-                    return;
                 }
             }
         }
@@ -578,7 +567,8 @@ namespace InspectWinform
                     cam3ResAds = null;
                 }
 
-                bool v = connectAllcon(); 
+                bool v = connectAllcon();
+
                 if (v)
                 {
                     //开始工作
@@ -643,13 +633,13 @@ namespace InspectWinform
             {
                 MessageBox.Show("视觉检测程序未开启");
                 return false;
-            }            
+            }
 
             if (plc == null & !isEmpty(plcIp1.Text) & !isEmpty(plcPort1.Text))//连接PLC
             {
                 plc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                plc.SendTimeout = 500;
-                plc.ReceiveTimeout = 500;
+                plc.SendTimeout = 1000;
+                plc.ReceiveTimeout = 1000;
 
                 Ping ping = new Ping();
                 PingReply pingReply = ping.Send(plcIp1.Text, 1000);
@@ -658,6 +648,7 @@ namespace InspectWinform
                     try
                     {
                         plc.Connect(new IPEndPoint(IPAddress.Parse(plcIp1.Text), int.Parse(plcPort1.Text)));
+
                     }
                     catch (Exception)
                     {
@@ -683,6 +674,7 @@ namespace InspectWinform
                     inspect = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     inspect.SendTimeout = 5000;
                     inspect.ReceiveTimeout = 5000;
+
                     inspect.Connect(new IPEndPoint(IPAddress.Parse(inspectIp.Text), int.Parse(inspectPort.Text)));
                 }
 
@@ -895,9 +887,12 @@ namespace InspectWinform
             Thread.Sleep(500);
             try
             {
-                cheakthread.Abort();
+                if (cheakthread != null)
+                {
+                    cheakthread.Abort();
+                }
             }
-            catch (Exception)
+            catch
             {
 
                 ;
